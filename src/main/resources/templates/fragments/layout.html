@@ -15,13 +15,13 @@
             <div class="row headerRow">
                 <div class="d-flex justify-content-center align-items-center col-12 col-sm-12 col-xl-2">
                     <img src="../../static/img/estomatologiaLogo.png" th:src="@{/img/estomatologiaLogo.png}"
-                         class="img-fluid "/>
+                         class="img-fluid " alt="logo"/>
                 </div>
                 <div class="d-flex justify-content-center align-items-center col-12 col-sm-12 col-xl-2">
-                    <a href="#"><img src="../../static/img/pl.png"
-                                     th:src="@{/img/pl.png}" class="header__img--icon img-fluid"/></a>
-                    <a href="#"><img src="../../static/img/eng.png"
-                                     th:src="@{/img/eng.png}" class="header__img--icon img-fluid" alt=""/></a>
+                    <a href="?lang=pl"><img id="pl" src="../../static/img/pl.png"
+                                            th:src="@{/img/pl.png}" class="header__img--icon img-fluid" alt="pl"/></a>
+                    <a href="?lang=en"><img id="en" src="../../static/img/eng.png"
+                                            th:src="@{/img/eng.png}" class="header__img--icon img-fluid" alt="eng"/></a>
                 </div>
                 <div class="navmenu col-12 col-sm-12 col-xl-4">
                     <nav class="navbar">
