@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="pl" xmlns:th="http://www.springframework.org/schema/data/jaxb" xmlns:th="http://www.thymeleaf.org">
+<html th:fragment="layout (template, menu)" xmlns:th="http://www.springframework.org/schema/data/jaxb">
 <head>
     <meta charset="UTF-8">
     <title>eSTOMATOLOGIA - system wspomagający działalność kliniki</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
-    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
+    <link href="../../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Livvic&display=swap" rel="stylesheet">
 </head>
 <body>
 <div id="app_content">
@@ -13,14 +14,14 @@
         <header>
             <div class="row headerRow">
                 <div class="d-flex justify-content-center align-items-center col-12 col-sm-12 col-xl-2">
-                    <img src="../static/img/estomatologiaLogo.png" th:href="@{/img/estomatologiaLogo.png}"
+                    <img src="../../static/img/estomatologiaLogo.png" th:src="@{/img/estomatologiaLogo.png}"
                          class="img-fluid "/>
                 </div>
                 <div class="d-flex justify-content-center align-items-center col-12 col-sm-12 col-xl-2">
-                    <a href="#"><img src="../static/img/pl.png"
-                                     th:href="@{/img/pl.png}" class="header__img--icon img-fluid"/></a>
-                    <a href="#"><img src="../static/img/eng.png"
-                                     th:href="@{/img/eng.png}" class="header__img--icon img-fluid" alt=""/></a>
+                    <a href="#"><img src="../../static/img/pl.png"
+                                     th:src="@{/img/pl.png}" class="header__img--icon img-fluid"/></a>
+                    <a href="#"><img src="../../static/img/eng.png"
+                                     th:src="@{/img/eng.png}" class="header__img--icon img-fluid" alt=""/></a>
                 </div>
                 <div class="navmenu col-12 col-sm-12 col-xl-4">
                     <nav class="navbar">
@@ -34,24 +35,26 @@
                         </div>
                     </nav>
                 </div>
-                <div class="d-flex justify-content-center align-items-center col-6 col-sm-6 col-xl-2"><a
-                        href="#">LOGIN</a></div>
-                <div class="d-flex justify-content-center align-items-center col-6 col-sm-6 col-xl-2"><a href="#">REGISTER</a>
+                <div class="d-flex justify-content-center align-items-center col-6 col-sm-6 col-xl-2">
+                    <button type="button" class="btn">Login</button>
+                </div>
+                <div class="d-flex justify-content-center align-items-center col-6 col-sm-6 col-xl-2">
+                    <button type="button" class="btn">Register</button>
                 </div>
             </div>
         </header>
         <main>
             <div class="row">
                 <div class="col-12 col-sm-12">
-                    CONTENT
+                    <th:block th:include="${template}"/>
                 </div>
             </div>
         </main>
-        <footer class="fixed-bottom">
+        <footer class="footer fixed-bottom">
             <div class="row">
                 <div class="col-12 col-sm-12">
                     <div class="d-flex justify-content-center align-items-center col-12 col-12">
-                        <div class="footer"></div>
+                        <div class="footer--text">Wszelkie prawa zastrzeżone &copy; Michał Kaczyński</div>
                     </div>
                 </div>
             </div>
