@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "Patient")
@@ -19,4 +20,10 @@ public class Patient extends Person {
     private String medicamentsTakenPermamently;
     @Column(name = "chronicDiseases")
     private String chronicDiseases;
+
+    @OneToMany(mappedBy = "patient")
+    private Set<ProposedVisit> proposedVisits;
+
+    @OneToMany(mappedBy = "patient")
+    private Set<Visit> visits;
 }

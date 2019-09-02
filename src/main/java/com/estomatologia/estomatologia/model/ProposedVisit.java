@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "ProposedVisit")
@@ -15,9 +16,13 @@ public class ProposedVisit {
     @GeneratedValue
     private long id;
 
-    private long patientId;
+    @ManyToOne
+    @JoinColumn(name="patient_id", nullable=false)
+    private Patient patient;
 
-    private long doctorId;
+    @ManyToOne
+    @JoinColumn(name = "doctor_id", nullable = false)
+    private Doctor doctor;
 
     @Column(name = "date")
     private String date;

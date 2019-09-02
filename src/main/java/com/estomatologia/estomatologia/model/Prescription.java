@@ -15,8 +15,6 @@ public class Prescription {
     @GeneratedValue
     private long id;
 
-    private long visitId;
-
     private String clinicName;
 
     @Column(name = "branchOfNFZ")
@@ -25,4 +23,7 @@ public class Prescription {
     @Column(name = "medicaments")
     private String medicaments;
 
+    @ManyToOne
+    @JoinColumn(name = "visit_id", nullable = false)
+    private Visit visit;
 }

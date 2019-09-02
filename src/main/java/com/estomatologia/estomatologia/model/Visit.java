@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "Visit")
@@ -15,9 +16,13 @@ public class Visit {
     @GeneratedValue
     private long id;
 
-    private long doctorId;
+    @ManyToOne
+    @JoinColumn(name="patient_id", nullable=false)
+    private Patient patient;
 
-    private long patientId;
+    @ManyToOne
+    @JoinColumn(name = "doctor_id", nullable = false)
+    private Doctor doctor;
 
     @Column(name = "date")
     private String date;
@@ -25,4 +30,7 @@ public class Visit {
     private String diagnosis;
     @Column(name = "recommendations")
     private String recommendations;
+
+    @OneToMany(mappedBy = "visit")
+    private Set<Visit> visit;
 }
