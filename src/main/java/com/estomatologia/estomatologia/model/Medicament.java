@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Table(name = "Medicaments")
 @Getter
 @Setter
-public class Medicaments {
+public class Medicament {
 
     @Id
     @GeneratedValue

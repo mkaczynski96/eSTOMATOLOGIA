@@ -1,8 +1,16 @@
 package com.estomatologia.estomatologia.model;
 
-import javax.persistence.Column;
+import lombok.Getter;
+import lombok.Setter;
 
-public class Person {
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
+import java.io.Serializable;
+
+@Getter
+@Setter
+@MappedSuperclass
+public class Person implements Serializable {
 
     @Column(name = "name")
     private String name;
