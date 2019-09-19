@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html th:fragment="layout (template, menu)" xmlns:th="http://www.springframework.org/schema/data/jaxb">
+<html th:fragment="layout (template, menu)" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title th:text="#{title}"></title>
+    <title th:text="#{title}">eSTOMATOLOGIA</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
     <link href="../../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css?family=Livvic&display=swap" rel="stylesheet">
+    <link href="../../static/css/style_login.css" th:href="@{/css/style_login.css}" rel="stylesheet"/>
 </head>
 <body>
 <div id="app_content">
@@ -26,27 +28,41 @@
                 <div class="navmenu col-12 col-sm-12 col-xl-4">
                     <nav class="navbar">
                         <div class="navbar-nav">
-                            <a class="nav-item nav-link" href="#"><p th:text="#{header.menu.option1}"></p></a>
-                            <a class="nav-item nav-link" href="#"><p th:text="#{header.menu.option2}"></p></a>
-                            <a class="nav-item nav-link" href="#"><p th:text="#{header.menu.option3}"></p></a>
-                            <a class="nav-item nav-link" href="#"><p th:text="#{header.menu.option4}"></p></a>
+                            <a class="nav-item nav-link" href="/"><p th:text="#{header.menu.option1}"></p></a>
+                            <a class="nav-item nav-link" href="/services"><p th:text="#{header.menu.option2}"></p></a>
+                            <a class="nav-item nav-link" href="/tariff"><p th:text="#{header.menu.option3}"></p></a>
+                            <a class="nav-item nav-link" href="/contact"><p th:text="#{header.menu.option4}"></p></a>
                         </div>
                     </nav>
                 </div>
                 <div class="d-flex justify-content-center align-items-center col-6 col-sm-6 col-xl-2">
-                    <button type="button"  onclick="location.href='/login';" class="btn" th:text="#{header.login}">Login</button>
+                    <div sec:authorize="!isAuthenticated()">
+                        <button type="button" onclick="location.href='/login';" class="btn" th:text="#{header.login}">
+                            Login
+                        </button>
+                    </div>
+                    <div sec:authorize="isAuthenticated()">
+                        <button type="button" onclick="location.href='/account';" class="btn"
+                                th:text="#{header.account}">My account
+                        </button>
+                    </div>
                 </div>
                 <div class="d-flex justify-content-center align-items-center col-6 col-sm-6 col-xl-2">
-                    <button type="button" onclick="location.href='/register';" class="btn" th:text="#{header.register}">Register</button>
+                    <div sec:authorize="!isAuthenticated()">
+                        <button type="button" onclick="location.href='/register';" class="btn"
+                                th:text="#{header.register}">Register
+                        </button>
+                    </div>
+                    <div sec:authorize="isAuthenticated()">
+                      <form th:action="@{/logout}" method="post">
+                            <input type="submit" class="btn" th:value="#{header.logout}" value="Logout">
+                         </form>
+                    </div>
                 </div>
             </div>
         </header>
         <main>
-            <div class="row">
-                <div class="col-12 col-sm-12">
-                    <th:block th:include="${template}"/>
-                </div>
-            </div>
+            <th:block th:include="${template}"/>
         </main>
         <footer class="footer fixed-bottom">
             <div class="row">

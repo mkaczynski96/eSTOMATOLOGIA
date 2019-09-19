@@ -9,13 +9,18 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
+import java.util.Locale;
+
 @Configuration
 @PropertySource(value = "classpath:application.properties", encoding = "UTF-8")
 public class InternalizationConfiguration implements WebMvcConfigurer {
 
     @Bean
     public LocaleResolver localeResolver(){
-        return new SessionLocaleResolver();
+        SessionLocaleResolver sessionLocaleResolver = new SessionLocaleResolver();
+        Locale locale = new Locale("pl","PL","UNIX");
+        sessionLocaleResolver.setDefaultLocale(locale);
+        return sessionLocaleResolver;
     }
 
     @Bean

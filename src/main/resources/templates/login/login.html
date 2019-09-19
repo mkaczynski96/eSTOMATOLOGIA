@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'login')}">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<div class="container_login">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 th:text="#{login_loginText}">Log in</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <form name="f" th:action="@{/login}" method="post">
+                <fieldset>
+                        <div th:if="${param.error}" class="alert alert-danger" th:text="#{login_invalid}">
+                            Invalid username and password.
+                        </div>
+                        <div class="form-row">
+                            <div class="col-auto">
+                                <label class="sr-only" for="username">Name</label>
+                                <input type="text" class="form-control mb-2" id="username" name="username"
+                                       th:placeholder="#{login_username}">
+                            </div>
+                            <div class="col-auto">
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend">
+                                    </div>
+                                    <input type="password" class="form-control" id="password" name="password"
+                                           th:placeholder="#{login_password}">
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" id="autoSizingCheck">
+                                    <label class="form-check-label" for="autoSizingCheck">
+                                        <span th:text="#{login_rememberMe}">Remember me</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-actions col-auto">
+                                <button type="submit" class="btn btn-primary mb-2" th:text="#{login_button}">Submit
+                                </button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
