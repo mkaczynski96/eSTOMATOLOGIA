@@ -21,22 +21,30 @@ public class AuthenticationManagerProvider extends WebSecurityConfigurerAdapter 
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("admin@admin.pl").password("{noop}admin").roles("USER");
+        auth.inMemoryAuthentication()
+                .withUser("patient").password("{noop}admin").roles("PATIENT")
+                .and()
+                .withUser("doctor").password("{noop}admin").roles("DOCTOR")
+                .and()
+                .withUser("reception").password("{noop}admin").roles("RECEPTION")
+                .and()
+                .withUser("admin").password("{noop}admin").roles("ADMIN");
     }
 
     @Bean
     public SpringSecurityDialect springSecurityDialect() {
         return new SpringSecurityDialect();
     }
+
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/login/logme").authenticated()
+                .antMatchers("/myaccount").authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/", true)
+                .defaultSuccessUrl("/myaccount", true)
                 .permitAll()
                 .and()
                 .logout()

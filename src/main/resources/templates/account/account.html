@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'services')}"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <link href="../../static/css/style_login.css" th:href="@{../../static/css/style_login.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+
+
+    <h1><span th:text="#{account_hello}">Welcome,</span> <b><span sec:authentication="name"></span></b></h1>
+
+    <div sec:authorize="hasRole('PATIENT')">
+        <a class="btn btn-primary" href="/myaccount/mydata" role="button" th:text="#{account_mydata}">My data</a>
+        <!--    umowiona/byla/w trakcie-->
+        <a class="btn btn-primary" href="/myaccount/historyofvisits" role="button" th:text="#{account_historyofvisits}">History
+            of visits</a>
+        <a class="btn btn-primary" href="/myaccount/makevisit" role="button" th:text="#{account_makevisit}">Make visit
+            appointment</a>
+        <a class="btn btn-primary" href="/myaccount/availabledoctors" role="button"
+           th:text="#{account_availabledoctors}">Check available doctors</a>
+        <a class="btn btn-primary" href="/myaccount/myrecipes" role="button" th:text="#{account_myrecipes}">My
+            recipes</a>
+    </div>
+    <div sec:authorize="hasRole('DOCTOR')">
+        <a class="btn btn-primary" href="/myaccount/mydata" role="button" th:text="#{account_mydata}">My data</a>
+        <a class="btn btn-primary" href="/myaccount/mypatients" role="button" th:text="#{account_mypatients}">My
+            patients</a>
+        <!--   (wystepujacy tylko raz) wystepujacy w tabeli WIZYTA powiazani z lekarzem-->
+        <a class="btn btn-primary" href="/myaccount/calendarofvisits" role="button"
+           th:text="#{account_calendarofvisits}">Calendar of visits</a>
+        <a class="btn btn-primary" href="/myaccount/availablemedicaments" role="button"
+           th:text="#{account_availablemedicaments}">Available medicaments</a>
+    </div>
+
+    <div sec:authorize="hasRole('RECEPTION')">
+        <a class="btn btn-primary" href="/myaccount/mydata" role="button" th:text="#{account_mydata}">My data</a>
+        <a class="btn btn-primary" href="/myaccount/patients" role="button" th:text="#{account_patients}">Patients</a>
+        <a class="btn btn-primary" href="/myaccount/doctors" role="button" th:text="#{account_doctors}">Doctors</a>
+        <a class="btn btn-primary" href="/myaccount/calendarofvisits" role="button"
+           th:text="#{account_calendarofvisits}">Calendar of visits</a>
+        <a class="btn btn-primary" href="/myaccount/createdvisits" role="button" th:text="#{account_createdvisits}">Created
+            visits requests</a>
+        <a class="btn btn-primary" href="/myaccount/manageequipment" role="button" th:text="#{account_manageequipment}">Manage
+            equipment</a>
+        <a class="btn btn-primary" href="/myaccount/managemedicament" role="button"
+           th:text="#{account_managemedicament}">Manage medicament</a>
+    </div>
+
+    <div sec:authorize="hasRole('ADMIN')">
+        <a class="btn btn-primary" href="/myaccount/mydata" role="button" th:text="#{account_mydata}">My data</a>
+        <a class="btn btn-primary" href="/myaccount/managedoctor" role="button" th:text="#{account_managedoctor}">Manage
+            doctor</a>
+        <a class="btn btn-primary" href="/myaccount/managepatient" role="button" th:text="#{account_amanagepatient}">Manage
+            patient</a>
+        <a class="btn btn-primary" href="/myaccount/managereception" role="button" th:text="#{account_managereception}">Manage
+            reception</a>
+    </div>
+</div>
+</body>
+</html>
