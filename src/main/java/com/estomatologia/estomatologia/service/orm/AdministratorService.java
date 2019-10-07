@@ -1,4 +1,4 @@
-package com.estomatologia.estomatologia.service;
+package com.estomatologia.estomatologia.service.orm;
 
 import com.estomatologia.estomatologia.model.Administrator;
 import com.estomatologia.estomatologia.repository.AdministratorRepository;

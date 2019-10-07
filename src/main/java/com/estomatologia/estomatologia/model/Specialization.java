@@ -19,5 +19,8 @@ public class Specialization {
     @Column(name = "name")
     private String name;
 
+    @OneToMany(mappedBy = "specialization")
+    Set<DoctorSpecialization> doctorSpecializations;
+
 
 }

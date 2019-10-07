@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout (~{::body},'availabledoctors')}">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<div class="container-mydata container-fluid">
+    <table class="table table-dark">
+        <tbody>
+        <tr th:each="doctor : ${doctors} ">
+            <th scope="col" th:text="${doctor.getName()}">Name</th>
+            <th scope="col"th:text="${doctor.getSurname()}">Surname</th>
+        <tr th:each="specialization : ${specializations}">
+            <td th:text="${specialization.getSpecialization().getName()}">Specialization</td>
+        </tr>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

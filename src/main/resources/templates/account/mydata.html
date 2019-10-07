@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout (~{::body},'mydata')}">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<div class="container-mydata container-fluid">
+    <table class="table table-dark">
+        <tbody>
+        <tr>
+            <td><b><span th:text="#{account_mydata_name}">Imie:</span></b></td>
+            <td><span th:text="${name}">Name</span></td>
+        </tr>
+        <tr>
+            <td><b><span th:text="#{account_mydata_surname}">Nazwisko:</span></b></td>
+            <td><span th:text="${surname}">Surname</span></td>
+        </tr>
+        <tr>
+            <td><b>Pesel:</b></td>
+            <td><span th:text="${pesel}">Pesel</span></td>
+        </tr>
+        <tr>
+            <td><b><span th:text="#{account_mydata_phoneNumber}"> telefonu:</span></b></td>
+            <td><span th:text="${phoneNumber}">Phone number</span></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

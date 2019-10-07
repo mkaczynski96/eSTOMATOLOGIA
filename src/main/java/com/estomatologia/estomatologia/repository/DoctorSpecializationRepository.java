@@ -4,6 +4,10 @@ import com.estomatologia.estomatologia.model.DoctorSpecialization;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface DoctorSpecializationRepository extends CrudRepository<DoctorSpecialization, Long> {
+
+    List<DoctorSpecialization> findAllByDoctorId(Long doctorId);
 }

@@ -3,10 +3,7 @@ package com.estomatologia.estomatologia.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "Administrator")
@@ -15,6 +12,10 @@ import javax.persistence.Table;
 public class Administrator extends Person {
 
     @Id
-    @GeneratedValue
+    @Column(name = "id")
     private long id;
+
+    @OneToOne
+    @MapsId
+    private User userAdministrator;
 }

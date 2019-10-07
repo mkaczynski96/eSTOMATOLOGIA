@@ -1,139 +1,106 @@
 package com.estomatologia.estomatologia.controller;
 
+import com.estomatologia.estomatologia.model.User;
+import com.estomatologia.estomatologia.repository.AdministratorRepository;
+import com.estomatologia.estomatologia.repository.DoctorRepository;
+import com.estomatologia.estomatologia.repository.PatientRepository;
+import com.estomatologia.estomatologia.repository.ReceptionistRepository;
+import com.estomatologia.estomatologia.service.security.AuthorizationService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import javax.annotation.security.RolesAllowed;
 
 @Controller
 public class AccountController {
 
+    private final PatientRepository patientRepository;
+    private final DoctorRepository doctorRepository;
+    private final AdministratorRepository administratorRepository;
+    private final ReceptionistRepository receptionistRepository;
+
+    private final AuthorizationService authorizationService;
+
+    public AccountController(PatientRepository patientRepository, DoctorRepository doctorRepository, AdministratorRepository administratorRepository, ReceptionistRepository receptionistRepository, AuthorizationService authorizationService) {
+        this.patientRepository = patientRepository;
+        this.doctorRepository = doctorRepository;
+        this.administratorRepository = administratorRepository;
+        this.receptionistRepository = receptionistRepository;
+        this.authorizationService = authorizationService;
+    }
+
+
     @GetMapping("/myaccount")
-    public String myAccount(){
+    public String myAccount() {
         return "account/account";
     }
 
 
+    @GetMapping("/myaccount/mydata")
+    public String myData(Model model) {
 
+        User loggedUser = authorizationService.getLoggedUser();
 
-    /* MUTUAL */
+        if (loggedUser == null) {
+            return "error";
+        } else {
+            Long loggedUserId = loggedUser.getId();
+            if (doctorRepository.findById(loggedUserId).isPresent()) {
+                String name = doctorRepository.findById(loggedUserId).get().getName();
+                String surname = doctorRepository.findById(loggedUserId).get().getSurname();
+                String pesel = doctorRepository.findById(loggedUserId).get().getPesel();
+                String phoneNumber = doctorRepository.findById(loggedUserId).get().getPhoneNumber();
 
-    @GetMapping("/myaccount/mydata") //TUTAJ ZROBIC /myaccount/mydata?=userId cos w tym stylu
-    public String myData(@RequestParam String userId){
-        return "account/account";
+                model.addAttribute("name", name);
+                model.addAttribute("surname", surname);
+                model.addAttribute("pesel", pesel);
+                model.addAttribute("phoneNumber", phoneNumber);
+
+                return "account/mydata";
+            } else if (patientRepository.findById(loggedUserId).isPresent()) {
+                String name = patientRepository.findById(loggedUserId).get().getName();
+                String surname = patientRepository.findById(loggedUserId).get().getSurname();
+                String pesel = patientRepository.findById(loggedUserId).get().getPesel();
+                String phoneNumber = patientRepository.findById(loggedUserId).get().getPhoneNumber();
+
+                model.addAttribute("name", name);
+                model.addAttribute("surname", surname);
+                model.addAttribute("pesel", pesel);
+                model.addAttribute("phoneNumber", phoneNumber);
+
+                return "account/mydata";
+            } else if (receptionistRepository.findById(loggedUserId).isPresent()) {
+                String name = receptionistRepository.findById(loggedUserId).get().getName();
+                String surname = receptionistRepository.findById(loggedUserId).get().getSurname();
+                String pesel = receptionistRepository.findById(loggedUserId).get().getPesel();
+                String phoneNumber = receptionistRepository.findById(loggedUserId).get().getPhoneNumber();
+
+                model.addAttribute("name", name);
+                model.addAttribute("surname", surname);
+                model.addAttribute("pesel", pesel);
+                model.addAttribute("phoneNumber", phoneNumber);
+
+                return "account/mydata";
+            } else if (administratorRepository.findById(loggedUserId).isPresent()) {
+                String name = administratorRepository.findById(loggedUserId).get().getName();
+                String surname = administratorRepository.findById(loggedUserId).get().getSurname();
+                String pesel = administratorRepository.findById(loggedUserId).get().getPesel();
+                String phoneNumber = administratorRepository.findById(loggedUserId).get().getPhoneNumber();
+
+                model.addAttribute("name", name);
+                model.addAttribute("surname", surname);
+                model.addAttribute("pesel", pesel);
+                model.addAttribute("phoneNumber", phoneNumber);
+                return "account/mydata";
+            } else {
+                return "error";
+            }
+
+        }
     }
+
 
     @GetMapping("/myaccount/calendarofvisits")
-    public String calendarOfVisits(){
-        return "account/account";
-    }
-
-
-
-
-
-
-
-
-    /* PATIENT */
-
-    @RolesAllowed("PATIENT")
-    @GetMapping("/myaccount/historyofvisits")
-    public String historyOfVisits(){
-        return "account/account";
-    }
-
-    @RolesAllowed("PATIENT")
-    @GetMapping("/myaccount/makevisit")
-    public String makeVisit(){
-        return "account/account";
-    }
-
-    @RolesAllowed("PATIENT")
-    @GetMapping("/myaccount/availabledoctors")
-    public String availabledoctors(){
-        return "account/account";
-    }
-
-    @RolesAllowed("PATIENT")
-    @GetMapping("/myaccount/myrecipes")
-    public String myRecipes(){
-        return "account/account";
-    }
-
-
-
-
-
-    /* DOCTOR */
-
-    @RolesAllowed("DOCTOR")
-    @GetMapping("/myaccount/mypatients")
-    public String myPatients(){
-        return "account/account";
-    }
-
-    @RolesAllowed("DOCTOR")
-    @GetMapping("/myaccount/availablemedicaments")
-    public String availableMedicaments(){
-        return "account/account";
-    }
-
-
-
-
-
-    /* RECEPTION */
-
-    @RolesAllowed("RECEPTION")
-    @GetMapping("/myaccount/patients")
-    public String patients(){
-        return "account/account";
-    }
-
-    @RolesAllowed("RECEPTION")
-    @GetMapping("/myaccount/doctors")
-    public String doctors(){
-        return "account/account";
-    }
-
-    @RolesAllowed("RECEPTION")
-    @GetMapping("/myaccount/createdvisits")
-    public String createdVisits(){
-        return "account/account";
-    }
-
-    @RolesAllowed("RECEPTION")
-    @GetMapping("/myaccount/manageequipment")
-    public String manageEquipment(){
-        return "account/account";
-    }
-
-    @RolesAllowed("RECEPTION")
-    @GetMapping("/myaccount/managemedicament")
-    public String manageMedicament(){
-        return "account/account";
-    }
-
-
-    /* ADMIN */
-
-    @RolesAllowed("ADMIN")
-    @GetMapping("/myaccount/managedoctor")
-    public String manageDoctor(){
-        return "account/account";
-    }
-
-    @RolesAllowed("ADMIN")
-    @GetMapping("/myaccount/managepatient")
-    public String managePatient(){
-        return "account/account";
-    }
-
-    @RolesAllowed("ADMIN")
-    @GetMapping("/myaccount/managereception")
-    public String manageReception(){
+    public String calendarOfVisits() {
         return "account/account";
     }
 

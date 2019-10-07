@@ -12,10 +12,6 @@ import java.io.Serializable;
 @MappedSuperclass
 public class Person implements Serializable {
 
-    @Column(name = "login")
-    private String login;
-    @Column(name = "password")
-    private String password;
     @Column(name = "name")
     private String name;
     @Column(name = "surname")

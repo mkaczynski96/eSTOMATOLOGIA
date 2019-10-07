@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout (~{::body},'mypatients')}">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div class="container-mydata container-fluid">
+    <table class="table table-dark">
+        <thead>
+        <tr>
+            <th scope="col"><b><span th:text="#{account_doctor_mypatients_name}">Name:</span></b></th>
+            <th scope="col"><b><span th:text="#{account_doctor_mypatients_surname}">Surname:</span></b></th>
+            <th scope="col"><b><span th:text="#{account_doctor_mypatients_phonenumber}">Phone number:</span></b></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="patient : ${patients} ">
+            <td th:text="${patient.getPatient().getName()}">Patient name</td>
+            <td th:text="${patient.getPatient().getSurname()}">Patient surname</td>
+            <td th:text="${patient.getPatient().getPhoneNumber()}">Patient phone number</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

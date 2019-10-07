@@ -9,9 +9,19 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 
+import javax.sql.DataSource;
+
 @Configuration
 @EnableWebSecurity
 public class AuthenticationManagerProvider extends WebSecurityConfigurerAdapter {
+
+    private DataSource dataSource;
+
+
+    public AuthenticationManagerProvider(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
 
     @Bean
     @Override
@@ -21,14 +31,14 @@ public class AuthenticationManagerProvider extends WebSecurityConfigurerAdapter 
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("patient").password("{noop}admin").roles("PATIENT")
-                .and()
-                .withUser("doctor").password("{noop}admin").roles("DOCTOR")
-                .and()
-                .withUser("reception").password("{noop}admin").roles("RECEPTION")
-                .and()
-                .withUser("admin").password("{noop}admin").roles("ADMIN");
+        auth.jdbcAuthentication()
+                .dataSource(dataSource)
+                .usersByUsernameQuery("select username,password,enabled "
+                        + "from user "
+                        + "where username = ?")
+                .authoritiesByUsernameQuery("select username,authority "
+                        + "from authorities "
+                        + "where username = ?");
     }
 
     @Bean
@@ -52,6 +62,4 @@ public class AuthenticationManagerProvider extends WebSecurityConfigurerAdapter 
                 .deleteCookies("JSESSIONID")
                 .permitAll();
     }
-
-
 }

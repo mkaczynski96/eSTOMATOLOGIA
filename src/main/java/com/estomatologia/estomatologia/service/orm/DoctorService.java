@@ -1,7 +1,8 @@
-package com.estomatologia.estomatologia.service;
+package com.estomatologia.estomatologia.service.orm;
 
 import com.estomatologia.estomatologia.model.Doctor;
 import com.estomatologia.estomatologia.repository.DoctorRepository;
+import com.estomatologia.estomatologia.service.orm.CrudService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,4 +45,5 @@ public class DoctorService implements CrudService<Doctor, Long> {
     public void deleteById(Long id) {
         doctorRepository.deleteById(id);
     }
+
 }

@@ -1,4 +1,4 @@
-package com.estomatologia.estomatologia.service;
+package com.estomatologia.estomatologia.service.orm;
 
 import java.util.Set;
 

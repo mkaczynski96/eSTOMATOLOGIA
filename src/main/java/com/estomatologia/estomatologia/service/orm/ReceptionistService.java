@@ -1,7 +1,8 @@
-package com.estomatologia.estomatologia.service;
+package com.estomatologia.estomatologia.service.orm;
 
 import com.estomatologia.estomatologia.model.Receptionist;
 import com.estomatologia.estomatologia.repository.ReceptionistRepository;
+import com.estomatologia.estomatologia.service.orm.CrudService;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;

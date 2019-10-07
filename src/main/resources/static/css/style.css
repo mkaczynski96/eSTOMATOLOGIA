@@ -59,6 +59,16 @@ header .navbar{
 }
 
 
+
+.container-mydata{
+    width: 60%;
+}
+
+.container-mydata tr{
+    display: flex;
+    justify-content: center;
+}
+
 /* Extra small devices (portrait phones, less than 576px) */
 @media (max-width: 575.98px)  {
 

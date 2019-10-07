@@ -13,7 +13,7 @@ import java.util.Set;
 public class Patient extends Person {
 
     @Id
-    @GeneratedValue
+    @Column(name = "id")
     private long id;
 
     @Column(name = "medicamentsTakenPermamently")
@@ -26,4 +26,8 @@ public class Patient extends Person {
 
     @OneToMany(mappedBy = "patient")
     private Set<Visit> visits;
+
+    @OneToOne
+    @MapsId
+    private User userPatient;
 }

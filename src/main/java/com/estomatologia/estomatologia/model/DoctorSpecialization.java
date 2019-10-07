@@ -14,14 +14,15 @@ public class DoctorSpecialization {
     @EmbeddedId
     DoctorSpecializationKey id;
 
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @MapsId("doctor_id")
-    @JoinColumn(name = "doctor_id")
+    @JoinColumn(name = "doctor_id", nullable = false, insertable = false, updatable = false)
     Doctor doctor;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @MapsId("specialization_id")
-    @JoinColumn(name = "specialization_id")
+    @JoinColumn(name = "specialization_id", nullable = false, insertable = false, updatable = false)
     Specialization specialization;
 
     @Column(name = "license")
