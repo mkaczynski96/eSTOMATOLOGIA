@@ -60,6 +60,7 @@ public class DataExample implements CommandLineRunner {
         doctor.setSurname("Abacki");
         doctor.setPesel("5755747474");
         doctor.setPhoneNumber("4363737734");
+        doctor.setAddress("ul. Jana Pawla II 13/12, Warszawa");
 
         //Connection
         doctor.setUserDoctor(doctorUser);
@@ -118,6 +119,7 @@ public class DataExample implements CommandLineRunner {
         administrator.setSurname("Swalczyk");
         administrator.setPesel("35353252");
         administrator.setPhoneNumber("25253252352");
+        administrator.setAddress("ul. Mrozna 3/111, Warszawa");
         administrator.setUserAdministrator(admin);
         admin.setAdministrator(administrator);
         userService.save(admin);
@@ -141,6 +143,7 @@ public class DataExample implements CommandLineRunner {
         patient1.setPesel("4353453453");
         patient1.setPhoneNumber("3252353252");
         patient1.setChronicDiseases("Zapalenie spojowek");
+        patient1.setAddress("ul. Bobra 1/2, Warszawa");
         patient1.setMedicamentsTakenPermamently(null);
         patient1.setUserPatient(patient1User);
         patient1User.setPatient(patient1);
@@ -155,6 +158,7 @@ public class DataExample implements CommandLineRunner {
         patient2.setPesel("1353434343");
         patient2.setPhoneNumber("3253666252");
         patient2.setChronicDiseases("Nadcisnienie");
+        patient2.setAddress("ul. Skoczna 7/4, Warszawa");
         patient2.setMedicamentsTakenPermamently(null);
         patient2.setUserPatient(patient2User);
         patient2User.setPatient(patient2);
@@ -167,7 +171,6 @@ public class DataExample implements CommandLineRunner {
 
         //Patients authorities
         Authorities rolePatient1 = new Authorities();
-        //TODO NAPRAWIC TA ZALEZNOSC - TERAZ MOZNA USTAWIC JEDNA ROLE DLA JEDNEGO PACJENTA, MUSI BYC N:N
         rolePatient1.setUsername(patient1User.getUsername());
         rolePatient1.setAuthority("ROLE_PATIENT");
         authoritiesService.save(rolePatient1);
@@ -188,6 +191,7 @@ public class DataExample implements CommandLineRunner {
         receptionist.setSurname("Wanna");
         receptionist.setPesel("3543634634634643");
         receptionist.setPhoneNumber("12412412412");
+        receptionist.setAddress("al. Jerozolimskie 45/322, Warszawa");
         receptionist.setUserReceptionist(receptionistUser);
         receptionistUser.setReceptionist(receptionist);
 
@@ -196,7 +200,7 @@ public class DataExample implements CommandLineRunner {
 
         Authorities roleReceptionist = new Authorities();
         roleReceptionist.setUsername(receptionistUser.getUsername());
-        roleReceptionist.setAuthority("ROLE_RECEPTIONIST");
+        roleReceptionist.setAuthority("ROLE_RECEPTION");
         authoritiesService.save(roleReceptionist);
 
 
@@ -227,6 +231,39 @@ public class DataExample implements CommandLineRunner {
         visitService.save(visit1);
         prescription1.setVisit(visit1);
         prescriptionService.save(prescription1);
+
+
+        //Doctor2
+        User doctorUser2 = new User();
+        doctorUser2.setUsername("doctor2");
+        doctorUser2.setPassword("password");
+        doctorUser2.setEnabled(true);
+
+        Doctor doctor2 = new Doctor();
+        doctor2.setName("Paweł");
+        doctor2.setSurname("Iwańczyk");
+        doctor2.setPesel("32532525");
+        doctor2.setAddress("ul. Kazimierza 3/15, Warszawa");
+        doctor2.setPhoneNumber("3252627770");
+
+        doctor2.setUserDoctor(doctorUser2);
+        doctorUser2.setDoctor(doctor2);
+        userService.save(doctorUser2);
+
+
+        Authorities roleAdmin2 = new Authorities();
+        roleAdmin2.setAuthority("ROLE_ADMIN");
+        roleAdmin2.setUsername(doctorUser2.getUsername());
+        authoritiesService.save(roleAdmin2);
+
+        doctorService.save(doctor2);
+
+        DoctorSpecialization doctor2Specialization1 = new DoctorSpecialization();
+        doctor2Specialization1.setDoctor(doctor2);
+        doctor2Specialization1.setSpecialization(ginecologist);
+        doctor2Specialization1.setId(new DoctorSpecializationKey(doctor2.getId(), ginecologist.getId()));
+        doctor2Specialization1.setLicense("1337");
+        doctorSpecializationService.save(doctor2Specialization1);
 
     }
 

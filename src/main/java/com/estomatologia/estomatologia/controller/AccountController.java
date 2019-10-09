@@ -45,51 +45,20 @@ public class AccountController {
         } else {
             Long loggedUserId = loggedUser.getId();
             if (doctorRepository.findById(loggedUserId).isPresent()) {
-                String name = doctorRepository.findById(loggedUserId).get().getName();
-                String surname = doctorRepository.findById(loggedUserId).get().getSurname();
-                String pesel = doctorRepository.findById(loggedUserId).get().getPesel();
-                String phoneNumber = doctorRepository.findById(loggedUserId).get().getPhoneNumber();
 
-                model.addAttribute("name", name);
-                model.addAttribute("surname", surname);
-                model.addAttribute("pesel", pesel);
-                model.addAttribute("phoneNumber", phoneNumber);
-
+                model.addAttribute("account", doctorRepository.findById(loggedUserId).get());
                 return "account/mydata";
             } else if (patientRepository.findById(loggedUserId).isPresent()) {
-                String name = patientRepository.findById(loggedUserId).get().getName();
-                String surname = patientRepository.findById(loggedUserId).get().getSurname();
-                String pesel = patientRepository.findById(loggedUserId).get().getPesel();
-                String phoneNumber = patientRepository.findById(loggedUserId).get().getPhoneNumber();
 
-                model.addAttribute("name", name);
-                model.addAttribute("surname", surname);
-                model.addAttribute("pesel", pesel);
-                model.addAttribute("phoneNumber", phoneNumber);
-
+                model.addAttribute("account", patientRepository.findById(loggedUserId).get());
                 return "account/mydata";
             } else if (receptionistRepository.findById(loggedUserId).isPresent()) {
-                String name = receptionistRepository.findById(loggedUserId).get().getName();
-                String surname = receptionistRepository.findById(loggedUserId).get().getSurname();
-                String pesel = receptionistRepository.findById(loggedUserId).get().getPesel();
-                String phoneNumber = receptionistRepository.findById(loggedUserId).get().getPhoneNumber();
 
-                model.addAttribute("name", name);
-                model.addAttribute("surname", surname);
-                model.addAttribute("pesel", pesel);
-                model.addAttribute("phoneNumber", phoneNumber);
-
+                model.addAttribute("account", receptionistRepository.findById(loggedUserId).get());
                 return "account/mydata";
             } else if (administratorRepository.findById(loggedUserId).isPresent()) {
-                String name = administratorRepository.findById(loggedUserId).get().getName();
-                String surname = administratorRepository.findById(loggedUserId).get().getSurname();
-                String pesel = administratorRepository.findById(loggedUserId).get().getPesel();
-                String phoneNumber = administratorRepository.findById(loggedUserId).get().getPhoneNumber();
 
-                model.addAttribute("name", name);
-                model.addAttribute("surname", surname);
-                model.addAttribute("pesel", pesel);
-                model.addAttribute("phoneNumber", phoneNumber);
+                model.addAttribute("account", administratorRepository.findById(loggedUserId).get());
                 return "account/mydata";
             } else {
                 return "error";

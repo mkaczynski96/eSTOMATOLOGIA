@@ -8,22 +8,31 @@
 
 <div class="container-mydata container-fluid">
     <table class="table table-dark">
+        <thead>
+        <tr>
+            <th><b><span th:text="#{account_mydata}">My data</span></b></th>
+        </tr>
+        </thead>
         <tbody>
         <tr>
-            <td><b><span th:text="#{account_mydata_name}">Imie:</span></b></td>
-            <td><span th:text="${name}">Name</span></td>
+            <td><b><span th:text="#{person_name_additional}">Name:</span></b></td>
+            <td><span th:text="${account.getName()}">Name</span></td>
         </tr>
         <tr>
-            <td><b><span th:text="#{account_mydata_surname}">Nazwisko:</span></b></td>
-            <td><span th:text="${surname}">Surname</span></td>
+            <td><b><span th:text="#{person_surname_additional}">Surname:</span></b></td>
+            <td><span th:text="${account.getSurname()}">Surname</span></td>
         </tr>
         <tr>
-            <td><b>Pesel:</b></td>
-            <td><span th:text="${pesel}">Pesel</span></td>
+            <td><b><span th:text="#{person_pesel_additional}">Pesel:</span></b></td>
+            <td><span th:text="${account.getPesel()}">Pesel</span></td>
         </tr>
         <tr>
-            <td><b><span th:text="#{account_mydata_phoneNumber}"> telefonu:</span></b></td>
-            <td><span th:text="${phoneNumber}">Phone number</span></td>
+            <td><b><span th:text="#{person_phonenumber_additional}">Phone number:</span></b></td>
+            <td><span th:text="${account.getPhoneNumber()}">Phone number</span></td>
+        </tr>
+        <tr>
+            <td><b><span th:text="#{person_address_additional}">Address:</span></b></td>
+            <td><span th:text="${account.getAddress()}">Address</span></td>
         </tr>
         </tbody>
     </table>

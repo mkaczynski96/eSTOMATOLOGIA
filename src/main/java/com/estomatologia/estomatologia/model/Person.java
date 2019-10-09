@@ -20,6 +20,7 @@ public class Person implements Serializable {
     private String pesel;
     @Column(name = "phoneNumber")
     private String phoneNumber;
-
+    @Column(name = "address")
+    private String address;
 
 }

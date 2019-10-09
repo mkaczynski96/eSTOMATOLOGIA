@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout (~{::body},'managemedicaments')}">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div class="container-mydata container-fluid">
+    <div class="table-responsive">
+        <table class="table table-dark table-hover table-borderless">
+            <tbody>
+            <tr th:each="equipment : ${equipments}">
+                <td th:text="${equipment.getName()}">Medicament Name</td>
+                <td th:text="${equipment.getNumber()}">Medicament Number</td>
+                <td><a th:href="@{'/myaccount/manageequipment/edit'(id=${equipment.getId()})}">
+                    <span th:text="#{account_reception_edit}">Edit</span>
+                </a></td>
+                <td><a th:href="@{'/myaccount/manageequipment/delete'(id=${equipment.getId()})}">
+                    <span th:text="#{account_reception_delete}">Delete</span>
+                </a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <a class="btn btn-primary" href="/myaccount/managemedicament/add" role="button" th:text="#{account_reception_add}">Add</a>
+</div>
+</body>
+</html>
