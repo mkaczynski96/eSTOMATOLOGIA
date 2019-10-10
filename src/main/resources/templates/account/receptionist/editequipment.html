@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout (~{::body},'editequipment')}">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div class="container-mydata container-fluid">
+    <form action="#" th:action="@{'/myaccount/manageequipment/edit'(id=${equipment.getId()})}" th:object="${equipment}"
+          method="post">
+        <div class="form-row">
+            <div class="col">
+                <label for="name"><span th:text="#{account_reception_name}">Name</span> </label>
+                <input type="text" class="form-control" th:placeholder="*{name}"
+                       id="name"
+                       th:field="*{name}"/>
+                <label for="number"><span th:text="#{account_reception_number}">Number</span></label>
+                <input type="text"
+                       class="form-control"
+                       id="number"
+                       th:placeholder="*{number}"
+                       th:field="*{number}"/>
+                <input type="submit" th:value="#{account_reception_edit}" class="btn btn-primary"/>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>
