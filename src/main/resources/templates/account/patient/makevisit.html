@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout (~{::body},'makevisit')}">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div class="container-mydata container-fluid">
+    <form action="#" th:action="@{/myaccount/makevisit}" th:object="${proposedvisit}" method="post">
+        <div class="form-group">
+            <label for="start">Select date</label>
+            <input type="date" id="start" name="trip-start" th:field="*{date}"
+                   th:value="${actuallydate}"
+                   min="2018-01-01" max="2060-12-31">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Select a doctor</label>
+            <select class="form-control" id="exampleFormControlSelect1" th:field="*{doctor.id}" >
+                <option th:each="doctorr : ${doctors}" th:value="${doctorr.id}">
+                    <span th:text="${doctorr.getName()}" ></span>
+                    <span th:text="${doctorr.getSurname()}" ></span></option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>
+</body>
+</html>

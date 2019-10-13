@@ -13,18 +13,18 @@
                 <th scope="col"><b><span th:text="#{person_lp}">LP</span></b></th>
                 <th scope="col"><b><span th:text="#{person_name}">Name</span></b></th>
                 <th scope="col"><b><span th:text="#{person_surname}">Surname</span></b></th>
-                <th scope="col"><b><span th:text="#{account_reception_doctors_details}">Details</span></b></th>
-                <!--            TODO DODAC COS W STYLU PADDINGU LUB MARGINU DO CALEGO DIVA Z MAINEM TAK ZEBY FOOTER NIE NAJEZDZAL PO ZMIENIEJSZENIU EKRANU-->
-                <!--            TODO ZROBIC TABELE RESPONSYWNA-->
+                <th scope="col"><b><span th:text="#{person_pesel}">Surname</span></b></th>
+                <th scope="col"><b><span th:text="#{person_details}">Details</span></b></th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="doctor, iStats : ${doctors}">
-                <td th:scope="row" th:text="${iStats.index+1} + '.'">Patient name</td>
-                <td th:text="${doctor.getName()}">Patient name</td>
-                <td th:text="${doctor.getSurname()}">Patient surname</td>
+                <td th:scope="row" th:text="${iStats.index+1} + '.'">Each id</td>
+                <td th:text="${doctor.getName()}">Doctor name</td>
+                <td th:text="${doctor.getSurname()}">Doctor surname</td>
+                <td th:text="${doctor.getPesel()}">Doctor pesel</td>
                 <td><a th:href="@{'/myaccount/doctors/doctordetails'(id=${doctor.getId()})}">
-                    <span th:text="#{account_reception_doctors_show}">Show</span>
+                    <span th:text="#{person_show}">Show</span>
                 </a></td>
             </tr>
             </tbody>

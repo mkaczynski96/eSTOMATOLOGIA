@@ -7,6 +7,7 @@
 <body>
 
 <div class="container-mydata container-fluid">
+    <h1>Historia wizyt</h1>
     <table class="table table-dark">
         <thead>
         <tr>
@@ -24,6 +25,24 @@
             <td th:text="${visit.getDate()}">Date</td>
             <td th:text="${visit.getDiagnosis()}">Diagnosis</td>
             <td th:text="${visit.getRecommendations()}">Recommendations</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h1>Propozycje wizyt</h1>
+    <table class="table table-dark">
+        <thead>
+        <tr>
+            <th scope="col"><b><span th:text="#{person_name}">Name</span></b></th>
+            <th scope="col"><b><span th:text="#{person_surname}">Surname</span></b></th>
+            <th scope="col"><b><span th:text="#{account_patient_historyofivists_date}">Date</span></b></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="proposedvisit : ${proposedvisits} ">
+            <td th:text="${proposedvisit.getDoctor().getName()}"></td>
+            <td th:text="${proposedvisit.getDoctor().getSurname()}"></td>
+            <td th:text="${proposedvisit.getDate()}"></td>
         </tr>
         </tbody>
     </table>

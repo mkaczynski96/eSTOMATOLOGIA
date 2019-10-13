@@ -8,14 +8,23 @@
 
 <div class="container-mydata container-fluid">
     <table class="table table-dark">
+        <thead>
+
+        </thead>
         <tbody>
-        <tr th:each="doctor : ${doctors} ">
-            <th scope="col" th:text="${doctor.getName()}">Name</th>
-            <th scope="col"th:text="${doctor.getSurname()}">Surname</th>
-        <tr th:each="specialization : ${specializations}">
-            <td th:text="${specialization.getSpecialization().getName()}">Specialization</td>
-        </tr>
-        </tr>
+        <th:block th:each="specialization : ${specializations}">
+            <tr>
+                <td><b><span th:text="${specialization.getName()}">Specialization</span></b></td>
+                <td></td>
+            </tr>
+            <tr th:each="doctorspecialization : ${doctorspecializations}">
+                    <span th:if="${doctorspecialization.getSpecialization().getDoctorSpecializations()==specialization.getDoctorSpecializations()}">
+                    <td th:text="${doctorspecialization.getDoctor().getName()}">Name</td>
+                    <td th:text="${doctorspecialization.getDoctor().getSurname()}">Surname</td>
+                    </span>
+            </tr>
+
+        </th:block>
         </tbody>
     </table>
 </div>

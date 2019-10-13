@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html"
+      th:replace="~{fragments/layout :: layout (~{::body},'patientdetails')}">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div class="container-mydata container-fluid">
+    <h1>Created visits</h1>
+    <div class="table-responsive">
+        <table class="table table-dark table-hover table-borderless">
+<!--            <thead>-->
+<!--            <th th:scope="col"><b><span th:text="#{account_patient_historyofivists_date}">Date</span></b></th>-->
+<!--            <th th:scope="col"><b><span th:text="#{person_name}">Doctor's name</span></b></th>-->
+<!--            <th th:scope="col"><b><span th:text="#{person_surname}">Doctor's surname</span></b></th>-->
+<!--            <th th:scope="col"><b><span th:text="#{account_patient_historyofivists_diagnosis}">Diagnosis</span></b></th>-->
+<!--            <th th:scope="col"><b><span th:text="#{account_patient_historyofivists_recommendations}">Recommendations</span></b></th>-->
+<!--            </thead>-->
+            <tbody>
+            <tr th:each="proposedVisit : ${proposedVisits}">
+                <td th:text="${proposedVisit.getDate()}">Date</td>
+                <td th:text="${proposedVisit.getPatient().getName()}">Date</td>
+                <td th:text="${proposedVisit.getPatient().getSurname()}">Date</td>
+                <td th:text="${proposedVisit.getPatient().getPesel()}">Date</td>
+                <td th:text="${proposedVisit.getPatient().getAddress()}">Date</td>
+                <td th:text="${proposedVisit.getDoctor().getName()}">Date</td>
+                <td th:text="${proposedVisit.getDoctor().getSurname()}">Date</td>
+                <td th:text="${proposedVisit.getDoctor().getPesel()}">Date</td>
+                <td th:text="${proposedVisit.getDoctor().getPesel()}">Date</td>
+                <td><a th:href="@{'/myaccount/createdvisits/add'(id=${proposedVisit.getId()})}">
+                    <span th:text="#{account_reception_add}">Add</span>
+                </a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+</body>
+</html>

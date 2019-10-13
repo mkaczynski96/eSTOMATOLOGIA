@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html"
+      th:replace="~{fragments/layout :: layout (~{::body},'patientdetails')}">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div class="container-mydata container-fluid">
+    <div class="table-responsive">
+        <table class="table table-dark table-hover table-borderless">
+            <thead>
+            <tr>
+                <th th:scope="col"><b><span th:text="#{person_details}">Patient's data</span></b></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><b><span th:text="#{person_name_additional}">Name:</span></b></td>
+                <td th:text="${patients.get().getName()}">Patient's name</td>
+            </tr>
+            <tr>
+                <td><b><span th:text="#{person_surname_additional}">Surname:</span></b></td>
+                <td th:text="${patients.get().getSurname()}">Patient's surname</td>
+            </tr>
+            <tr>
+                <td><b><span th:text="#{person_address_additional}">Address:</span></b></td>
+                <td th:text="${patients.get().getAddress()}">Patient's address</td>
+            </tr>
+            <tr>
+                <td><b><span th:text="#{person_phonenumber_additional}">Phone number:</span></b></td>
+                <td th:text="${patients.get().getPhoneNumber()}">Patient's phone number</td>
+            </tr>
+            <tr>
+                <td><b><span th:text="#{account_doctor_mypatients_chronic_diseases}">Chronic diseases:</span></b></td>
+                <td th:text="${patients.get().getChronicDiseases()}">Patient's Chronic diseases</td>
+            </tr>
+            <tr>
+                <td><b><span th:text="#{account_doctor_mypatients_medicaments}">Medicaments taken permamently:</span></b></td>
+                <td th:text="${patients.get().getMedicamentsTakenPermamently()}">Patient's medicaments taken permamently</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <h1>Historia wizyt pacjenta</h1>
+    <div class="table-responsive">
+        <table class="table table-dark table-hover table-borderless">
+            <thead>
+            <th th:scope="col"><b><span th:text="#{account_patient_historyofivists_date}">Date</span></b></th>
+            <th th:scope="col"><b><span th:text="#{person_name}">Doctor's name</span></b></th>
+            <th th:scope="col"><b><span th:text="#{person_surname}">Doctor's surname</span></b></th>
+            <th th:scope="col"><b><span th:text="#{account_patient_historyofivists_diagnosis}">Diagnosis</span></b></th>
+            <th th:scope="col"><b><span th:text="#{account_patient_historyofivists_recommendations}">Recommendations</span></b></th>
+            </thead>
+            <tbody>
+            <tr th:each="visit : ${visits}">
+                <td th:text="${visit.getDate()}">Date</td>
+                <td th:text="${visit.getDoctor().getName()}">Doctor's name</td>
+                <td th:text="${visit.getDoctor().getSurname()}">Doctor's surname</td>
+                <td th:text="${visit.getDiagnosis()}">Patient's diagnosis</td>
+                <td th:text="${visit.getRecommendations()}">Patient's recommendations</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+</body>
+</html>

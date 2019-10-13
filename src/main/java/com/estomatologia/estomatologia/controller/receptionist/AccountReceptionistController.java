@@ -1,8 +1,6 @@
 package com.estomatologia.estomatologia.controller.receptionist;
 
-import com.estomatologia.estomatologia.model.Equipment;
-import com.estomatologia.estomatologia.model.Medicament;
-import com.estomatologia.estomatologia.model.User;
+import com.estomatologia.estomatologia.model.*;
 import com.estomatologia.estomatologia.repository.*;
 import com.estomatologia.estomatologia.service.security.AuthorizationService;
 import org.springframework.stereotype.Controller;
@@ -23,16 +21,20 @@ public class AccountReceptionistController {
     private DoctorSpecializationRepository doctorSpecializationRepository;
     private MedicamentRepository medicamentRepository;
     private EquipmentRepository equipmentRepository;
+    private VisitRepository visitRepository;
+    private ProposedVisitRepository proposedVisitRepository;
 
     private AuthorizationService authorizationService;
 
-    public AccountReceptionistController(ReceptionistRepository receptionistRepository, PatientRepository patientRepository, DoctorRepository doctorRepository, DoctorSpecializationRepository doctorSpecializationRepository, MedicamentRepository medicamentRepository, EquipmentRepository equipmentRepository, AuthorizationService authorizationService) {
+    public AccountReceptionistController(ReceptionistRepository receptionistRepository, PatientRepository patientRepository, DoctorRepository doctorRepository, DoctorSpecializationRepository doctorSpecializationRepository, MedicamentRepository medicamentRepository, EquipmentRepository equipmentRepository, VisitRepository visitRepository, ProposedVisitRepository proposedVisitRepository, AuthorizationService authorizationService) {
         this.receptionistRepository = receptionistRepository;
         this.patientRepository = patientRepository;
         this.doctorRepository = doctorRepository;
         this.doctorSpecializationRepository = doctorSpecializationRepository;
         this.medicamentRepository = medicamentRepository;
         this.equipmentRepository = equipmentRepository;
+        this.visitRepository = visitRepository;
+        this.proposedVisitRepository = proposedVisitRepository;
         this.authorizationService = authorizationService;
     }
 
@@ -48,6 +50,26 @@ public class AccountReceptionistController {
             if (receptionistRepository.findById(loggedUserId).isPresent()) {
                 model.addAttribute("patients", patientRepository.findAll());
                 return "account/receptionist/patients";
+            } else {
+                return "error";
+            }
+        }
+    }
+
+    @RolesAllowed("RECEPTION")
+    @GetMapping("/myaccount/patients/patientdetails")
+    public String morePatientDetails(@RequestParam Long id, Model model) {
+        User loggedUser = authorizationService.getLoggedUser();
+
+        if (loggedUser == null) {
+            return "error";
+        } else {
+            Long loggedUserId = loggedUser.getId();
+            if (receptionistRepository.findById(loggedUserId).isPresent()) {
+
+                model.addAttribute("patients", patientRepository.findById(id));
+                model.addAttribute("visits", visitRepository.findAllByPatientId(id));
+                return "account/receptionist/patientdetails";
             } else {
                 return "error";
             }
@@ -96,9 +118,56 @@ public class AccountReceptionistController {
 
     @RolesAllowed("RECEPTION")
     @GetMapping("/myaccount/createdvisits")
-    public String createdVisits() {
-        return "account/account";
+    public String createdVisits(Model model) {
+        User loggedUser = authorizationService.getLoggedUser();
+
+        if (loggedUser == null) {
+            return "error";
+        } else {
+            Long loggedUserId = loggedUser.getId();
+            if (receptionistRepository.findById(loggedUserId).isPresent()) {
+                model.addAttribute("proposedVisits",proposedVisitRepository.findAll());
+                return "account/receptionist/createdvisits";
+            } else {
+                return "error";
+            }
+        }
     }
+
+
+    @RolesAllowed("RECEPTION")
+    @GetMapping("/myaccount/createdvisits/add")
+    public String addToVisit(@RequestParam Long id) {
+        User loggedUser = authorizationService.getLoggedUser();
+
+        if (loggedUser == null) {
+            return "error";
+        } else {
+            Long loggedUserId = loggedUser.getId();
+            if (receptionistRepository.findById(loggedUserId).isPresent()) {
+
+                //TODO ADD STATUS TO VISIT - ZAKONCZONA/AKTYWNA.
+
+
+                if (proposedVisitRepository.findById(id).isPresent()) {
+                    Visit visit = new Visit();
+                    ProposedVisit proposedVisit = proposedVisitRepository.findById(id).orElse(null);
+                    visit.setPatient(proposedVisit.getPatient());
+                    visit.setDoctor(proposedVisit.getDoctor());
+                    visit.setDate(proposedVisit.getDate());
+                    visitRepository.save(visit);
+                    proposedVisitRepository.deleteById(id);
+                }
+                return "success";
+            } else {
+                return "error";
+            }
+        }
+    }
+
+
+
+
 
     @RolesAllowed("RECEPTION")
     @GetMapping("/myaccount/manageequipment")
@@ -140,7 +209,7 @@ public class AccountReceptionistController {
 
     @RolesAllowed("RECEPTION")
     @PostMapping("/myaccount/manageequipment/add")
-    public String submitEquipment(@ModelAttribute Equipment equipment) {
+    public String addEquipment(@ModelAttribute Equipment equipment) {
         User loggedUser = authorizationService.getLoggedUser();
 
         if (loggedUser == null) {
@@ -149,7 +218,7 @@ public class AccountReceptionistController {
             Long loggedUserId = loggedUser.getId();
             if (receptionistRepository.findById(loggedUserId).isPresent()) {
                 equipmentRepository.save(equipment);
-                return "account/receptionist/manageequipments";
+                return "success";
             } else {
                 return "error";
             }
@@ -178,7 +247,7 @@ public class AccountReceptionistController {
 
     @RolesAllowed("RECEPTION")
     @PostMapping("/myaccount/manageequipment/edit")
-    public String editEquipment(@ModelAttribute Equipment equipment, @RequestParam Long id) {
+    public String editEquipment(@ModelAttribute Equipment equipment, @RequestParam Long id, Model model) {
         User loggedUser = authorizationService.getLoggedUser();
 
         if (loggedUser == null) {
@@ -194,8 +263,8 @@ public class AccountReceptionistController {
                     equipmentEdited.setNumber(equipment.getNumber());
                     equipmentRepository.save(equipmentEdited);
                 }
-
-                return "account/receptionist/manageequipments";
+                model.addAttribute("success", "equipment");
+                return "success";
             } else {
                 return "error";
             }
@@ -205,7 +274,7 @@ public class AccountReceptionistController {
 
     @RolesAllowed("RECEPTION")
     @GetMapping("/myaccount/manageequipment/delete")
-    public String deleteEquipment(@RequestParam Long id) {
+    public String deleteEquipment(@RequestParam Long id, Model model) {
         User loggedUser = authorizationService.getLoggedUser();
 
         if (loggedUser == null) {
@@ -214,7 +283,8 @@ public class AccountReceptionistController {
             Long loggedUserId = loggedUser.getId();
             if (receptionistRepository.findById(loggedUserId).isPresent()) {
                 equipmentRepository.deleteById(id);
-                return "account/receptionist/manageequipments";
+                model.addAttribute("success", "equipment");
+                return "success";
             } else {
                 return "error";
             }
@@ -262,7 +332,7 @@ public class AccountReceptionistController {
 
     @RolesAllowed("RECEPTION")
     @PostMapping("/myaccount/managemedicament/add")
-    public String submitMedicament(@ModelAttribute Medicament medicament) {
+    public String submitMedicament(@ModelAttribute Medicament medicament, Model model) {
         User loggedUser = authorizationService.getLoggedUser();
 
         if (loggedUser == null) {
@@ -271,7 +341,8 @@ public class AccountReceptionistController {
             Long loggedUserId = loggedUser.getId();
             if (receptionistRepository.findById(loggedUserId).isPresent()) {
                 medicamentRepository.save(medicament);
-                return "account/receptionist/managemedicaments";
+                model.addAttribute("success", "medicament");
+                return "success";
             } else {
                 return "error";
             }
@@ -300,7 +371,7 @@ public class AccountReceptionistController {
 
     @RolesAllowed("RECEPTION")
     @PostMapping("/myaccount/managemedicament/edit")
-    public String editMedicament(@ModelAttribute Medicament medicament, @RequestParam Long id) {
+    public String editMedicament(@ModelAttribute Medicament medicament, @RequestParam Long id, Model model) {
         User loggedUser = authorizationService.getLoggedUser();
 
         if (loggedUser == null) {
@@ -316,8 +387,8 @@ public class AccountReceptionistController {
                     medicamentEdited.setNumber(medicament.getNumber());
                     medicamentRepository.save(medicamentEdited);
                 }
-
-                return "account/receptionist/manageequipments";
+                model.addAttribute("success", "medicament");
+                return "success";
             } else {
                 return "error";
             }
@@ -326,7 +397,7 @@ public class AccountReceptionistController {
 
     @RolesAllowed("RECEPTION")
     @GetMapping("/myaccount/managemedicament/delete")
-    public String deleteMedicament(@RequestParam Long id) {
+    public String deleteMedicament(@RequestParam Long id, Model model) {
         User loggedUser = authorizationService.getLoggedUser();
 
         if (loggedUser == null) {
@@ -335,7 +406,8 @@ public class AccountReceptionistController {
             Long loggedUserId = loggedUser.getId();
             if (receptionistRepository.findById(loggedUserId).isPresent()) {
                 medicamentRepository.deleteById(id);
-                return "account/receptionist/managemedicaments";
+                model.addAttribute("success", "medicament");
+                return "success";
             } else {
                 return "error";
             }

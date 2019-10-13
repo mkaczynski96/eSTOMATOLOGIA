@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'failed')}">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div class="container">
+    <span th:text="#{failed_add_visit}">Failed! You can't add new visit proposition, because you have too many booked!</span>
+</div>
+
+<script>
+    var message = "[[${failed}]]";
+    setTimeout(function () {
+       if (message === "proposedvisit") {
+            window.location.href = 'http://localhost:8080/myaccount/historyofvisits';
+        }
+    }, 3000);
+</script>
+</body>
+</html>

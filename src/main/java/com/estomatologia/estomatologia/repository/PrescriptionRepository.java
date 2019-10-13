@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PrescriptionRepository extends CrudRepository<Prescription, Long> {
+
+    Prescription findByVisitId(Long id);
 }

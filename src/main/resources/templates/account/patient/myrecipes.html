@@ -5,6 +5,37 @@
     <meta charset="UTF-8">
 </head>
 <body>
-
+<div class="container-mydata container-fluid">
+    <div class="table-responsive">
+        <table class="table table-dark table-hover table-borderless">
+            <thead>
+            <tr>
+                <th scope="col"><b><span th:text="#{person_lp}">LP</span></b></th>
+                <th scope="col"><b><span th:text="#{person_name}">Clinic name</span></b></th>
+                <th scope="col"><b><span th:text="'medicaments'">Medicament</span></b></th>
+                <th scope="col"><b><span th:text="#{person_pesel}">Branch of NFZ</span></b></th>
+                <th scope="col"><b><span th:text="#{person_name}">Doctor's name</span></b></th>
+                <th scope="col"><b><span th:text="#{person_surname}">Doctor's name</span></b></th>
+                <th scope="col"><b><span th:text="#{person_name}">Patient's name</span></b></th>
+                <th scope="col"><b><span th:text="#{person_surname}">Patient's surname</span></b></th>
+                <th scope="col"><b><span th:text="#{account_patient_historyofivists_date}">Date</span></b></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="prescription, iStats : ${recipes}">
+                <td th:scope="row" th:text="${iStats.index+1} + '.'">Each id</td>
+                <td th:text="${prescription.getClinicName()}">Clinic name</td>
+                <td th:text="${prescription.getMedicaments()}">Medicament</td>
+                <td th:text="${prescription.getBranchOfNFZ()}">Branch of NFZ</td>
+                <td th:text="${prescription.getVisit().getDoctor().getName()}">Doctor name</td>
+                <td th:text="${prescription.getVisit().getDoctor().getSurname()}">Doctor's surname</td>
+                <td th:text="${prescription.getVisit().getPatient().getName()}">Patient's name</td>
+                <td th:text="${prescription.getVisit().getPatient().getSurname()}">Patient's surname</td>
+                <td th:text="${prescription.getVisit().getDate()}">Date</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 </body>
 </html>
