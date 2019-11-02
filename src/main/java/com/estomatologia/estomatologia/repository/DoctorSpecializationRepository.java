@@ -4,6 +4,7 @@ import com.estomatologia.estomatologia.model.DoctorSpecialization;
 import com.estomatologia.estomatologia.model.Specialization;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -11,4 +12,7 @@ import java.util.List;
 public interface DoctorSpecializationRepository extends CrudRepository<DoctorSpecialization, Long> {
 
     List<DoctorSpecialization> findAllByDoctorId(Long doctorId);
+
+    @Transactional
+    void deleteAllByDoctorId(Long id);
 }

@@ -130,7 +130,7 @@ public class AccountPatientController {
     }
 
     @RolesAllowed("PATIENT")
-    @GetMapping("/myaccount/myrecipes")
+    @GetMapping("/myaccount/myprescriptions")
     public String myRecipes(Model model) {
 
         User loggedUser = authorizationService.getLoggedUser();
@@ -144,7 +144,7 @@ public class AccountPatientController {
                 List<Prescription> prescriptions = new ArrayList<>();
                 visit.forEach(e -> prescriptions.add(prescriptionRepository.findByVisitId(e.getId())));
                 model.addAttribute("recipes", prescriptions);
-                return "account/patient/myrecipes";
+                return "account/patient/myprescriptions";
             } else {
                 return "error";
             }

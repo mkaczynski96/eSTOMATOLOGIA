@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout (~{::body},'addreceptionist')}">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div class="container-mydata container">
+    <h1>Add receptionist</h1>
+    <form action="#" th:action="@{/myaccount/managereception/add}" th:object="${receptionists}" method="post">
+        <div class="form-row">
+            <div class="col">
+                <label for="name"><span th:text="#{account_reception_name}"></span></label>
+                <input type="text"
+                       class="form-control"
+                       id="name"
+                       th:field="*{name}"/>
+
+                <label for="surname"><span th:text="Surname"></span></label>
+                <input type="text"
+                       class="form-control"
+                       id="surname"
+                       th:field="*{surname}"/>
+
+                <label for="phonenumber"><span th:text="Phonenumber"></span></label>
+                <input type="text"
+                       class="form-control"
+                       id="phonenumber"
+                       th:field="*{phoneNumber}"/>
+
+                <label for="pesel"><span th:text="Pesel"></span></label>
+                <input type="text"
+                       class="form-control"
+                       id="pesel"
+                       th:field="*{pesel}"/>
+
+                <label for="address"><span th:text="Address"></span></label>
+                <input type="text"
+                       class="form-control"
+                       id="address"
+                       th:field="*{address}"/>
+
+                <label for="username"><span th:text="Username"></span></label>
+                <input type="text"
+                       class="form-control"
+                       id="username"
+                       th:field="*{userReceptionist.username}"/>
+
+                <label for="password"><span th:text="Userpassword"></span></label>
+                <input type="text"
+                       class="form-control"
+                       id="password"
+                       th:field="*{userReceptionist.password}"/>
+
+                <input type="submit" th:value="#{account_reception_add}" class="btn btn-primary"/>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

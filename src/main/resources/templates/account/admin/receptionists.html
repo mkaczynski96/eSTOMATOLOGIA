@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html"
+      th:replace="~{fragments/layout :: layout (~{::body},'receptionists')}">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div class="container-mydata container">
+    <h1>Receptionist details</h1>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th th:scope="col"><b><span th:text="#{person_details}">Patient's data</span></b></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><b><span th:text="#{person_name_additional}">Name:</span></b></td>
+                <td th:text="${receptionists.get().getName()}">Patient's name</td>
+            </tr>
+            <tr>
+                <td><b><span th:text="#{person_surname_additional}">Surname:</span></b></td>
+                <td th:text="${receptionists.get().getSurname()}">Patient's surname</td>
+
+            </tr>
+            <tr>
+                <td><b><span th:text="#{person_address_additional}">Address:</span></b></td>
+                <td th:text="${receptionists.get().getAddress()}">Patient's address</td>
+            </tr>
+            <tr>
+                <td><b><span th:text="#{person_phonenumber_additional}">Phone number:</span></b></td>
+                <td th:text="${receptionists.get().getPhoneNumber()}">Patient's phone number</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <a class="btn btn-primary" th:href="@{'/myaccount/managereception/receptionists/edit'}" role="button" th:text="#{account_reception_edit}">Edit</a>
+    <a class="btn btn-primary" th:href="@{'/myaccount/managereception/receptionists/delete'}" role="button" th:text="#{account_reception_delete}">Delete</a>
+</div>
+</body>
+</html>

@@ -50,6 +50,9 @@ public class DataExample implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
+
+
+
         //User doctor//
         User doctorUser = new User();
         doctorUser.setUsername("doctor");
@@ -236,7 +239,7 @@ public class DataExample implements CommandLineRunner {
         //Doctor2
         User doctorUser2 = new User();
         doctorUser2.setUsername("doctor2");
-        doctorUser2.setPassword("password");
+        doctorUser2.setPassword(passwordEncoder.encode("password"));
         doctorUser2.setEnabled(true);
 
         Doctor doctor2 = new Doctor();

@@ -4,10 +4,11 @@ header{
 }
 
 .headerRow{
-    /*background-color: #228B22;*/
     background: rgb(41,173,41);
     background: linear-gradient(180deg, rgba(41,173,41,1) 0%, rgba(34,139,34,1) 100%);
-    color: white;
+    color: #FFFFFF;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .menu{
@@ -18,7 +19,7 @@ header a,
 header a:active,
 header a:link{
     text-decoration: none;
-    color: white;
+    color: #FFFFFF;
 }
 
 header a:hover{
@@ -38,31 +39,94 @@ header .navbar{
 }
 
 .btn{
-    border: black 2px solid;
-    color: white;
+    background-color: #047212;
+    color: #FFFFFF;
+    box-shadow: #000000 1px 1px 5px;
+    text-shadow: #000000 1px 1px 1px;
+    border: #000000 solid 1px;
+    transition-duration: 0.4s;
 }
 
 .btn:hover{
-    background-color: limegreen;
+    background-color: #0EBA25;
+    color: #FFFFFF;
+    text-shadow: #000000 1px 1px 1px;
+    box-shadow: #000000 1px 1px 8px;
+    transition-duration: 0.4s;
 }
+
 
 .footer--text{
     display: flex;
-    align-items: end;
+    align-items: center;
     justify-content: center;
-    color: white;
+    color: #FFFFFF;
+    font-size: 12px;
     background-color: #228b22;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    height: 50px;
+    height: 30px;
     width: 80%;
+
+}
+
+.footer--text p{
+    margin: 0;
 }
 
 
 
 .container-mydata{
-    padding: 50px;
+    margin: 20px auto 0;
 }
+
+.container-account{
+    margin: 50px 0;
+}
+
+.container-account div{
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.welcome{
+    display: flex;
+    flex-direction: row !important;
+    padding: 10px;
+    font-size: 20px;
+}
+
+.welcome b{
+    margin-left: 5px;
+}
+
+
+.navmenu{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}
+
+.navbar-nav{
+    flex-direction: column;
+}
+
+.nav-item{
+    padding: 5px;
+    margin: 5px;
+    text-align: center;
+}
+
+.container{
+    margin-bottom: 50px;
+}
+
+
+
+
+
+
 
 
 
@@ -109,6 +173,7 @@ header .navbar{
         margin: 5px;
         text-align: center;
     }
+
 }
 
 /* Large devices (desktops, 992px and up)*/
@@ -129,6 +194,7 @@ header .navbar{
         margin: 5px;
         text-align: center;
     }
+
 }
 
 /*  Extra large devices (large desktops, 1200px and up)*/
@@ -149,4 +215,25 @@ header .navbar{
         margin: 5px;
         text-align: center;
     }
+
+    .nav-item p{
+        display: flex;
+        margin: 0 !important;
+        align-content: center;
+        align-self: center;
+        align-items: center;
+    }
+
+    .container-account div{
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+    }
+
+    .container-account div a{
+        margin: 5px;
+    }
+
+
+
 }

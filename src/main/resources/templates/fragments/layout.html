@@ -9,6 +9,8 @@
     <link href="../../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css?family=Livvic&display=swap" rel="stylesheet">
     <link href="../../static/css/style_login.css" th:href="@{/css/style_login.css}" rel="stylesheet"/>
+    <link href="../../static/css/index.css" th:href="@{/css/index.css}" rel="stylesheet"/>
+    <link rel="icon" href="../../static/img/eSTOMATOLOGIA_icon.png" th:href="@{/img/eSTOMATOLOGIA_icon.png}" />
 </head>
 <body>
 <div id="app_content">
@@ -28,10 +30,10 @@
                 <div class="navmenu col-12 col-sm-12 col-xl-4">
                     <nav class="navbar">
                         <div class="navbar-nav">
-                            <a class="nav-item nav-link" href="/"><p th:text="#{header.menu.option1}"></p></a>
-                            <a class="nav-item nav-link" href="/services"><p th:text="#{header.menu.option2}"></p></a>
-                            <a class="nav-item nav-link" href="/tariff"><p th:text="#{header.menu.option3}"></p></a>
-                            <a class="nav-item nav-link" href="/contact"><p th:text="#{header.menu.option4}"></p></a>
+                            <a class="nav-item nav-link" href="/"><span th:text="#{header.menu.option1}"></span></a>
+                            <a class="nav-item nav-link" href="/services"><span th:text="#{header.menu.option2}"></span></a>
+                            <a class="nav-item nav-link" href="/tariff"><span th:text="#{header.menu.option3}"></span></a>
+                            <a class="nav-item nav-link" href="/contact"><span th:text="#{header.menu.option4}"></span></a>
                         </div>
                     </nav>
                 </div>
@@ -64,8 +66,8 @@
         <main>
             <th:block th:include="${template}"/>
         </main>
-        <footer class="footer fixed-bottom">
-            <div class="row">
+        <footer id="footer">
+            <div class="row fixed-bottom">
                 <div class="col-12 col-sm-12">
                     <div class="d-flex justify-content-center align-items-center col-12 col-12">
                         <div class="footer--text"><p th:text="#{footer.text}"></p></div>

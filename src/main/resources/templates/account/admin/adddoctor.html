@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout (~{::body},'adddoctor')}">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div class="container-mydata container">
+    <h1>Add doctor</h1>
+    <form action="#" th:action="@{/myaccount/managedoctor/add}" th:object="${doctorspecializations}" method="post">
+        <div class="form-row">
+            <div class="col">
+                <label for="name"><span th:text="#{account_reception_name}"></span></label>
+                <input type="text"
+                       class="form-control"
+                       id="name"
+                       th:field="*{doctor.name}"/>
+
+                <label for="surname"><span th:text="Surname"></span></label>
+                <input type="text"
+                       class="form-control"
+                       id="surname"
+                       th:field="*{doctor.surname}"/>
+
+                <label for="phonenumber"><span th:text="Phonenumber"></span></label>
+                <input type="text"
+                       class="form-control"
+                       id="phonenumber"
+                       th:field="*{doctor.phoneNumber}"/>
+
+                <label for="pesel"><span th:text="Pesel"></span></label>
+                <input type="text"
+                       class="form-control"
+                       id="pesel"
+                       th:field="*{doctor.pesel}"/>
+
+                <label for="address"><span th:text="Address"></span></label>
+                <input type="text"
+                       class="form-control"
+                       id="address"
+                       th:field="*{doctor.address}"/>
+
+                <label for="username"><span th:text="Username"></span></label>
+                <input type="text"
+                       class="form-control"
+                       id="username"
+                       th:field="*{doctor.userDoctor.username}"/>
+
+                <label for="password"><span th:text="Userpassword"></span></label>
+                <input type="text"
+                       class="form-control"
+                       id="password"
+                       th:field="*{doctor.userDoctor.password}"/>
+
+                <!--                TODO ADD BUTTON TO MORE SPECIALIZATIONS-->
+
+                <label for="exampleFormControlSelect1">Select specialization</label>
+                <select class="form-control" id="exampleFormControlSelect1" th:field="*{specialization.id}">
+                    <option th:each="specialization : ${specializations}" th:value="${specialization.id}">
+                        <span th:text="${specialization.getName()}"></span>
+                </select>
+
+                <label for="license"><span th:text="Specializationlicense"></span></label>
+                <input type="text"
+                       class="form-control"
+                       id="license"
+                       th:field="*{license}"/>
+
+                <input type="submit" th:value="#{account_reception_add}" class="btn btn-primary"/>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

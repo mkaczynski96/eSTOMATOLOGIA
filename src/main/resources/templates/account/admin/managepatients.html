@@ -1,36 +1,38 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{fragments/layout :: layout (~{::body},'doctors')}">
+      th:replace="~{fragments/layout :: layout (~{::body},'managepatients')}">
 <head>
     <meta charset="UTF-8">
 </head>
 <body>
 <div class="container-mydata container">
-    <h1>Doctors</h1>
+    <h1>Manage patients</h1>
     <div class="table-responsive">
-        <table class="table table-dark table-hover table-borderless">
+        <table class="table table-dark">
             <thead>
             <tr>
                 <th scope="col"><b><span th:text="#{person_lp}">LP</span></b></th>
                 <th scope="col"><b><span th:text="#{person_name}">Name</span></b></th>
                 <th scope="col"><b><span th:text="#{person_surname}">Surname</span></b></th>
-                <th scope="col"><b><span th:text="#{person_pesel}">Surname</span></b></th>
+                <th scope="col"><b><span th:text="#{person_pesel}">Pesel</span></b></th>
                 <th scope="col"><b><span th:text="#{person_details}">Details</span></b></th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="doctor, iStats : ${doctors}">
+            <tr th:each="patient, iStats: ${patients} ">
                 <td th:scope="row" th:text="${iStats.index+1} + '.'">Each id</td>
-                <td th:text="${doctor.getName()}">Doctor name</td>
-                <td th:text="${doctor.getSurname()}">Doctor surname</td>
-                <td th:text="${doctor.getPesel()}">Doctor pesel</td>
-                <td><a th:href="@{'/myaccount/doctors/doctordetails'(id=${doctor.getId()})}">
+                <td th:text="${patient.getName()}">Patient name</td>
+                <td th:text="${patient.getSurname()}">Patient surname</td>
+                <td th:text="${patient.getPesel()}">Patient pesel</td>
+                <td><a th:href="@{'/myaccount/managepatient/patients'(id=${patient.getId()})}">
                     <span th:text="#{person_show}">Show</span>
                 </a></td>
             </tr>
             </tbody>
         </table>
     </div>
+    <a class="btn btn-primary" th:href="@{'/myaccount/managepatient/add'}" role="button"
+       th:text="#{account_reception_add}">Add</a>
 </div>
 </body>
 </html>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html"
-      th:replace="~{fragments/layout :: layout (~{::body},'doctordetails')}">
+      th:replace="~{fragments/layout :: layout (~{::body},'doctors')}">
 <head>
     <meta charset="UTF-8">
 </head>
@@ -41,6 +41,8 @@
             </tbody>
         </table>
     </div>
+    <a class="btn btn-primary" th:href="@{'/myaccount/managedoctor/edit'}" role="button" th:text="#{account_reception_edit}">Edit</a>
+    <a class="btn btn-primary" th:href="@{'/myaccount/managedoctor/delete'(id=${doctor.get().getId()})}" role="button" th:text="#{account_reception_delete}">Delete</a>
 </div>
 </body>
 </html>

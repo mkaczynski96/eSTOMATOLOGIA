@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
 </head>
 <body>
-<div class="container-mydata container-fluid">
+<div class="container-mydata container">
+    <h1>Edit medicament</h1>
     <form action="#" th:action="@{'/myaccount/managemedicament/edit'(id=${medicament.getId()})}"
           th:object="${medicament}" method="post">
         <div class="form-row">
