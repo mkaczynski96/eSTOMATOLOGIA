@@ -6,7 +6,7 @@
 </head>
 <body>
 <div class="container-mydata container">
-    <h1>Add doctor</h1>
+    <h1 th:text="#{account_admin_adddoctor}">Add doctor</h1>
     <form action="#" th:action="@{/myaccount/managedoctor/add}" th:object="${doctorspecializations}" method="post">
         <div class="form-row">
             <div class="col">

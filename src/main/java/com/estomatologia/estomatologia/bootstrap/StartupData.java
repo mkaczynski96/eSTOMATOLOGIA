@@ -7,7 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DataExample implements CommandLineRunner {
+public class StartupData implements CommandLineRunner {
 
     private final DoctorService doctorService;
     private final SpecializationService specializationService;
@@ -26,7 +26,7 @@ public class DataExample implements CommandLineRunner {
 
     private PasswordEncoder passwordEncoder;
 
-    public DataExample(DoctorService doctorService, SpecializationService specializationService,
+    public StartupData(DoctorService doctorService, SpecializationService specializationService,
                        UserService userService, AuthoritiesService authoritiesService, MedicamentService medicamentService,
                        AdministratorService administratorService, PatientService patientService, ReceptionistService receptionistService,
                        EquipmentService equipmentService, PrescriptionService prescriptionService, ProposedVisitService proposedVisit,

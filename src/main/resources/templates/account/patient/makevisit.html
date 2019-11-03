@@ -6,7 +6,7 @@
 </head>
 <body>
 <div class="container-mydata container">
-    <h1>Make visit appointment</h1>
+    <h1 th:text="#{account_patient_makevisit}">Make visit appointment</h1>
     <form action="#" th:action="@{/myaccount/makevisit}" th:object="${proposedvisit}" method="post">
         <div class="form-group">
             <label for="start">Select date</label>
