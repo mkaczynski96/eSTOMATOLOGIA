@@ -1,7 +1,7 @@
 package com.estomatologia.estomatologia.bootstrap;
 
 import com.estomatologia.estomatologia.model.*;
-import com.estomatologia.estomatologia.service.orm.*;
+import com.estomatologia.estomatologia.repository.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -9,48 +9,47 @@ import org.springframework.stereotype.Component;
 @Component
 public class StartupData implements CommandLineRunner {
 
-    private final DoctorService doctorService;
-    private final SpecializationService specializationService;
-    private final UserService userService;
-    private final AuthoritiesService authoritiesService;
-    private final MedicamentService medicamentService;
-    private final AdministratorService administratorService;
-    private final PatientService patientService;
-    private final ReceptionistService receptionistService;
-    private final EquipmentService equipmentService;
-    private final PrescriptionService prescriptionService;
-    private final ProposedVisitService proposedVisit;
-    private final VisitService visitService;
-    private final DoctorSpecializationService doctorSpecializationService;
+    private final DoctorRepository doctorRepository;
+    private final SpecializationRepository specializationRepository;
+    private final UserRepository userRepository;
+    private final AuthorityRepository authorityRepository;
+    private final MedicamentRepository medicamentRepository;
+    private final AdministratorRepository administratorRepository;
+    private final PatientRepository patientRepository;
+    private final ReceptionistRepository receptionistRepository;
+    private final EquipmentRepository equipmentRepository;
+    private final PrescriptionRepository prescriptionRepository;
+    private final VisitRepository visitRepository;
+    private final DoctorSpecializationRepository doctorSpecializationRepository;
 
 
     private PasswordEncoder passwordEncoder;
 
-    public StartupData(DoctorService doctorService, SpecializationService specializationService,
-                       UserService userService, AuthoritiesService authoritiesService, MedicamentService medicamentService,
-                       AdministratorService administratorService, PatientService patientService, ReceptionistService receptionistService,
-                       EquipmentService equipmentService, PrescriptionService prescriptionService, ProposedVisitService proposedVisit,
-                       VisitService visitService, DoctorSpecializationService doctorSpecializationService, PasswordEncoder passwordEncoder) {
-        this.doctorService = doctorService;
-        this.specializationService = specializationService;
-        this.userService = userService;
-        this.authoritiesService = authoritiesService;
-        this.medicamentService = medicamentService;
-        this.administratorService = administratorService;
-        this.patientService = patientService;
-        this.receptionistService = receptionistService;
-        this.equipmentService = equipmentService;
-        this.prescriptionService = prescriptionService;
-        this.proposedVisit = proposedVisit;
-        this.visitService = visitService;
-        this.doctorSpecializationService = doctorSpecializationService;
+    public StartupData(DoctorRepository doctorRepository, SpecializationRepository specializationRepository,
+                       UserRepository userRepository, AuthorityRepository authorityRepository,
+                       MedicamentRepository medicamentRepository, AdministratorRepository administratorRepository,
+                       PatientRepository patientRepository, ReceptionistRepository receptionistRepository,
+                       EquipmentRepository equipmentRepository, PrescriptionRepository prescriptionRepository,
+                       VisitRepository visitRepository, DoctorSpecializationRepository doctorSpecializationRepository,
+                       PasswordEncoder passwordEncoder) {
+        this.doctorRepository = doctorRepository;
+        this.specializationRepository = specializationRepository;
+        this.userRepository = userRepository;
+        this.authorityRepository = authorityRepository;
+        this.medicamentRepository = medicamentRepository;
+        this.administratorRepository = administratorRepository;
+        this.patientRepository = patientRepository;
+        this.receptionistRepository = receptionistRepository;
+        this.equipmentRepository = equipmentRepository;
+        this.prescriptionRepository = prescriptionRepository;
+        this.visitRepository = visitRepository;
+        this.doctorSpecializationRepository = doctorSpecializationRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
+
     @Override
     public void run(String... args) throws Exception {
-
-
 
 
         //User doctor//
@@ -68,13 +67,13 @@ public class StartupData implements CommandLineRunner {
         //Connection
         doctor.setUserDoctor(doctorUser);
         doctorUser.setDoctor(doctor);
-        userService.save(doctorUser);
+        userRepository.save(doctorUser);
 
         //Doctors authorities
         Authorities roleDoctor = new Authorities();
         roleDoctor.setUsername("doctor");
         roleDoctor.setAuthority("ROLE_DOCTOR");
-        authoritiesService.save(roleDoctor);
+        authorityRepository.save(roleDoctor);
 
 
         //Specialization
@@ -83,9 +82,9 @@ public class StartupData implements CommandLineRunner {
         Specialization heartSurgeon = new Specialization();
         heartSurgeon.setName("Ortodonta");
 
-        doctorService.save(doctor);
-        specializationService.save(ginecologist);
-        specializationService.save(heartSurgeon);
+        doctorRepository.save(doctor);
+        specializationRepository.save(ginecologist);
+        specializationRepository.save(heartSurgeon);
 
         //Doctor-specialization
         DoctorSpecialization doctorSpecialization = new DoctorSpecialization();
@@ -93,14 +92,14 @@ public class StartupData implements CommandLineRunner {
         doctorSpecialization.setSpecialization(ginecologist);
         doctorSpecialization.setId(new DoctorSpecializationKey(doctor.getId(), ginecologist.getId()));
         doctorSpecialization.setLicense("4336");
-        doctorSpecializationService.save(doctorSpecialization);
+        doctorSpecializationRepository.save(doctorSpecialization);
 
         DoctorSpecialization doctorSpecialization2 = new DoctorSpecialization();
         doctorSpecialization2.setDoctor(doctor);
         doctorSpecialization2.setSpecialization(heartSurgeon);
         doctorSpecialization2.setId(new DoctorSpecializationKey(doctor.getId(), heartSurgeon.getId()));
         doctorSpecialization2.setLicense("5332");
-        doctorSpecializationService.save(doctorSpecialization2);
+        doctorSpecializationRepository.save(doctorSpecialization2);
 
         //Medicaments
         Medicament bolprazol = new Medicament();
@@ -109,8 +108,8 @@ public class StartupData implements CommandLineRunner {
         Medicament apap = new Medicament();
         apap.setName("APAP");
         apap.setNumber(5);
-        medicamentService.save(bolprazol);
-        medicamentService.save(apap);
+        medicamentRepository.save(bolprazol);
+        medicamentRepository.save(apap);
 
         //Administrator
         User admin = new User();
@@ -125,14 +124,14 @@ public class StartupData implements CommandLineRunner {
         administrator.setAddress("ul. Mrozna 3/111, Warszawa");
         administrator.setUserAdministrator(admin);
         admin.setAdministrator(administrator);
-        userService.save(admin);
-        administratorService.save(administrator);
+        userRepository.save(admin);
+        administratorRepository.save(administrator);
 
         //Admin authorities
         Authorities roleAdmin = new Authorities();
         roleAdmin.setUsername(admin.getUsername());
         roleAdmin.setAuthority("ROLE_ADMIN");
-        authoritiesService.save(roleAdmin);
+        authorityRepository.save(roleAdmin);
 
 
         //Patients
@@ -166,22 +165,22 @@ public class StartupData implements CommandLineRunner {
         patient2.setUserPatient(patient2User);
         patient2User.setPatient(patient2);
 
-        userService.save(patient1User);
-        userService.save(patient2User);
-        patientService.save(patient1);
-        patientService.save(patient2);
+        userRepository.save(patient1User);
+        userRepository.save(patient2User);
+        patientRepository.save(patient1);
+        patientRepository.save(patient2);
 
 
         //Patients authorities
         Authorities rolePatient1 = new Authorities();
         rolePatient1.setUsername(patient1User.getUsername());
         rolePatient1.setAuthority("ROLE_PATIENT");
-        authoritiesService.save(rolePatient1);
+        authorityRepository.save(rolePatient1);
 
         Authorities rolePatient2 = new Authorities();
         rolePatient2.setUsername(patient2User.getUsername());
         rolePatient2.setAuthority("ROLE_PATIENT");
-        authoritiesService.save(rolePatient2);
+        authorityRepository.save(rolePatient2);
 
 
         //Receptionist
@@ -198,24 +197,24 @@ public class StartupData implements CommandLineRunner {
         receptionist.setUserReceptionist(receptionistUser);
         receptionistUser.setReceptionist(receptionist);
 
-        userService.save(receptionistUser);
-        receptionistService.save(receptionist);
+        userRepository.save(receptionistUser);
+        receptionistRepository.save(receptionist);
 
         Authorities roleReceptionist = new Authorities();
         roleReceptionist.setUsername(receptionistUser.getUsername());
         roleReceptionist.setAuthority("ROLE_RECEPTION");
-        authoritiesService.save(roleReceptionist);
+        authorityRepository.save(roleReceptionist);
 
 
         //Equipment
         Equipment chair = new Equipment();
         chair.setName("Krzesło stomatologiczne");
         chair.setNumber(5);
-        equipmentService.save(chair);
+        equipmentRepository.save(chair);
         Equipment computer = new Equipment();
         computer.setName("Komputer HP3600");
         computer.setNumber(10);
-        equipmentService.save(computer);
+        equipmentRepository.save(computer);
 
 
         //Visit and prescription
@@ -232,9 +231,9 @@ public class StartupData implements CommandLineRunner {
         prescription1.setBranchOfNFZ(1);
         prescription1.setClinicName("ESTOMATOLOGIA");
 
-        visitService.save(visit1);
+        visitRepository.save(visit1);
         prescription1.setVisit(visit1);
-        prescriptionService.save(prescription1);
+        prescriptionRepository.save(prescription1);
 
 
         //Doctor2
@@ -252,22 +251,22 @@ public class StartupData implements CommandLineRunner {
 
         doctor2.setUserDoctor(doctorUser2);
         doctorUser2.setDoctor(doctor2);
-        userService.save(doctorUser2);
+        userRepository.save(doctorUser2);
 
 
         Authorities roleAdmin2 = new Authorities();
         roleAdmin2.setAuthority("ROLE_ADMIN");
         roleAdmin2.setUsername(doctorUser2.getUsername());
-        authoritiesService.save(roleAdmin2);
+        authorityRepository.save(roleAdmin2);
 
-        doctorService.save(doctor2);
+        doctorRepository.save(doctor2);
 
         DoctorSpecialization doctor2Specialization1 = new DoctorSpecialization();
         doctor2Specialization1.setDoctor(doctor2);
         doctor2Specialization1.setSpecialization(ginecologist);
         doctor2Specialization1.setId(new DoctorSpecializationKey(doctor2.getId(), ginecologist.getId()));
         doctor2Specialization1.setLicense("1337");
-        doctorSpecializationService.save(doctor2Specialization1);
+        doctorSpecializationRepository.save(doctor2Specialization1);
 
     }
 

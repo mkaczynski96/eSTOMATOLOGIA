@@ -5,7 +5,7 @@ import com.estomatologia.estomatologia.repository.DoctorRepository;
 import com.estomatologia.estomatologia.repository.MedicamentRepository;
 import com.estomatologia.estomatologia.repository.PatientRepository;
 import com.estomatologia.estomatologia.repository.VisitRepository;
-import com.estomatologia.estomatologia.service.security.AuthorizationService;
+import com.estomatologia.estomatologia.service.AuthorizationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

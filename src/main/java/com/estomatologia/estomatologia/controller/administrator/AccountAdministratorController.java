@@ -2,7 +2,7 @@ package com.estomatologia.estomatologia.controller.administrator;
 
 import com.estomatologia.estomatologia.model.*;
 import com.estomatologia.estomatologia.repository.*;
-import com.estomatologia.estomatologia.service.security.AuthorizationService;
+import com.estomatologia.estomatologia.service.AuthorizationService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -264,7 +264,8 @@ public class AccountAdministratorController {
 
     @RolesAllowed("ADMIN")
     @PostMapping("/myaccount/managedoctor/addspecializationtodoctor")
-    public String addSpecializationToDoctor(@ModelAttribute Specialization specialization, @RequestParam Long id, @RequestParam String license) {
+    public String addSpecializationToDoctor(@ModelAttribute Specialization specialization, @RequestParam Long id,
+                                            @RequestParam String license) {
         User loggedUser = authorizationService.getLoggedUser();
 
         if (loggedUser == null) {
@@ -282,7 +283,6 @@ public class AccountAdministratorController {
             }
         }
     }
-
 
 
     @RolesAllowed("ADMIN")
@@ -303,7 +303,6 @@ public class AccountAdministratorController {
             }
         }
     }
-
 
     @RolesAllowed("ADMIN")
     @GetMapping("/myaccount/managepatient/add")
@@ -358,8 +357,6 @@ public class AccountAdministratorController {
                 authorities.setAuthority("ROLE_PATIENT");
 
                 authorityRepository.save(authorities);
-
-
                 return "success";
             } else {
                 return "error";

@@ -2,7 +2,7 @@ package com.estomatologia.estomatologia.controller;
 
 import com.estomatologia.estomatologia.model.User;
 import com.estomatologia.estomatologia.repository.*;
-import com.estomatologia.estomatologia.service.security.AuthorizationService;
+import com.estomatologia.estomatologia.service.AuthorizationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,4 +1,4 @@
-package com.estomatologia.estomatologia.service.security;
+package com.estomatologia.estomatologia.service;
 
 import com.estomatologia.estomatologia.model.User;
 import com.estomatologia.estomatologia.repository.UserRepository;

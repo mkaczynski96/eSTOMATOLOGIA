@@ -2,7 +2,7 @@ package com.estomatologia.estomatologia.controller.receptionist;
 
 import com.estomatologia.estomatologia.model.*;
 import com.estomatologia.estomatologia.repository.*;
-import com.estomatologia.estomatologia.service.security.AuthorizationService;
+import com.estomatologia.estomatologia.service.AuthorizationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -466,7 +466,6 @@ public class AccountReceptionistController {
         } else {
             Long loggedUserId = loggedUser.getId();
             if (receptionistRepository.findById(loggedUserId).isPresent()) {
-                // visit.setPatient(patientRepository.findById(loggedUserId).orElse(null));
                 visit.setFinished(false);
                 visitRepository.save(visit);
                 model.addAttribute("success", "visit");
