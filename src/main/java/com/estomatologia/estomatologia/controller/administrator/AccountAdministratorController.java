@@ -134,6 +134,61 @@ public class AccountAdministratorController {
 
 
     @RolesAllowed("ADMIN")
+    @GetMapping("/myaccount/managedoctor/edit")
+    public String editDoctor(@RequestParam Long id, Model model) {
+        User loggedUser = authorizationService.getLoggedUser();
+
+        if (loggedUser == null) {
+            return "error";
+        } else {
+            Long loggedUserId = loggedUser.getId();
+            if (administratorRepository.findById(loggedUserId).isPresent()) {
+                if (doctorRepository.findById(id).isPresent()) {
+                    Doctor doctor = doctorRepository.findById(id).orElse(null);
+                    model.addAttribute("doctor", doctor);
+
+                    return "account/admin/editdoctor";
+                }
+                return "error";
+            } else {
+                return "error";
+            }
+        }
+    }
+
+
+    @RolesAllowed("ADMIN")
+    @PostMapping("/myaccount/managedoctor/edit")
+    public String editDoctor(@ModelAttribute Doctor doctor, @RequestParam Long id) {
+        User loggedUser = authorizationService.getLoggedUser();
+
+        if (loggedUser == null) {
+            return "error";
+        } else {
+            Long loggedUserId = loggedUser.getId();
+            if (administratorRepository.findById(loggedUserId).isPresent()) {
+
+                Doctor editedDoctor = doctorRepository.findById(doctor.getId()).orElse(null);
+                if (editedDoctor != null) {
+                    editedDoctor.setId(id);
+                    editedDoctor.setName(doctor.getName());
+                    editedDoctor.setSurname(doctor.getSurname());
+                    editedDoctor.setAddress(doctor.getAddress());
+                    editedDoctor.setPesel(doctor.getPesel());
+                    editedDoctor.setPhoneNumber(doctor.getPhoneNumber());
+                    doctorRepository.save(editedDoctor);
+
+                    return "success";
+                }
+                return "error";
+            } else {
+                return "error";
+            }
+        }
+    }
+
+
+    @RolesAllowed("ADMIN")
     @GetMapping("/myaccount/managedoctor/delete")
     public String deleteDoctor(@RequestParam Long id) {
         User loggedUser = authorizationService.getLoggedUser();
@@ -153,8 +208,9 @@ public class AccountAdministratorController {
                     doctorRepository.findAllByUserDoctorId(id).setPesel(null);
                     doctorRepository.findAllByUserDoctorId(id).setPhoneNumber(null);
                     doctorRepository.findAllByUserDoctorId(id);
+                    return "success";
                 }
-                return "success";
+                return "error";
             } else {
                 return "error";
             }
@@ -180,6 +236,54 @@ public class AccountAdministratorController {
             }
         }
     }
+
+
+
+
+    @RolesAllowed("ADMIN")
+    @GetMapping("/myaccount/managedoctor/addspecializationtodoctor")
+    public String addSpecializationToDoctor(@RequestParam Long id, Model model) {
+        User loggedUser = authorizationService.getLoggedUser();
+
+        if (loggedUser == null) {
+            return "error";
+        } else {
+            Long loggedUserId = loggedUser.getId();
+            if (administratorRepository.findById(loggedUserId).isPresent()) {
+                    model.addAttribute("specializations",specializationRepository.findAll());
+                    model.addAttribute("id", id);
+                    return "account/admin/addspecializationtodoctor";
+            } else {
+                return "error";
+            }
+        }
+    }
+
+
+
+
+    @RolesAllowed("ADMIN")
+    @PostMapping("/myaccount/managedoctor/addspecializationtodoctor")
+    public String addSpecializationToDoctor(@ModelAttribute Specialization specialization, @RequestParam Long id, @RequestParam String license) {
+        User loggedUser = authorizationService.getLoggedUser();
+
+        if (loggedUser == null) {
+            return "error";
+        } else {
+            Long loggedUserId = loggedUser.getId();
+            if (administratorRepository.findById(loggedUserId).isPresent()) {
+                    DoctorSpecialization doctorSpecialization = new DoctorSpecialization();
+                    doctorSpecialization.setSpecialization(specialization);
+                    doctorSpecialization.setDoctor(doctorRepository.findById(id).orElse(null));
+                    doctorSpecialization.setLicense(license);
+                    return "success";
+            } else {
+                return "error";
+            }
+        }
+    }
+
+
 
     @RolesAllowed("ADMIN")
     @GetMapping("/myaccount/managepatient")
@@ -284,6 +388,96 @@ public class AccountAdministratorController {
         }
     }
 
+
+    @RolesAllowed("ADMIN")
+    @GetMapping("/myaccount/managepatient/edit")
+    public String editPatient(@RequestParam Long id, Model model) {
+        User loggedUser = authorizationService.getLoggedUser();
+
+        if (loggedUser == null) {
+            return "error";
+        } else {
+            Long loggedUserId = loggedUser.getId();
+            if (administratorRepository.findById(loggedUserId).isPresent()) {
+                if (patientRepository.findById(id).isPresent()) {
+                    Patient patient = patientRepository.findById(id).orElse(null);
+                    model.addAttribute("patient", patient);
+
+                    return "account/admin/editpatient";
+                }
+                return "error";
+            } else {
+                return "error";
+            }
+        }
+    }
+
+
+    @RolesAllowed("ADMIN")
+    @PostMapping("/myaccount/managepatient/edit")
+    public String editPatient(@ModelAttribute Patient patient, @RequestParam Long id) {
+        User loggedUser = authorizationService.getLoggedUser();
+
+        if (loggedUser == null) {
+            return "error";
+        } else {
+            Long loggedUserId = loggedUser.getId();
+            if (administratorRepository.findById(loggedUserId).isPresent()) {
+
+                Patient editedPatient = patientRepository.findById(patient.getId()).orElse(null);
+                if (editedPatient != null) {
+                    editedPatient.setId(id);
+                    editedPatient.setName(patient.getName());
+                    editedPatient.setSurname(patient.getSurname());
+                    editedPatient.setAddress(patient.getAddress());
+                    editedPatient.setPesel(patient.getPesel());
+                    editedPatient.setPhoneNumber(patient.getPhoneNumber());
+                    editedPatient.setMedicamentsTakenPermamently(patient.getMedicamentsTakenPermamently());
+                    editedPatient.setChronicDiseases(patient.getChronicDiseases());
+                    patientRepository.save(editedPatient);
+
+                    return "success";
+                }
+                return "error";
+            } else {
+                return "error";
+            }
+        }
+    }
+
+
+
+    @RolesAllowed("ADMIN")
+    @GetMapping("/myaccount/managepatient/delete")
+    public String deletePatient(@RequestParam Long id) {
+        User loggedUser = authorizationService.getLoggedUser();
+
+        if (loggedUser == null) {
+            return "error";
+        } else {
+            Long loggedUserId = loggedUser.getId();
+            if (administratorRepository.findById(loggedUserId).isPresent()) {
+                if (patientRepository.findById(id).isPresent()) {
+                    authorityRepository.deleteAllByUsername(patientRepository.findById(id).get().getName());
+                    userRepository.findById(id).get().setEnabled(false);
+                    String name = "X - " + patientRepository.findAllByUserPatientId(id).getName();
+                    patientRepository.findAllByUserPatientId(id).setName(name);
+                    patientRepository.findAllByUserPatientId(id).setAddress(null);
+                    patientRepository.findAllByUserPatientId(id).setPesel(null);
+                    patientRepository.findAllByUserPatientId(id).setPhoneNumber(null);
+                    patientRepository.findAllByUserPatientId(id).setChronicDiseases(null);
+                    patientRepository.findAllByUserPatientId(id).setMedicamentsTakenPermamently(null);
+                    patientRepository.findAllByUserPatientId(id).setProposedVisits(null);
+                    patientRepository.findAllByUserPatientId(id);
+                    return "success";
+                }
+                return "error";
+            } else {
+                return "error";
+            }
+        }
+    }
+
     @RolesAllowed("ADMIN")
     @GetMapping("/myaccount/managereception")
     public String manageReceptionist(Model model) {
@@ -364,7 +558,6 @@ public class AccountAdministratorController {
     }
 
 
-
     @RolesAllowed("ADMIN")
     @GetMapping("/myaccount/managereception/receptionists")
     public String receptionistDetails(@RequestParam Long id, Model model) {
@@ -383,5 +576,96 @@ public class AccountAdministratorController {
             }
         }
     }
+
+
+
+    @RolesAllowed("ADMIN")
+    @GetMapping("/myaccount/managereception/edit")
+    public String editReceptionist(@RequestParam Long id, Model model) {
+        User loggedUser = authorizationService.getLoggedUser();
+
+        if (loggedUser == null) {
+            return "error";
+        } else {
+            Long loggedUserId = loggedUser.getId();
+            if (administratorRepository.findById(loggedUserId).isPresent()) {
+                if (receptionistRepository.findById(id).isPresent()) {
+                    Receptionist receptionist = receptionistRepository.findById(id).orElse(null);
+                    model.addAttribute("receptionist", receptionist);
+
+                    return "account/admin/editreceptionist";
+                }
+                return "error";
+            } else {
+                return "error";
+            }
+        }
+    }
+
+
+
+
+    @RolesAllowed("ADMIN")
+    @PostMapping("/myaccount/managereception/edit")
+    public String editReceptionist(@ModelAttribute Receptionist receptionist, @RequestParam Long id) {
+        User loggedUser = authorizationService.getLoggedUser();
+
+        if (loggedUser == null) {
+            return "error";
+        } else {
+            Long loggedUserId = loggedUser.getId();
+            if (administratorRepository.findById(loggedUserId).isPresent()) {
+
+                Receptionist editedReceptionist = receptionistRepository.findById(receptionist.getId()).orElse(null);
+                if (editedReceptionist != null) {
+                    editedReceptionist.setId(id);
+                    editedReceptionist.setName(receptionist.getName());
+                    editedReceptionist.setSurname(receptionist.getSurname());
+                    editedReceptionist.setAddress(receptionist.getAddress());
+                    editedReceptionist.setPesel(receptionist.getPesel());
+                    editedReceptionist.setPhoneNumber(receptionist.getPhoneNumber());
+                    receptionistRepository.save(editedReceptionist);
+
+                    return "success";
+                }
+                return "error";
+            } else {
+                return "error";
+            }
+        }
+    }
+
+
+
+
+
+    @RolesAllowed("ADMIN")
+    @GetMapping("/myaccount/managereception/delete")
+    public String deleteReceptionist(@RequestParam Long id) {
+        User loggedUser = authorizationService.getLoggedUser();
+
+        if (loggedUser == null) {
+            return "error";
+        } else {
+            Long loggedUserId = loggedUser.getId();
+            if (administratorRepository.findById(loggedUserId).isPresent()) {
+                if (receptionistRepository.findById(id).isPresent()) {
+                    authorityRepository.deleteAllByUsername(receptionistRepository.findById(id).get().getName());
+                    userRepository.findById(id).get().setEnabled(false);
+                    String name = "X - " + receptionistRepository.findAllByUserReceptionistId(id).getName();
+                    receptionistRepository.findAllByUserReceptionistId(id).setName(name);
+                    receptionistRepository.findAllByUserReceptionistId(id).setAddress(null);
+                    receptionistRepository.findAllByUserReceptionistId(id).setPesel(null);
+                    receptionistRepository.findAllByUserReceptionistId(id).setPhoneNumber(null);
+                    receptionistRepository.findAllByUserReceptionistId(id);
+                    return "success";
+                }
+                return "error";
+            } else {
+                return "error";
+            }
+        }
+    }
+
 
 }

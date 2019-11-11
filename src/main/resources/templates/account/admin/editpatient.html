@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout (~{::body},'editpatient')}">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div class="container-mydata container">
+    <h1 th:text="#{account_admin_adddoctor}">Edit patient</h1>
+
+    <form action="#" th:action="@{'/myaccount/managepatient/edit'(id=${patient.getId()})}"
+          th:object="${patient}" method="post">
+        <div class="form-row">
+            <div class="col">
+                <label for="name"><span th:text="#{person_name}"></span></label>
+                <input type="text"
+                       class="form-control"
+                       id="name"
+                       th:placeholder="*{name}"
+                       th:field="*{name}"/>
+                <label for="surname"><span th:text="#{person_surname}"></span></label>
+                <input type="text"
+                       class="form-control"
+                       id="surname"
+                       th:placeholder="*{surname}"
+                       th:field="*{surname}"/>
+                <label for="address"><span th:text="#{person_address}"></span></label>
+                <input type="text"
+                       class="form-control"
+                       id="address"
+                       th:placeholder="*{address}"
+                       th:field="*{address}"/>
+                <label for="pesel"><span th:text="#{person_pesel}"></span></label>
+                <input type="text"
+                       class="form-control"
+                       id="pesel"
+                       th:placeholder="*{pesel}"
+                       th:field="*{pesel}"/>
+                <label for="phonenumber"><span th:text="#{person_phonenumber}"></span></label>
+                <input type="text"
+                       class="form-control"
+                       id="phonenumber"
+                       th:placeholder="*{phoneNumber}"
+                       th:field="*{phoneNumber}"/>
+                <label for="chronicdiseases"><span th:text="#{account_doctor_mypatients_chronic_diseases}"></span></label>
+                <input type="text"
+                       class="form-control"
+                       id="chronicdiseases"
+                       th:placeholder="*{chronicDiseases}"
+                       th:field="*{chronicDiseases}"/>
+                <label for="medicamentstakenpermamently"><span th:text="#{account_doctor_mypatients_medicaments}"></span></label>
+                <input type="text"
+                       class="form-control"
+                       id="medicamentstakenpermamently"
+                       th:placeholder="*{medicamentsTakenPermamently}"
+                       th:field="*{medicamentsTakenPermamently}"/>
+
+
+                <input type="submit" th:value="#{account_reception_edit}" class="btn btn-primary"/>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

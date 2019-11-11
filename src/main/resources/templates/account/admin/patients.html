@@ -42,8 +42,8 @@
             </tbody>
         </table>
     </div>
-    <a class="btn btn-primary" th:href="@{'/myaccount/managepatient/patients/edit'}" role="button" th:text="#{account_reception_edit}">Edit</a>
-    <a class="btn btn-primary" th:href="@{'/myaccount/managepatient/patients/delete'}" role="button" th:text="#{account_reception_delete}">Delete</a>
+    <a class="btn btn-primary" th:href="@{'/myaccount/managepatient/edit'(id=${patients.get().getId()})}" role="button" th:text="#{account_reception_edit}">Edit</a>
+    <a class="btn btn-primary" th:href="@{'/myaccount/managepatient/delete'(id=${patients.get().getId()})}" role="button" th:text="#{account_reception_delete}">Delete</a>
 </div>
 </body>
 </html>

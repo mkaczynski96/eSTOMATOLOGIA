@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html"
-      th:replace="~{fragments/layout :: layout (~{::body},'patientdetails')}">
+      th:replace="~{fragments/layout :: layout (~{::body},'createdvisits')}">
 <head>
     <meta charset="UTF-8">
 </head>
@@ -29,6 +29,9 @@
                 <td th:text="${proposedVisit.getDoctor().getPesel()}">Date</td>
                 <td><a th:href="@{'/myaccount/createdvisits/add'(id=${proposedVisit.getId()})}">
                     <span th:text="#{account_reception_add}">Add</span>
+                </a></td>
+                <td><a th:href="@{'/myaccount/createdvisits/delete'(id=${proposedVisit.getId()})}">
+                    <span th:text="#{account_reception_delete}">Delete</span>
                 </a></td>
             </tr>
             </tbody>

@@ -31,6 +31,9 @@ public class Visit {
     @Column(name = "recommendations")
     private String recommendations;
 
+    @Column(name = "finished")
+    private boolean finished;
+
     @OneToMany(mappedBy = "visit")
     private Set<Visit> visit;
 }

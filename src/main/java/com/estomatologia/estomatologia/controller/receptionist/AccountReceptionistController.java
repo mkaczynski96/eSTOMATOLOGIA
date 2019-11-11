@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.security.RolesAllowed;
+import java.time.LocalDate;
 
 @Controller
 public class AccountReceptionistController {
@@ -126,7 +127,7 @@ public class AccountReceptionistController {
         } else {
             Long loggedUserId = loggedUser.getId();
             if (receptionistRepository.findById(loggedUserId).isPresent()) {
-                model.addAttribute("proposedVisits",proposedVisitRepository.findAll());
+                model.addAttribute("proposedVisits", proposedVisitRepository.findAll());
                 return "account/receptionist/createdvisits";
             } else {
                 return "error";
@@ -146,15 +147,13 @@ public class AccountReceptionistController {
             Long loggedUserId = loggedUser.getId();
             if (receptionistRepository.findById(loggedUserId).isPresent()) {
 
-                //TODO ADD STATUS TO VISIT - ZAKONCZONA/AKTYWNA.
-
-
                 if (proposedVisitRepository.findById(id).isPresent()) {
                     Visit visit = new Visit();
                     ProposedVisit proposedVisit = proposedVisitRepository.findById(id).orElse(null);
                     visit.setPatient(proposedVisit.getPatient());
                     visit.setDoctor(proposedVisit.getDoctor());
                     visit.setDate(proposedVisit.getDate());
+                    visit.setFinished(false);
                     visitRepository.save(visit);
                     proposedVisitRepository.deleteById(id);
                 }
@@ -166,7 +165,26 @@ public class AccountReceptionistController {
     }
 
 
+    @RolesAllowed("RECEPTION")
+    @GetMapping("/myaccount/createdvisits/delete")
+    public String deleteProposition(@RequestParam Long id) {
+        User loggedUser = authorizationService.getLoggedUser();
 
+        if (loggedUser == null) {
+            return "error";
+        } else {
+            Long loggedUserId = loggedUser.getId();
+            if (receptionistRepository.findById(loggedUserId).isPresent()) {
+                if (proposedVisitRepository.findById(id).isPresent()) {
+                    proposedVisitRepository.deleteById(id);
+                    return "success";
+                }
+                return "error";
+            } else {
+                return "error";
+            }
+        }
+    }
 
 
     @RolesAllowed("RECEPTION")
@@ -262,9 +280,11 @@ public class AccountReceptionistController {
                     equipmentEdited.setName(equipment.getName());
                     equipmentEdited.setNumber(equipment.getNumber());
                     equipmentRepository.save(equipmentEdited);
+
+                    model.addAttribute("success", "equipment");
+                    return "success";
                 }
-                model.addAttribute("success", "equipment");
-                return "success";
+                return "error";
             } else {
                 return "error";
             }
@@ -407,6 +427,49 @@ public class AccountReceptionistController {
             if (receptionistRepository.findById(loggedUserId).isPresent()) {
                 medicamentRepository.deleteById(id);
                 model.addAttribute("success", "medicament");
+                return "success";
+            } else {
+                return "error";
+            }
+        }
+    }
+
+
+    @RolesAllowed("RECEPTION")
+    @GetMapping("/myaccount/visitforpatient")
+    public String makeVisit(Model model) {
+        User loggedUser = authorizationService.getLoggedUser();
+
+        if (loggedUser == null) {
+            return "error";
+        } else {
+            Long loggedUserId = loggedUser.getId();
+            if (receptionistRepository.findById(loggedUserId).isPresent()) {
+                model.addAttribute("patients", patientRepository.findAll());
+                model.addAttribute("visit", new Visit());
+                model.addAttribute("actuallydate", LocalDate.now());
+                model.addAttribute("doctors", doctorRepository.findAll());
+                return "account/receptionist/visitforpatient";
+            } else {
+                return "error";
+            }
+        }
+    }
+
+    @RolesAllowed("RECEPTION")
+    @PostMapping("/myaccount/visitforpatient")
+    public String makeVisit(@ModelAttribute Visit visit, Model model) {
+        User loggedUser = authorizationService.getLoggedUser();
+
+        if (loggedUser == null) {
+            return "error";
+        } else {
+            Long loggedUserId = loggedUser.getId();
+            if (receptionistRepository.findById(loggedUserId).isPresent()) {
+                // visit.setPatient(patientRepository.findById(loggedUserId).orElse(null));
+                visit.setFinished(false);
+                visitRepository.save(visit);
+                model.addAttribute("success", "visit");
                 return "success";
             } else {
                 return "error";

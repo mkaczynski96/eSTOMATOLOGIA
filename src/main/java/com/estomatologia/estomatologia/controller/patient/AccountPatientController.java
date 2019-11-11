@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.security.RolesAllowed;
 import java.time.LocalDate;
@@ -61,6 +62,47 @@ public class AccountPatientController {
     }
 
     @RolesAllowed("PATIENT")
+    @GetMapping("/myaccount/historyofvisits/deleteproposition")
+    public String deleteProposition(@RequestParam Long id) {
+        User loggedUser = authorizationService.getLoggedUser();
+        if (loggedUser == null) {
+            return "error";
+        } else {
+            Long loggedUserId = loggedUser.getId();
+            if (patientRepository.findById(loggedUserId).isPresent()) {
+                if (proposedVisitRepository.findById(id).isPresent()) {
+                    proposedVisitRepository.deleteById(id);
+                    return "success";
+                }
+                return "error";
+            } else {
+                return "error";
+            }
+        }
+    }
+
+
+    @RolesAllowed("PATIENT")
+    @GetMapping("/myaccount/historyofvisits/deletevisit")
+    public String deleteVisit(@RequestParam Long id) {
+        User loggedUser = authorizationService.getLoggedUser();
+        if (loggedUser == null) {
+            return "error";
+        } else {
+            Long loggedUserId = loggedUser.getId();
+            if (patientRepository.findById(loggedUserId).isPresent()) {
+                if (visitRepository.findById(id).isPresent()) {
+                    visitRepository.deleteById(id);
+                    return "success";
+                }
+                return "error";
+            } else {
+                return "error";
+            }
+        }
+    }
+
+    @RolesAllowed("PATIENT")
     @GetMapping("/myaccount/makevisit")
     public String makeVisit(Model model) {
         User loggedUser = authorizationService.getLoggedUser();
@@ -81,7 +123,7 @@ public class AccountPatientController {
         }
     }
 
-    @RolesAllowed("RECEPTION")
+    @RolesAllowed("PATIENT")
     @PostMapping("/myaccount/makevisit")
     public String makevisit(@ModelAttribute ProposedVisit proposedVisit, Model model) {
         User loggedUser = authorizationService.getLoggedUser();
@@ -92,7 +134,7 @@ public class AccountPatientController {
             Long loggedUserId = loggedUser.getId();
             if (patientRepository.findById(loggedUserId).isPresent()) {
                 proposedVisit.setPatient(patientRepository.findById(loggedUserId).orElse(null));
-                if (proposedVisitRepository.findAllByPatientId(loggedUserId).size() >= 5) {
+                if (proposedVisitRepository.findAllByPatientId(loggedUserId).size() >= 5 || visitRepository.findAllByPatientIdAndFinished(loggedUserId, false).size() >= 5) {
                     model.addAttribute("failed", "proposedvisit");
                     return "failed";
                 } else {
@@ -140,7 +182,7 @@ public class AccountPatientController {
         } else {
             Long loggedUserId = loggedUser.getId();
             if (patientRepository.findById(loggedUserId).isPresent()) {
-                List<Visit> visit = visitRepository.findAllByPatientId(loggedUserId);
+                List<Visit> visit = visitRepository.findAllByPatientIdAndFinished(loggedUserId,true);
                 List<Prescription> prescriptions = new ArrayList<>();
                 visit.forEach(e -> prescriptions.add(prescriptionRepository.findByVisitId(e.getId())));
                 model.addAttribute("recipes", prescriptions);

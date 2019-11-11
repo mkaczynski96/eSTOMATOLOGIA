@@ -10,8 +10,6 @@ import java.util.Optional;
 @Repository
 public interface DoctorRepository extends CrudRepository<Doctor, Long> {
 
-   Optional<Doctor> findByName(String name);
-
    @Transactional
    Doctor findAllByUserDoctorId(Long id);
 }

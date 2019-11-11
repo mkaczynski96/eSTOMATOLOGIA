@@ -41,7 +41,9 @@
             </tbody>
         </table>
     </div>
-    <a class="btn btn-primary" th:href="@{'/myaccount/managedoctor/edit'}" role="button" th:text="#{account_reception_edit}">Edit</a>
+    <a class="btn btn-primary" th:href="@{'/myaccount/managedoctor/edit'(id=${doctor.get().getId()})}" role="button" th:text="#{account_reception_edit}">Edit</a>
+    <a class="btn btn-primary" th:href="@{'/myaccount/managedoctor/addspecialization'(id=${doctor.get().getId()})}" role="button" th:text="Dodajspecjalizacje">Edit</a>
+    <a class="btn btn-primary" th:href="@{'/myaccount/managedoctor/deletespecialization'(id=${doctor.get().getId()})}" role="button" th:text="Usuńspecjalizacje">Edit</a>
     <a class="btn btn-primary" th:href="@{'/myaccount/managedoctor/delete'(id=${doctor.get().getId()})}" role="button" th:text="#{account_reception_delete}">Delete</a>
 </div>
 </body>

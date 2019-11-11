@@ -79,9 +79,9 @@ public class StartupData implements CommandLineRunner {
 
         //Specialization
         Specialization ginecologist = new Specialization();
-        ginecologist.setName("Ginekolog");
+        ginecologist.setName("Chirurg stomatolog");
         Specialization heartSurgeon = new Specialization();
-        heartSurgeon.setName("Kardiochirurg");
+        heartSurgeon.setName("Ortodonta");
 
         doctorService.save(doctor);
         specializationService.save(ginecologist);
@@ -142,7 +142,7 @@ public class StartupData implements CommandLineRunner {
         patient1User.setEnabled(true);
         Patient patient1 = new Patient();
         patient1.setName("Michal");
-        patient1.setSurname("Ewanc");
+        patient1.setSurname("Ewan");
         patient1.setPesel("4353453453");
         patient1.setPhoneNumber("3252353252");
         patient1.setChronicDiseases("Zapalenie spojowek");
@@ -157,7 +157,7 @@ public class StartupData implements CommandLineRunner {
         patient2User.setEnabled(true);
         Patient patient2 = new Patient();
         patient2.setName("Kamil");
-        patient2.setSurname("Babon");
+        patient2.setSurname("Mydliński");
         patient2.setPesel("1353434343");
         patient2.setPhoneNumber("3253666252");
         patient2.setChronicDiseases("Nadcisnienie");
@@ -191,7 +191,7 @@ public class StartupData implements CommandLineRunner {
         receptionistUser.setEnabled(true);
         Receptionist receptionist = new Receptionist();
         receptionist.setName("Barbara");
-        receptionist.setSurname("Wanna");
+        receptionist.setSurname("Warecka");
         receptionist.setPesel("3543634634634643");
         receptionist.setPhoneNumber("12412412412");
         receptionist.setAddress("al. Jerozolimskie 45/322, Warszawa");
@@ -209,12 +209,12 @@ public class StartupData implements CommandLineRunner {
 
         //Equipment
         Equipment chair = new Equipment();
-        chair.setName("Krzeslo");
+        chair.setName("Krzesło stomatologiczne");
         chair.setNumber(5);
         equipmentService.save(chair);
         Equipment computer = new Equipment();
-        computer.setName("COMPUTER20000");
-        computer.setNumber(1);
+        computer.setName("Komputer HP3600");
+        computer.setNumber(10);
         equipmentService.save(computer);
 
 
@@ -225,6 +225,7 @@ public class StartupData implements CommandLineRunner {
         visit1.setRecommendations("Mycie zebow 6 razy dziennie szczoteczka soniczną");
         visit1.setDiagnosis("Kamień nazębny");
         visit1.setDate("2019-03-10");
+        visit1.setFinished(true);
 
         Prescription prescription1 = new Prescription();
         prescription1.setMedicaments("LEK500");

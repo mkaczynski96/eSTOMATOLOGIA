@@ -11,5 +11,7 @@ public interface VisitRepository extends CrudRepository<Visit, Long> {
 
     List<Visit> findAllByPatientId(Long id);
 
+    List<Visit> findAllByPatientIdAndFinished(Long id, boolean isFinished);
+
     List<Visit> findAllByDoctorId(Long id);
 }

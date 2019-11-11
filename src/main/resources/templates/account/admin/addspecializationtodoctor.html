@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout (~{::body},'addspecializationtodoctor')}">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div class="container-mydata container">
+    <h1 th:text="#{account_admin_adddoctor}">Edit receptionist</h1>
+
+<!--    <form action="#" th:action="@{'/myaccount/managedoctor/addspecializationtodoctor'(id=${id})}"-->
+<!--          th:object="${specializations}" method="post">-->
+<!--        <div class="form-row">-->
+<!--            <div class="col">-->
+
+<!--                <label for="exampleFormControlSelect1">Select specialization</label>-->
+<!--                <select class="form-control" id="exampleFormControlSelect1" th:field="*{specialization.id}">-->
+<!--                    <option th:each="specialization : ${specializations}" th:value="${specialization.id}">-->
+<!--                        <span th:text="${specialization.getName()}"></span>-->
+<!--                </select>-->
+
+<!--                <label for="license"><span th:text="Specializationlicense"></span></label>-->
+<!--                <input type="text"-->
+<!--                       class="form-control"-->
+<!--                       id="license"-->
+<!--                       th:field="*{license}"/>-->
+<!--                <input type="submit" th:value="#{account_reception_edit}" class="btn btn-primary"/>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </form>-->
+</div>
+</body>
+</html>
