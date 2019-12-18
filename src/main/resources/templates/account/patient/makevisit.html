@@ -9,26 +9,28 @@
     <h1 th:text="#{account_patient_makevisit}">Make visit appointment</h1>
     <form action="#" th:action="@{/myaccount/makevisit}" th:object="${proposedvisit}" method="post">
         <div class="form-group">
-            <label for="start">Select date</label>
-            <input type="date" id="start" name="trip-start" th:field="*{date}"
+            <label for="selectdate"><span th:text="#{account_patient_makevsit_selectdate}">Select date</span></label>
+            <input type="date" class="form-control mb-2" id="selectdate" name="trip-start" th:field="*{date}"
                    th:value="${actuallydate}"
                    min="2018-01-01" max="2060-12-31">
         </div>
         <div class="form-group">
-            <label for="appt">Select time</label>
-            <input type="time" id="appt" name="appt"
+            <label for="selecttime"><span th:text="#{account_patient_makevsit_selecttime}">Select time</span></label>
+            <input type="time" class="form-control mb-2" id="selecttime" name="selecttime"
                    min="09:00" max="18:00" required>
         </div>
         <div class="form-group">
-            <label for="exampleFormControlSelect1">Select a doctor</label>
-            <select class="form-control" id="exampleFormControlSelect1" th:field="*{doctor.id}" >
+            <label for="selectdoctor"><span
+                    th:text="#{account_patient_makevsit_selectdoctor}">Select a doctor</span></label>
+            <select class="form-control" id="selectdoctor" th:field="*{doctor.id}">
                 <option th:each="doctorr : ${doctors}" th:value="${doctorr.id}">
-                    <span th:text="${doctorr.getName()}" ></span>
-                    <span th:text="${doctorr.getSurname()}" ></span></option>
+                    <span th:text="${doctorr.getName()}"></span>
+                    <span th:text="${doctorr.getSurname()}"></span></option>
             </select>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+        <button type="submit" class="btn btn-primary"><span th:text="#{account_patient_makevisit_sendproposition}">Submit</span>
+        </button>
+    </form>
 </div>
 </body>
 </html>

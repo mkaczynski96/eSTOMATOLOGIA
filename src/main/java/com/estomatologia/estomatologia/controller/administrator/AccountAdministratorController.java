@@ -238,8 +238,6 @@ public class AccountAdministratorController {
     }
 
 
-
-
     @RolesAllowed("ADMIN")
     @GetMapping("/myaccount/managedoctor/addspecializationtodoctor")
     public String addSpecializationToDoctor(@RequestParam Long id, Model model) {
@@ -250,16 +248,14 @@ public class AccountAdministratorController {
         } else {
             Long loggedUserId = loggedUser.getId();
             if (administratorRepository.findById(loggedUserId).isPresent()) {
-                    model.addAttribute("specializations",specializationRepository.findAll());
-                    model.addAttribute("id", id);
-                    return "account/admin/addspecializationtodoctor";
+                model.addAttribute("specializations", specializationRepository.findAll());
+                model.addAttribute("id", id);
+                return "account/admin/addspecializationtodoctor";
             } else {
                 return "error";
             }
         }
     }
-
-
 
 
     @RolesAllowed("ADMIN")
@@ -273,11 +269,11 @@ public class AccountAdministratorController {
         } else {
             Long loggedUserId = loggedUser.getId();
             if (administratorRepository.findById(loggedUserId).isPresent()) {
-                    DoctorSpecialization doctorSpecialization = new DoctorSpecialization();
-                    doctorSpecialization.setSpecialization(specialization);
-                    doctorSpecialization.setDoctor(doctorRepository.findById(id).orElse(null));
-                    doctorSpecialization.setLicense(license);
-                    return "success";
+                DoctorSpecialization doctorSpecialization = new DoctorSpecialization();
+                doctorSpecialization.setSpecialization(specialization);
+                doctorSpecialization.setDoctor(doctorRepository.findById(id).orElse(null));
+                doctorSpecialization.setLicense(license);
+                return "success";
             } else {
                 return "error";
             }
@@ -443,7 +439,6 @@ public class AccountAdministratorController {
     }
 
 
-
     @RolesAllowed("ADMIN")
     @GetMapping("/myaccount/managepatient/delete")
     public String deletePatient(@RequestParam Long id) {
@@ -575,7 +570,6 @@ public class AccountAdministratorController {
     }
 
 
-
     @RolesAllowed("ADMIN")
     @GetMapping("/myaccount/managereception/edit")
     public String editReceptionist(@RequestParam Long id, Model model) {
@@ -598,8 +592,6 @@ public class AccountAdministratorController {
             }
         }
     }
-
-
 
 
     @RolesAllowed("ADMIN")
@@ -631,9 +623,6 @@ public class AccountAdministratorController {
             }
         }
     }
-
-
-
 
 
     @RolesAllowed("ADMIN")

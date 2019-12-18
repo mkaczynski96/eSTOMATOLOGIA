@@ -76,9 +76,11 @@ public class AccountController {
             Long loggedUserId = loggedUser.getId();
             if (doctorRepository.findById(loggedUserId).isPresent()) {
 
+                model.addAttribute("visits", visitRepository.findAll());
                 return "account/calendarofvisits";
             } else if (patientRepository.findById(loggedUserId).isPresent()) {
 
+                model.addAttribute("visits", visitRepository.findAll());
                 return "account/calendarofvisits";
             } else if (receptionistRepository.findById(loggedUserId).isPresent()) {
 
@@ -86,6 +88,7 @@ public class AccountController {
                 return "account/calendarofvisits";
             } else if (administratorRepository.findById(loggedUserId).isPresent()) {
 
+                model.addAttribute("visits", visitRepository.findAll());
                 return "account/calendarofvisits";
             } else {
                 return "error";

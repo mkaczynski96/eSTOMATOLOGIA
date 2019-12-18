@@ -60,8 +60,8 @@ public class StartupData implements CommandLineRunner {
         Doctor doctor = new Doctor();
         doctor.setName("Jan");
         doctor.setSurname("Abacki");
-        doctor.setPesel("5755747474");
-        doctor.setPhoneNumber("4363737734");
+        doctor.setPesel("67092404212");
+        doctor.setPhoneNumber("536373734");
         doctor.setAddress("ul. Jana Pawla II 13/12, Warszawa");
 
         //Connection
@@ -102,13 +102,13 @@ public class StartupData implements CommandLineRunner {
         doctorSpecializationRepository.save(doctorSpecialization2);
 
         //Medicaments
-        Medicament bolprazol = new Medicament();
-        bolprazol.setName("BALPROZOL");
-        bolprazol.setNumber(3);
+        Medicament anesthesia = new Medicament();
+        anesthesia.setName("Znieczulenie z adrenaliną");
+        anesthesia.setNumber(3);
         Medicament apap = new Medicament();
-        apap.setName("APAP");
+        apap.setName("Apap Max");
         apap.setNumber(5);
-        medicamentRepository.save(bolprazol);
+        medicamentRepository.save(anesthesia);
         medicamentRepository.save(apap);
 
         //Administrator
@@ -119,8 +119,8 @@ public class StartupData implements CommandLineRunner {
         Administrator administrator = new Administrator();
         administrator.setName("Adam");
         administrator.setSurname("Swalczyk");
-        administrator.setPesel("35353252");
-        administrator.setPhoneNumber("25253252352");
+        administrator.setPesel("86110603267");
+        administrator.setPhoneNumber("85253253");
         administrator.setAddress("ul. Mrozna 3/111, Warszawa");
         administrator.setUserAdministrator(admin);
         admin.setAdministrator(administrator);
@@ -142,9 +142,9 @@ public class StartupData implements CommandLineRunner {
         Patient patient1 = new Patient();
         patient1.setName("Michal");
         patient1.setSurname("Ewan");
-        patient1.setPesel("4353453453");
-        patient1.setPhoneNumber("3252353252");
-        patient1.setChronicDiseases("Zapalenie spojowek");
+        patient1.setPesel("9303143453");
+        patient1.setPhoneNumber("82523552");
+        patient1.setChronicDiseases("Cukrzyca");
         patient1.setAddress("ul. Bobra 1/2, Warszawa");
         patient1.setMedicamentsTakenPermamently(null);
         patient1.setUserPatient(patient1User);
@@ -157,8 +157,8 @@ public class StartupData implements CommandLineRunner {
         Patient patient2 = new Patient();
         patient2.setName("Kamil");
         patient2.setSurname("Mydliński");
-        patient2.setPesel("1353434343");
-        patient2.setPhoneNumber("3253666252");
+        patient2.setPesel("83053142433");
+        patient2.setPhoneNumber("82536662");
         patient2.setChronicDiseases("Nadcisnienie");
         patient2.setAddress("ul. Skoczna 7/4, Warszawa");
         patient2.setMedicamentsTakenPermamently(null);
@@ -191,8 +191,8 @@ public class StartupData implements CommandLineRunner {
         Receptionist receptionist = new Receptionist();
         receptionist.setName("Barbara");
         receptionist.setSurname("Warecka");
-        receptionist.setPesel("3543634634634643");
-        receptionist.setPhoneNumber("12412412412");
+        receptionist.setPesel("87021225775");
+        receptionist.setPhoneNumber("72412412");
         receptionist.setAddress("al. Jerozolimskie 45/322, Warszawa");
         receptionist.setUserReceptionist(receptionistUser);
         receptionistUser.setReceptionist(receptionist);
@@ -245,9 +245,9 @@ public class StartupData implements CommandLineRunner {
         Doctor doctor2 = new Doctor();
         doctor2.setName("Paweł");
         doctor2.setSurname("Iwańczyk");
-        doctor2.setPesel("32532525");
+        doctor2.setPesel("9603252564");
         doctor2.setAddress("ul. Kazimierza 3/15, Warszawa");
-        doctor2.setPhoneNumber("3252627770");
+        doctor2.setPhoneNumber("72526277");
 
         doctor2.setUserDoctor(doctorUser2);
         doctorUser2.setDoctor(doctor2);

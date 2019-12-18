@@ -42,7 +42,7 @@ public class AccountDoctorController {
             Long loggedUserId = loggedUser.getId();
             if (doctorRepository.findById(loggedUserId).isPresent()) {
                 {
-                    model.addAttribute("patients", visitRepository.findAllByDoctorId(loggedUserId));
+                    model.addAttribute("patients", visitRepository.findVisitByDoctorId(loggedUserId));
                     return "account/doctor/mypatients";
                 }
             } else {
