@@ -7,8 +7,13 @@
 </head>
 <body>
 <div class="container-calendarofvisits container-fluid">
-    <h1 th:text="#{account_calendarofvisits}">Calendar of visits</h1>
-    <table class="table table-dark">
+      <span sec:authorize=" hasRole('DOCTOR')">
+    <h1 th:text="#{visits}">Visits</h1>
+      </span>
+    <span sec:authorize=" hasRole('ADMIN') or hasRole('PATIENT') or hasRole('RECEPTION')">
+        <h1 th:text="#{account_calendarofvisits}">Calendar of visits</h1>
+    </span>
+    <table class="table table-hover">
         <thead>
         <tr>
             <span sec:authorize="hasRole('PATIENT') or hasRole('DOCTOR')">
@@ -26,6 +31,11 @@
             <th scope="col"><b><span th:text="#{account_patient_historyofivists_recommendations}">Recommendations</span></b>
             </th>
             <th scope="col"><b><span th:text="#{account_historyofivists_state}">State</span></b></th>
+            <span sec:authorize="hasRole('DOCTOR')">
+                <th scope="col"><b><span th:text="#{diagnosisAction}">Diagnoza</span></b></th>
+                <th scope="col"><b><span
+                        th:text="#{recommendationsAction}">Rekomendacje</span></b></th>
+            </span>
             <th scope="col"><b><span th:text="#{account_historyofvisits_action}">Action</span></b></th>
         </tr>
         </thead>
@@ -50,16 +60,78 @@
             <td th:text="${visit.getRecommendations()}">Recommendations</td>
             <span th:if="${visit.isFinished()==false}">
                 <td th:text="#{account_historyofvisits_active}">Aktywna</td>
-            <td sec:authorize="hasRole('DOCTOR') or hasRole('RECEPTION') or hasRole('ADMIN')"><a
-                    th:href="@{'/myaccount/calendarofvisits/deletevisit'(id=${visit.getId()})}">
-                <span th:text="#{account_reception_delete}">Delete</span>
-            </a></td>
+                  <td sec:authorize="hasRole('DOCTOR')">
+                <a th:href="@{'/myaccount/calendarofvisits/adddiagnosis'(id=${visit.getId()})}">
+                    <span th:text="#{account_reception_add}">Add</span>
+                </a>
+                /
+                <a th:href="@{'/myaccount/calendarofvisits/editdiagnosis'(id=${visit.getId()})}">
+                    <span th:text="#{account_reception_edit}">Edit</span>
+                </a>
+                /
+                <a th:href="@{'/myaccount/calendarofvisits/deletediagnosis'(id=${visit.getId()})}">
+                    <span th:text="#{account_reception_delete}">Delete</span>
+                </a>
+            </td>
+            <td sec:authorize="hasRole('DOCTOR')">
+                <a th:href="@{'/myaccount/calendarofvisits/addrecommendation'(id=${visit.getId()})}">
+                    <span th:text="#{account_reception_add}">Add</span>
+                </a>
+                /
+                <a th:href="@{'/myaccount/calendarofvisits/editrecommendation'(id=${visit.getId()})}">
+                    <span th:text="#{account_reception_edit}">Edit</span>
+                </a>
+                /
+                <a th:href="@{'/myaccount/calendarofvisits/deleterecommendations'(id=${visit.getId()})}">
+                    <span th:text="#{account_reception_delete}">Delete</span>
+                </a>
+            </td>
+            <td sec:authorize="hasRole('DOCTOR') or hasRole('RECEPTION') or hasRole('ADMIN')">
+
+                 <span sec:authorize="hasRole('DOCTOR')">
+                  <a th:href="@{'/myaccount/calendarofvisits/finishvisit'(id=${visit.getId()})}">
+                <span th:text="#{endVisit}">Finish the visit</span></a>
+                /
+                </span>
+                <a th:href="@{'/myaccount/calendarofvisits/deletevisit'(id=${visit.getId()})}">
+                <span th:text="#{account_reception_delete}">Delete</span></a>
+
+            </td>
             </span>
             <span th:if="${visit.isFinished()==true}">
                 <td th:text="#{account_historyofvisits_finished}">Zakończona</td>
-                 <td sec:authorize="hasRole('ADMIN')"><a
-                         th:href="@{'/myaccount/calendarofvisits/deletevisit'(id=${visit.getId()})}">
+                  <td sec:authorize="hasRole('DOCTOR')">
+                      <a th:href="@{'/myaccount/calendarofvisits/adddiagnosis'(id=${visit.getId()})}">
+                    <span th:text="#{account_reception_add}">Add</span>
+                </a>
+                /
+                <a th:href="@{'/myaccount/calendarofvisits/editdiagnosis'(id=${visit.getId()})}">
+                    <span th:text="#{account_reception_edit}">Edit</span>
+                </a>
+                /
+                <a th:href="@{'/myaccount/calendarofvisits/deletediagnosis'(id=${visit.getId()})}">
+                    <span th:text="#{account_reception_delete}">Delete</span>
+                </a>
+            </td>
+            <td sec:authorize="hasRole('DOCTOR')">
+                <a th:href="@{'/myaccount/calendarofvisits/addrecommendations'(id=${visit.getId()})}">
+                    <span th:text="#{account_reception_add}">Add</span>
+                </a>
+                /
+                <a th:href="@{'/myaccount/calendarofvisits/editrecommendations'(id=${visit.getId()})}">
+                    <span th:text="#{account_reception_edit}">Edit</span>
+                </a>
+                /
+                <a th:href="@{'/myaccount/calendarofvisits/deleterecommendations'(id=${visit.getId()})}">
+                    <span th:text="#{account_reception_delete}">Delete</span>
+                </a>
+            </td>
+                 <td sec:authorize="hasRole('ADMIN')">
+                     <a th:href="@{'/myaccount/calendarofvisits/deletevisit'(id=${visit.getId()})}">
                 <span th:text="#{account_reception_delete}">Delete</span>
+            </a></td>
+                   <td sec:authorize="hasRole('RECEPTION') or hasRole('DOCTOR') or hasRole('PATIENT')">
+                <span th:text="'-'">-</span>
             </a></td>
             </span>
         </tr>

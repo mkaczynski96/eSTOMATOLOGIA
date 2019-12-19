@@ -52,6 +52,8 @@
 
     <div sec:authorize="hasRole('ADMIN')">
         <a class="btn" href="/myaccount/mydata" role="button" th:text="#{account_mydata}">My data</a>
+        <a class="btn" href="/myaccount/manageadmin" role="button" th:text="#{account_manageadmin}">Manage
+            admin</a>
         <a class="btn" href="/myaccount/managedoctor" role="button" th:text="#{account_managedoctor}">Manage
             doctor</a>
         <a class="btn" href="/myaccount/managepatient" role="button" th:text="#{account_amanagepatient}">Manage

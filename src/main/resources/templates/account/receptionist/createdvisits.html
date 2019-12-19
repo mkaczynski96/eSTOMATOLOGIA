@@ -8,29 +8,35 @@
 <div class="container-mydata container">
     <h1 th:text="#{account_receptionist_createdvisits}">Created visits</h1>
     <div class="table-responsive">
-        <table class="table table-dark table-hover table-borderless">
-<!--            <thead>-->
-<!--            <th th:scope="col"><b><span th:text="#{account_patient_historyofivists_date}">Date</span></b></th>-->
-<!--            <th th:scope="col"><b><span th:text="#{person_name}">Doctor's name</span></b></th>-->
-<!--            <th th:scope="col"><b><span th:text="#{person_surname}">Doctor's surname</span></b></th>-->
-<!--            <th th:scope="col"><b><span th:text="#{account_patient_historyofivists_diagnosis}">Diagnosis</span></b></th>-->
-<!--            <th th:scope="col"><b><span th:text="#{account_patient_historyofivists_recommendations}">Recommendations</span></b></th>-->
-<!--            </thead>-->
+        <table class="table table-hover table-borderless">
+            <thead>
+            <th th:scope="col"><b><span th:text="#{account_patient_historyofivists_date}">Date</span></b></th>
+            <th th:scope="col"><b><span th:text="#{hour}">Hour</span></b></th>
+            <th th:scope="col"><b><span th:text="#{patient_name}">Patient's name</span></b></th>
+            <th th:scope="col"><b><span th:text="#{patient_surname}">Patient's surname</span></b></th>
+            <th th:scope="col"><b><span th:text="#{person_pesel}">Patient's pesel</span></b></th>
+            <th th:scope="col"><b><span th:text="#{person_address}">Address</span></b></th>
+            <th th:scope="col"><b><span th:text="#{doctor_name}">Doctor's name</span></b></th>
+            <th th:scope="col"><b><span th:text="#{doctor_surname}">Doctor's surname</span></b></th>
+            <th th:scope="col"><b><span th:text="#{person_pesel}">Doctor's pesel</span></b></th>
+            <th th:scope="col"><b><span th:text="#{account_historyofvisits_action}">Action</span></b></th>
+            </thead>
             <tbody>
             <tr th:each="proposedVisit : ${proposedVisits}">
-                <td th:text="${proposedVisit.getDate()}">Date</td>
-                <td th:text="${proposedVisit.getPatient().getName()}">Date</td>
-                <td th:text="${proposedVisit.getPatient().getSurname()}">Date</td>
-                <td th:text="${proposedVisit.getPatient().getPesel()}">Date</td>
-                <td th:text="${proposedVisit.getPatient().getAddress()}">Date</td>
-                <td th:text="${proposedVisit.getDoctor().getName()}">Date</td>
-                <td th:text="${proposedVisit.getDoctor().getSurname()}">Date</td>
-                <td th:text="${proposedVisit.getDoctor().getPesel()}">Date</td>
-                <td th:text="${proposedVisit.getDoctor().getPesel()}">Date</td>
+                <td th:text="${proposedVisit.getDate()}"></td>
+                <td th:text="${proposedVisit.getDate()}"></td>
+                <td th:text="${proposedVisit.getPatient().getName()}"></td>
+                <td th:text="${proposedVisit.getPatient().getSurname()}"></td>
+                <td th:text="${proposedVisit.getPatient().getPesel()}"></td>
+                <td th:text="${proposedVisit.getPatient().getAddress()}"></td>
+                <td th:text="${proposedVisit.getDoctor().getName()}"></td>
+                <td th:text="${proposedVisit.getDoctor().getSurname()}"></td>
+                <td th:text="${proposedVisit.getDoctor().getPesel()}"></td>
                 <td><a th:href="@{'/myaccount/createdvisits/add'(id=${proposedVisit.getId()})}">
                     <span th:text="#{account_reception_add}">Add</span>
-                </a></td>
-                <td><a th:href="@{'/myaccount/createdvisits/delete'(id=${proposedVisit.getId()})}">
+                </a>
+                    /
+                <a th:href="@{'/myaccount/createdvisits/delete'(id=${proposedVisit.getId()})}">
                     <span th:text="#{account_reception_delete}">Delete</span>
                 </a></td>
             </tr>

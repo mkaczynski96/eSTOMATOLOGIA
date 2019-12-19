@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       th:replace="~{fragments/layout :: layout (~{::body},'mydata')}">
 <head>
     <meta charset="UTF-8">
@@ -8,12 +9,7 @@
 
 <div class="container-mydata container">
     <h1 th:text="#{account_mydata}">My data</h1>
-    <table class="table table-dark">
-        <thead>
-        <tr>
-            <th><b><span th:text="#{account_mydata}">My data</span></b></th>
-        </tr>
-        </thead>
+    <table class="table table-hover">
         <tbody>
         <tr>
             <td><b><span th:text="#{person_name_additional}">Name:</span></b></td>
@@ -37,6 +33,9 @@
         </tr>
         </tbody>
     </table>
+    <span sec:authorize=" hasRole('ADMIN')">
+    <a class="btn btn-primary" th:href="@{'/mydata/editadmindata'}" role="button" th:text="#{account_reception_edit}">Edit</a>
+    </span>
 </div>
 
 </body>

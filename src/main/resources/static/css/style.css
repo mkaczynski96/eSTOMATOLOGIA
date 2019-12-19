@@ -3,6 +3,10 @@ header{
     font-family: 'Livvic', sans-serif;
 }
 
+table{
+    border: 1px solid gray;
+}
+
 .headerRow{
     background: rgb(41,173,41);
     background: linear-gradient(180deg, rgba(41,173,41,1) 0%, rgba(34,139,34,1) 100%);
