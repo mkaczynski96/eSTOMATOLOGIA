@@ -17,6 +17,10 @@
             <th scope="col"><b><span th:text="#{person_address}">Address</span></b></th>
             <th scope="col"><b><span th:text="#{account_doctor_mypatients_chronic_diseases}">Chronic diseases</span></b></th>
             <th scope="col"><b><span th:text="#{account_doctor_mypatients_medicaments}">Medicaments taken permamently</span></b></th>
+            <th scope="col"><b><span
+                th:text="#{action_chronic_diseases}">Chronic diseases - action</span></b></th>
+            <th scope="col"><b><span
+                    th:text="#{action_mtp}">Medicaments taken permanently - action</span></b></th>
         </tr>
         </thead>
         <tbody>
@@ -28,6 +32,32 @@
             <td th:text="${patient.getPatient().getAddress()}">Patient address</td>
             <td th:text="${patient.getPatient().getChronicDiseases()}">Patient chronic diseases</td>
             <td th:text="${patient.getPatient().getMedicamentsTakenPermamently()}">Patient medicaments taken permamently</td>
+            <td>
+                <a th:href="@{'/myaccount/mypatients/addchronicdiseases'(id=${patient.getPatient().getId()})}">
+                    <span th:text="#{account_reception_add}">Add</span>
+                </a>
+                /
+                <a th:href="@{'/myaccount/mypatients/editchronicdiseases'(id=${patient.getPatient().getId()})}">
+                    <span th:text="#{account_reception_edit}">Edit</span>
+                </a>
+                /
+                <a th:href="@{'/myaccount/mypatients/deletechronicdiseases'(id=${patient.getPatient().getId()})}">
+                    <span th:text="#{account_reception_delete}">Delete</span>
+                </a>
+            </td>
+            <td>
+                <a th:href="@{'/myaccount/mypatients/addmtp'(id=${patient.getPatient().getId()})}">
+                    <span th:text="#{account_reception_add}">Add</span>
+                </a>
+                /
+                <a th:href="@{'/myaccount/mypatients/editmtp'(id=${patient.getPatient().getId()})}">
+                    <span th:text="#{account_reception_edit}">Edit</span>
+                </a>
+                /
+                <a th:href="@{'/myaccount/mypatients/deletemtp'(id=${patient.getPatient().getId()})}">
+                    <span th:text="#{account_reception_delete}">Delete</span>
+                </a>
+            </td>
         </tr>
         </tbody>
     </table>

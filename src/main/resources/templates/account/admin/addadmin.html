@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{fragments/layout :: layout (~{::body},'register')}">
+      th:replace="~{fragments/layout :: layout (~{::body},'addadmin')}">
 <head>
     <meta charset="UTF-8">
 </head>
 <body>
 <div class="container-mydata container">
-    <h1 th:text="#{header.register}">Register</h1>
-
-    <form action="#" th:action="@{/register}" th:object="${patients}" method="post">
-        <div class="form-row" style="width: 50%; margin-left: auto; margin-right: auto;">
+    <h1 th:text="#{add_admin}">Add admin</h1>
+    <form action="#" th:action="@{/myaccount/manageadmin/add}" th:object="${admin}" method="post">
+        <div class="form-row">
             <div class="col">
                 <label for="name"><span th:text="#{person_name}"></span></label>
                 <input type="text"
@@ -41,31 +40,20 @@
                        id="address"
                        th:field="*{address}"/>
 
-                <label for="chronicdiseases"><span th:text="#{account_doctor_mypatients_chronic_diseases}"></span></label>
-                <input type="text"
-                       class="form-control"
-                       id="chronicdiseases"
-                       th:field="*{chronicDiseases}"/>
-
-                <label for="medicamentstakenpermamently"><span th:text="#{account_doctor_mypatients_medicaments}"></span></label>
-                <input type="text"
-                       class="form-control"
-                       id="medicamentstakenpermamently"
-                       th:field="*{medicamentsTakenPermamently}"/>
-
                 <label for="username"><span th:text="#{login_username}"></span></label>
                 <input type="text"
                        class="form-control"
                        id="username"
-                       th:field="*{userPatient.username}"/>
+                       th:field="*{userAdministrator.username}"/>
 
                 <label for="password"><span th:text="#{login_password}"></span></label>
                 <input type="text"
                        class="form-control"
                        id="password"
-                       th:field="*{userPatient.password}"/>
+                       th:field="*{userAdministrator.password}"/>
 
-                <input type="submit" th:value="#{header.register}" id="reg" class="btn btn-primary"/>
+
+                <input type="submit" style="margin-top: 10px;" th:value="#{account_reception_add}" class="btn btn-primary"/>
             </div>
         </div>
     </form>

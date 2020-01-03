@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout (~{::body},'managespecializations')}">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div class="container-mydata container">
+    <h1 th:text="#{spec_manage}">Manage specializations</h1>
+    <div class="table-responsive">
+        <table class="table table-hover table-borderless">
+            <thead>
+            <tr>
+                <th scope="col"><b><span th:text="#{person_lp}">LP</span></b></th>
+                <th scope="col"><b><span th:text="#{account_reception_name}">Name</span></b></th>
+                <th scope="col"><b><span th:text="#{account_historyofvisits_action}">Action</span></b></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="specialization, iStats : ${specializations}">
+                <td th:scope="row" th:text="${iStats.index+1} + '.'">Each id</td>
+                <td th:text="${specialization.getName()}">name</td>
+                <td>
+                    <a th:href="@{'/myaccount/managespecializations/deletespecialization'(specid=${specialization.getId()})}">
+                        <span th:text="#{account_reception_delete}">Delete</span>
+                    </a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <a class="btn" href="/myaccount/managespecializations/addspecialization" role="button" th:text="#{add_spec}">Add
+        specialization</a>
+</div>
+</body>
+</html>

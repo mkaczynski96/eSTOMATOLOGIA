@@ -9,19 +9,17 @@
 <div class="row">
     <div class="dentist-section1">
         <h1>eStomatologia</h1>
-        <p>System wspomagania kliniki stomatologicznej</p>
+        <p th:text="#{indexMainDesc}" style="text-shadow: 1px 1px 2px black; color: #FFFFFF;"></p>
     </div>
     <div class="dentist-section2">
-
-        <div>Fast</div>
-        <div>Nice</div>
-        <div>Smooth</div>
-
+        <div><span th:text="#{nice}"></span></div>
+        <div><span th:text="#{fast}"></span></div>
+        <div><span th:text="#{international}"></span></div>
     </div>
     <div class="dentist-section3">
         <div class="dentist-section3-block">
-            <h1>Najlepsze narzędzia do prowadzenia kliniki</h1>
-            <p>Umawianie wizyt - Kalendarz wizyt - Zarządzanie usługami kliniki</p>
+            <h1 th:text="#{indexBestTool}"></h1>
+            <p th:text="#{indexBestToolDesc}"></p>
         </div>
     </div>
     <div class="dentist-section4">

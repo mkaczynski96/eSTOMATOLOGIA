@@ -45,6 +45,181 @@ public class AccountAdministratorController {
     }
 
     @RolesAllowed("ADMIN")
+    @GetMapping("/myaccount/manageadmin")
+    public String manageAdmin(Model model) {
+        User loggedUser = authorizationService.getLoggedUser();
+
+        if (loggedUser == null) {
+            return "error";
+        } else {
+            Long loggedUserId = loggedUser.getId();
+            if (administratorRepository.findById(loggedUserId).isPresent()) {
+
+                model.addAttribute("admins", administratorRepository.findAll());
+                return "account/admin/manageadministration";
+            } else {
+                return "error";
+            }
+        }
+    }
+
+    @RolesAllowed("ADMIN")
+    @GetMapping("/myaccount/manageadmin/add")
+    public String addAdmin(Model model) {
+        User loggedUser = authorizationService.getLoggedUser();
+
+        if (loggedUser == null) {
+            return "error";
+        } else {
+            Long loggedUserId = loggedUser.getId();
+            if (administratorRepository.findById(loggedUserId).isPresent()) {
+                model.addAttribute("admin", new Administrator());
+                return "account/admin/addadmin";
+            } else {
+                return "error";
+            }
+        }
+    }
+
+
+    @RolesAllowed("ADMIN")
+    @PostMapping("/myaccount/manageadmin/add")
+    public String addAdmin(@ModelAttribute Administrator administrator) {
+        User loggedUser = authorizationService.getLoggedUser();
+
+        if (loggedUser == null) {
+            return "error";
+        } else {
+            Long loggedUserId = loggedUser.getId();
+            if (administratorRepository.findById(loggedUserId).isPresent()) {
+
+                Administrator newDoctor = new Administrator();
+                newDoctor.setName(administrator.getName());
+                newDoctor.setSurname(administrator.getSurname());
+                newDoctor.setAddress(administrator.getAddress());
+                newDoctor.setPhoneNumber(administrator.getPhoneNumber());
+                newDoctor.setPesel(administrator.getPesel());
+
+                User newUserDoctor = new User();
+                newUserDoctor.setUsername(administrator.getUserAdministrator().getUsername());
+                newUserDoctor.setPassword(passwordEncoder.encode(administrator.getUserAdministrator().getPassword()));
+                newUserDoctor.setEnabled(true);
+                newUserDoctor.setAdministrator(newDoctor);
+                newDoctor.setUserAdministrator(newUserDoctor);
+
+                Authorities doctorAuthorities = new Authorities();
+                doctorAuthorities.setUsername(newUserDoctor.getUsername());
+                doctorAuthorities.setAuthority("ROLE_ADMIN");
+
+                authorityRepository.save(doctorAuthorities);
+                userRepository.save(newUserDoctor);
+
+                return "success";
+            } else {
+                return "error";
+            }
+        }
+    }
+
+
+    @RolesAllowed("ADMIN")
+    @GetMapping("/myaccount/manageadmin/edit")
+    public String editAdmin(@RequestParam Long id, Model model) {
+        User loggedUser = authorizationService.getLoggedUser();
+
+        if (loggedUser == null) {
+            return "error";
+        } else {
+            Long loggedUserId = loggedUser.getId();
+            if (administratorRepository.findById(loggedUserId).isPresent()) {
+                if (administratorRepository.findById(id).isPresent()) {
+                    Administrator doctor = administratorRepository.findById(id).orElse(null);
+                    model.addAttribute("admin", doctor);
+
+                    return "account/admin/editadmin";
+                }
+                return "error";
+            } else {
+                return "error";
+            }
+        }
+    }
+
+
+    @RolesAllowed("ADMIN")
+    @PostMapping("/myaccount/manageadmin/edit")
+    public String editAdmin(@ModelAttribute Administrator doctor, @RequestParam Long id) {
+        User loggedUser = authorizationService.getLoggedUser();
+
+        if (loggedUser == null) {
+            return "error";
+        } else {
+            Long loggedUserId = loggedUser.getId();
+            if (administratorRepository.findById(loggedUserId).isPresent()) {
+
+                Administrator editedDoctor = administratorRepository.findById(doctor.getId()).orElse(null);
+                if (editedDoctor != null) {
+                    editedDoctor.setId(id);
+                    editedDoctor.setName(doctor.getName());
+                    editedDoctor.setSurname(doctor.getSurname());
+                    editedDoctor.setAddress(doctor.getAddress());
+                    editedDoctor.setPesel(doctor.getPesel());
+                    editedDoctor.setPhoneNumber(doctor.getPhoneNumber());
+                    administratorRepository.save(editedDoctor);
+
+                    return "success";
+                }
+                return "error";
+            } else {
+                return "error";
+            }
+        }
+    }
+
+
+    @RolesAllowed("ADMIN")
+    @GetMapping("/myaccount/manageadmin/delete")
+    public String deleteAdmin(@RequestParam Long id) {
+        User loggedUser = authorizationService.getLoggedUser();
+
+        if (loggedUser == null) {
+            return "error";
+        } else {
+            Long loggedUserId = loggedUser.getId();
+            if (administratorRepository.findById(loggedUserId).isPresent()) {
+                if (administratorRepository.findById(id).isPresent()) {
+                    authorityRepository.deleteAllByUsername(administratorRepository.findById(id).get().getName());
+                    administratorRepository.deleteById(id);
+                    return "success";
+                }
+                return "error";
+            } else {
+                return "error";
+            }
+        }
+    }
+
+    @RolesAllowed("ADMIN")
+    @GetMapping("/myaccount/manageadmin/admins")
+    public String adminDetails(@RequestParam Long id, Model model) {
+        User loggedUser = authorizationService.getLoggedUser();
+
+        if (loggedUser == null) {
+            return "error";
+        } else {
+            Long loggedUserId = loggedUser.getId();
+            if (administratorRepository.findById(loggedUserId).isPresent()) {
+
+                model.addAttribute("admin", administratorRepository.findById(id));
+                return "account/admin/admins";
+            } else {
+                return "error";
+            }
+        }
+    }
+
+
+    @RolesAllowed("ADMIN")
     @GetMapping("/myaccount/managedoctor")
     public String manageDoctor(Model model) {
         User loggedUser = authorizationService.getLoggedUser();
@@ -239,18 +414,22 @@ public class AccountAdministratorController {
 
 
     @RolesAllowed("ADMIN")
-    @GetMapping("/myaccount/managedoctor/addspecializationtodoctor")
-    public String addSpecializationToDoctor(@RequestParam Long id, Model model) {
+    @GetMapping("/myaccount/managedoctor/addspecialization")
+    public String addChronicDiseases(@RequestParam Long id, Model model) {
         User loggedUser = authorizationService.getLoggedUser();
-
         if (loggedUser == null) {
             return "error";
         } else {
             Long loggedUserId = loggedUser.getId();
             if (administratorRepository.findById(loggedUserId).isPresent()) {
-                model.addAttribute("specializations", specializationRepository.findAll());
-                model.addAttribute("id", id);
-                return "account/admin/addspecializationtodoctor";
+                if (doctorRepository.findById(id).isPresent()) {
+                    Doctor p1 = doctorRepository.findById(id).orElse(null);
+                    model.addAttribute("doctor", p1);
+                    model.addAttribute("doctorspecializations", new DoctorSpecialization());
+                    model.addAttribute("specializations", specializationRepository.findAll());
+                    return "account/admin/addspecialization";
+                }
+                return "error";
             } else {
                 return "error";
             }
@@ -259,9 +438,8 @@ public class AccountAdministratorController {
 
 
     @RolesAllowed("ADMIN")
-    @PostMapping("/myaccount/managedoctor/addspecializationtodoctor")
-    public String addSpecializationToDoctor(@ModelAttribute Specialization specialization, @RequestParam Long id,
-                                            @RequestParam String license) {
+    @PostMapping("/myaccount/managedoctor/addspecialization")
+    public String addSpecialization(@RequestParam Long doctorid, @ModelAttribute DoctorSpecialization doctorSpecialization) {
         User loggedUser = authorizationService.getLoggedUser();
 
         if (loggedUser == null) {
@@ -269,17 +447,66 @@ public class AccountAdministratorController {
         } else {
             Long loggedUserId = loggedUser.getId();
             if (administratorRepository.findById(loggedUserId).isPresent()) {
-                DoctorSpecialization doctorSpecialization = new DoctorSpecialization();
-                doctorSpecialization.setSpecialization(specialization);
-                doctorSpecialization.setDoctor(doctorRepository.findById(id).orElse(null));
-                doctorSpecialization.setLicense(license);
-                return "success";
+                Doctor d1 = doctorRepository.findById(doctorid).orElse(null);
+
+                DoctorSpecialization doctorSpecialization1 = new DoctorSpecialization();
+                doctorSpecialization1.setDoctor(d1);
+                doctorSpecialization1.setSpecialization(doctorSpecialization.getSpecialization());
+                doctorSpecialization1.setLicense(doctorSpecialization.getLicense());
+                doctorSpecialization1.setId(new DoctorSpecializationKey(d1.getId(), doctorSpecialization.getSpecialization().getId()));
+
+                doctorSpecializationRepository.save(doctorSpecialization1);
+                    return "success";
             } else {
                 return "error";
             }
         }
     }
 
+
+    @RolesAllowed("ADMIN")
+    @GetMapping("/myaccount/managedoctor/deletespecialization")
+    public String deleteSpecialization(@RequestParam Long id, Model model) {
+        User loggedUser = authorizationService.getLoggedUser();
+        if (loggedUser == null) {
+            return "error";
+        } else {
+            Long loggedUserId = loggedUser.getId();
+            if (administratorRepository.findById(loggedUserId).isPresent()) {
+                if (doctorRepository.findById(id).isPresent()) {
+                    Doctor p1 = doctorRepository.findById(id).orElse(null);
+                    model.addAttribute("doctor",p1);
+                    model.addAttribute("doctorspecializations", doctorSpecializationRepository.findAllByDoctorId(p1.getId()));
+                    model.addAttribute("specializations",specializationRepository.findAll());
+                    return "account/admin/deletespecialization";
+                }
+                return "error";
+            } else {
+                return "error";
+            }
+        }
+    }
+
+
+    @RolesAllowed("ADMIN")
+    @PostMapping("/myaccount/managedoctor/deletespecialization")
+    public String deleteSpecialization(@RequestParam Long doctorid, @RequestParam("specid") Long specid) {
+        User loggedUser = authorizationService.getLoggedUser();
+
+        if (loggedUser == null) {
+            return "error";
+        } else {
+            Long loggedUserId = loggedUser.getId();
+            if (administratorRepository.findById(loggedUserId).isPresent()) {
+
+                doctorSpecializationRepository.deleteByDoctorIdAndSpecializationId(doctorid,specid);
+
+                return "success";
+            } else {
+                return "error";
+            }
+        }
+    }
 
     @RolesAllowed("ADMIN")
     @GetMapping("/myaccount/managepatient")
@@ -652,6 +879,89 @@ public class AccountAdministratorController {
             }
         }
     }
+
+
+
+
+
+
+
+    @RolesAllowed("ADMIN")
+    @GetMapping("/myaccount/managespecializations/addspecialization")
+    public String addSpec(Model model) {
+        User loggedUser = authorizationService.getLoggedUser();
+        if (loggedUser == null) {
+            return "error";
+        } else {
+            Long loggedUserId = loggedUser.getId();
+            if (administratorRepository.findById(loggedUserId).isPresent()) {
+                    model.addAttribute("specializations", new Specialization());
+                    return "account/admin/addspec";
+            } else {
+                return "error";
+            }
+        }
+    }
+
+
+    @RolesAllowed("ADMIN")
+    @PostMapping("/myaccount/managespecializations/addspecialization")
+    public String addSpec(@ModelAttribute Specialization specialization) {
+        User loggedUser = authorizationService.getLoggedUser();
+
+        if (loggedUser == null) {
+            return "error";
+        } else {
+            Long loggedUserId = loggedUser.getId();
+            if (administratorRepository.findById(loggedUserId).isPresent()) {
+               specializationRepository.save(specialization);
+                return "success";
+            } else {
+                return "error";
+            }
+        }
+    }
+
+
+    @RolesAllowed("ADMIN")
+    @GetMapping("/myaccount/managespecializations/deletespecialization")
+    public String delSpec(@RequestParam Long specid) {
+        User loggedUser = authorizationService.getLoggedUser();
+
+        if (loggedUser == null) {
+            return "error";
+        } else {
+            Long loggedUserId = loggedUser.getId();
+            if (administratorRepository.findById(loggedUserId).isPresent()) {
+                doctorSpecializationRepository.deleteAllBySpecializationId(specid);
+                specializationRepository.deleteById(specid);
+                return "success";
+            } else {
+                return "error";
+            }
+        }
+    }
+
+
+    @RolesAllowed("ADMIN")
+    @GetMapping("/myaccount/managespecializations")
+    public String manageSpecializations(Model model) {
+        User loggedUser = authorizationService.getLoggedUser();
+
+        if (loggedUser == null) {
+            return "error";
+        } else {
+            Long loggedUserId = loggedUser.getId();
+            if (administratorRepository.findById(loggedUserId).isPresent()) {
+
+                model.addAttribute("specializations", specializationRepository.findAll());
+                return "account/admin/managespecializations";
+            } else {
+                return "error";
+            }
+        }
+    }
+
 
 
 }

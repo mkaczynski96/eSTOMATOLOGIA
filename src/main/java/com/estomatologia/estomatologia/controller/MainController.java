@@ -38,21 +38,6 @@ public class MainController {
         return "login/login";
     }
 
-    @GetMapping("/services")
-    public String services() {
-        return "services/services";
-    }
-
-    @GetMapping("/tariff")
-    public String tariff() {
-        return "tariff/tariff";
-    }
-
-    @GetMapping("/contact")
-    public String contact() {
-        return "contact/contact";
-    }
-
     @GetMapping("/register")
     public String register(Model model) {
         User loggedUser = authorizationService.getLoggedUser();

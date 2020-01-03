@@ -111,6 +111,20 @@
 }
 
 
-.dentist-section4-block{
-    width: 60%;
+#contact{
+    margin-right: auto;
+    margin-left: auto;
 }
+
+
+#error{
+    margin-right: auto;
+    margin-left: auto;
+    color: #ff0000;
+    font-size: 24px;
+}
+
+#reg{
+    margin-top: 10px;
+}
+

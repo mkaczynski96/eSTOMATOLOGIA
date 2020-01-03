@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{fragments/layout :: layout (~{::body},'adddiagnosis')}">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div class="container-mydata container">
+
+    <h1 th:text="#{add_diagnosis}">Add diagnosis</h1>
+
+    <form action="#" th:action="@{'/myaccount/calendarofvisits/adddiagnosis'(id=${visit.getId()})}" style="width: 50%; margin-left: auto; margin-right: auto;" th:object="${visit}" method="post">
+
+        <label for="diag"><span th:text="#{account_patient_historyofivists_diagnosis}"></span></label>
+        <input type="text"
+               class="form-control"
+               id="diag"
+               th:field="*{diagnosis}"/>
+        <button type="submit" class="btn btn-primary" style="margin-top: 10px;" th:text="#{add_diagnosis}">Add diagnosis</button>
+    </form>
+
+</div>
+</body>
+</html>

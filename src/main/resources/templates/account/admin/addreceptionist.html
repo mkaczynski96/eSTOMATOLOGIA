@@ -6,53 +6,53 @@
 </head>
 <body>
 <div class="container-mydata container">
-    <h1 th:text="#{account_admin_addreceptionist}">Add receptionist</h1>
+    <h1 th:text="#{account_admin_addreceptionists}">Add receptionist</h1>
     <form action="#" th:action="@{/myaccount/managereception/add}" th:object="${receptionists}" method="post">
         <div class="form-row">
             <div class="col">
-                <label for="name"><span th:text="#{account_reception_name}"></span></label>
+                <label for="name"><span th:text="#{person_name}"></span></label>
                 <input type="text"
                        class="form-control"
                        id="name"
                        th:field="*{name}"/>
 
-                <label for="surname"><span th:text="Surname"></span></label>
+                <label for="surname"><span th:text="#{person_surname}"></span></label>
                 <input type="text"
                        class="form-control"
                        id="surname"
                        th:field="*{surname}"/>
 
-                <label for="phonenumber"><span th:text="Phonenumber"></span></label>
+                <label for="phonenumber"><span th:text="#{person_phonenumber}"></span></label>
                 <input type="text"
                        class="form-control"
                        id="phonenumber"
                        th:field="*{phoneNumber}"/>
 
-                <label for="pesel"><span th:text="Pesel"></span></label>
+                <label for="pesel"><span th:text="#{person_pesel}"></span></label>
                 <input type="text"
                        class="form-control"
                        id="pesel"
                        th:field="*{pesel}"/>
 
-                <label for="address"><span th:text="Address"></span></label>
+                <label for="address"><span th:text="#{person_address}"></span></label>
                 <input type="text"
                        class="form-control"
                        id="address"
                        th:field="*{address}"/>
 
-                <label for="username"><span th:text="Username"></span></label>
+                <label for="username"><span th:text="#{login_username}"></span></label>
                 <input type="text"
                        class="form-control"
                        id="username"
                        th:field="*{userReceptionist.username}"/>
 
-                <label for="password"><span th:text="Userpassword"></span></label>
+                <label for="password"><span th:text="#{login_password}"></span></label>
                 <input type="text"
                        class="form-control"
                        id="password"
                        th:field="*{userReceptionist.password}"/>
 
-                <input type="submit" th:value="#{account_reception_add}" class="btn btn-primary"/>
+                <input type="submit" style="margin-top: 10px;" th:value="#{account_reception_add}" class="btn btn-primary"/>
             </div>
         </div>
     </form>

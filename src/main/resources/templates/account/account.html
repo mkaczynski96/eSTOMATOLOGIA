@@ -9,7 +9,7 @@
 <div class="container-account container-fluid">
 
     <div class="welcome">
-    <span th:text="#{account_hello}">Welcome </span> <b><span sec:authentication="name"></span></b>
+        <span th:text="#{account_hello}">Welcome </span> <b><span sec:authentication="name"></span></b>
     </div>
 
     <div sec:authorize="hasRole('PATIENT')">
@@ -39,7 +39,8 @@
         <a class="btn" href="/myaccount/mydata" role="button" th:text="#{account_mydata}">My data</a>
         <a class="btn" href="/myaccount/patients" role="button" th:text="#{account_patients}">Patients</a>
         <a class="btn" href="/myaccount/doctors" role="button" th:text="#{account_doctors}">Doctors</a>
-        <a class="btn" href="/myaccount/visitforpatient" role="button" th:text="#{account_patient_makevisit}">Utwórz wizytę</a>
+        <a class="btn" href="/myaccount/visitforpatient" role="button" th:text="#{account_patient_makevisit}">Utwórz
+            wizytę</a>
         <a class="btn" href="/myaccount/calendarofvisits" role="button"
            th:text="#{account_calendarofvisits}">Calendar of visits</a>
         <a class="btn" href="/myaccount/createdvisits" role="button" th:text="#{account_createdvisits}">Created
@@ -60,6 +61,7 @@
             patient</a>
         <a class="btn" href="/myaccount/managereception" role="button" th:text="#{account_managereception}">Manage
             reception</a>
+        <a class="btn" href="/myaccount/managespecializations" role="button" th:text="#{spec_manage}">Manage specializations</a>
     </div>
 
 </div>

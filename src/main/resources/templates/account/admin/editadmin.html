@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout (~{::body},'editadmin')}">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div class="container-mydata container">
+    <h1 th:text="#{account_reception_edit}">Edit</h1>
+
+    <form action="#" th:action="@{'/myaccount/manageadmin/edit'(id=${admin.getId()})}"
+          th:object="${admin}" method="post">
+        <div class="form-row">
+            <div class="col">
+                <label for="name"><span th:text="#{person_name}"></span></label>
+                <input type="text"
+                       class="form-control"
+                       id="name"
+                       th:placeholder="*{name}"
+                       th:field="*{name}"/>
+                <label for="surname"><span th:text="#{person_surname}"></span></label>
+                <input type="text"
+                       class="form-control"
+                       id="surname"
+                       th:placeholder="*{surname}"
+                       th:field="*{surname}"/>
+                <label for="address"><span th:text="#{person_address}"></span></label>
+                <input type="text"
+                       class="form-control"
+                       id="address"
+                       th:placeholder="*{address}"
+                       th:field="*{address}"/>
+                <label for="pesel"><span th:text="#{person_pesel}"></span></label>
+                <input type="text"
+                       class="form-control"
+                       id="pesel"
+                       th:placeholder="*{pesel}"
+                       th:field="*{pesel}"/>
+                <label for="phonenumber"><span th:text="#{person_phonenumber}"></span></label>
+                <input type="text"
+                       class="form-control"
+                       id="phonenumber"
+                       th:placeholder="*{phoneNumber}"
+                       th:field="*{phoneNumber}"/>
+
+
+                <input type="submit" th:value="#{account_reception_edit}" class="btn btn-primary"/>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

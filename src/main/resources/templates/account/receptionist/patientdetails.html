@@ -19,6 +19,10 @@
                 <td th:text="${patients.get().getSurname()}">Patient's surname</td>
             </tr>
             <tr>
+                <td><b><span th:text="#{person_pesel}">Pesel:</span></b></td>
+                <td th:text="${patients.get().getPesel()}">Patient's pesel</td>
+            </tr>
+            <tr>
                 <td><b><span th:text="#{person_address_additional}">Address:</span></b></td>
                 <td th:text="${patients.get().getAddress()}">Patient's address</td>
             </tr>

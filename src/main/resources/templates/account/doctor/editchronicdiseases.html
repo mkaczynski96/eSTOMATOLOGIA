@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{fragments/layout :: layout (~{::body},'editchronicdiseases')}">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div class="container-mydata container">
+
+    <h1 th:text="#{edit_chronic}"></h1>
+
+    <form action="#" th:action="@{'/myaccount/mypatients/addchronicdiseases'(id=${patient.getId()})}" style="width: 50%; margin-left: auto; margin-right: auto;" th:object="${patient}" method="post">
+
+        <label for="diag"><span th:text="#{account_doctor_mypatients_chronic_diseases}"></span></label>
+        <input type="text"
+               class="form-control"
+               id="diag"
+               th:field="*{chronicDiseases}"/>
+        <button type="submit" class="btn btn-primary" style="margin-top: 10px;" th:text="#{edit_chronic}"></button>
+    </form>
+
+</div>
+</body>
+</html>

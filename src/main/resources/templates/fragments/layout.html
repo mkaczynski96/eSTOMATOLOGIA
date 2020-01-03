@@ -17,9 +17,9 @@
     <div class="container-fluid">
         <header>
             <div class="row headerRow">
-                <div class="d-flex justify-content-center align-items-center col-12 col-sm-12 col-xl-2">
-                    <img src="../../static/img/estomatologiaLogo.png" th:src="@{/img/estomatologiaLogo.png}"
-                         class="img-fluid " alt="logo"/>
+                <div class="d-flex justify-content-center align-items-center col-12 col-sm-12 col-xl-3">
+                   <a href="/"> <img src="../../static/img/estomatologiaLogo.png" th:src="@{/img/estomatologiaLogo.png}"
+                         class="img-fluid " alt="logo"/> </a>
                 </div>
                 <div class="d-flex justify-content-center align-items-center col-12 col-sm-12 col-xl-2">
                     <a href="?lang=pl"><img id="pl" src="../../static/img/pl.png"
@@ -27,13 +27,9 @@
                     <a href="?lang=en"><img id="en" src="../../static/img/eng.png"
                                             th:src="@{/img/eng.png}" class="header__img--icon img-fluid" alt="eng"/></a>
                 </div>
-                <div class="navmenu col-12 col-sm-12 col-xl-4">
+                <div class="navmenu col-12 col-sm-12 col-xl-3">
                     <nav class="navbar">
                         <div class="navbar-nav">
-                            <a class="nav-item nav-link" href="/"><span th:text="#{header.menu.option1}"></span></a>
-                            <a class="nav-item nav-link" href="/services"><span th:text="#{header.menu.option2}"></span></a>
-                            <a class="nav-item nav-link" href="/tariff"><span th:text="#{header.menu.option3}"></span></a>
-                            <a class="nav-item nav-link" href="/contact"><span th:text="#{header.menu.option4}"></span></a>
                         </div>
                     </nav>
                 </div>

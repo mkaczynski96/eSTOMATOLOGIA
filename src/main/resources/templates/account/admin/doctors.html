@@ -9,11 +9,6 @@
     <h1 th:text="#{account_admin_doctors}">Doctor details</h1>
     <div class="table-responsive">
         <table class="table table-hover table-borderless">
-            <thead>
-            <tr>
-                <th th:scope="col"><b><span th:text="#{account_reception_doctordetails_details}">Doctor's data</span></b></th>
-            </tr>
-            </thead>
             <tbody>
             <tr>
                 <td><b><span th:text="#{person_name_additional}">Name:</span></b></td>
@@ -42,8 +37,8 @@
         </table>
     </div>
     <a class="btn btn-primary" th:href="@{'/myaccount/managedoctor/edit'(id=${doctor.get().getId()})}" role="button" th:text="#{account_reception_edit}">Edit</a>
-    <a class="btn btn-primary" th:href="@{'/myaccount/managedoctor/addspecialization'(id=${doctor.get().getId()})}" role="button" th:text="Dodajspecjalizacje">Edit</a>
-    <a class="btn btn-primary" th:href="@{'/myaccount/managedoctor/deletespecialization'(id=${doctor.get().getId()})}" role="button" th:text="Usuńspecjalizacje">Edit</a>
+    <a class="btn btn-primary" th:href="@{'/myaccount/managedoctor/addspecialization'(id=${doctor.get().getId()})}" role="button" th:text="#{add_spec}">Edit</a>
+    <a class="btn btn-primary" th:href="@{'/myaccount/managedoctor/deletespecialization'(id=${doctor.get().getId()})}" role="button" th:text="#{delete_spec}">Edit</a>
     <a class="btn btn-primary" th:href="@{'/myaccount/managedoctor/delete'(id=${doctor.get().getId()})}" role="button" th:text="#{account_reception_delete}">Delete</a>
 </div>
 </body>

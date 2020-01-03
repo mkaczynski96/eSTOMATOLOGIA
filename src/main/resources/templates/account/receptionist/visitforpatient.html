@@ -7,10 +7,10 @@
 <body>
 <div class="container-mydata container">
     <h1 th:text="#{account_patient_makevisit}">Make visit appointment</h1>
-    <form action="#" th:action="@{/myaccount/visitforpatient}" th:object="${visit}" method="post">
+    <form action="#" th:action="@{/myaccount/visitforpatient}" style="width: 50%; margin-left: auto; margin-right: auto;" th:object="${visit}" method="post">
 
         <div class="form-group">
-            <label for="exampleFormControlSelect1">Select a patient</label>
+            <label for="exampleFormControlSelect1" th:text="#{new_visit_select_patient}">Select a patient</label>
             <select class="form-control" id="exampleFormControlSelect" th:field="*{patient.id}" >
                 <option th:each="patientt : ${patients}" th:value="${patientt.id}">
                     <span th:text="${patientt.getName()}" ></span>
@@ -21,25 +21,25 @@
         </div>
 
         <div class="form-group">
-            <label for="start">Select date</label>
+            <label for="start" th:text="#{new_visit_select_date}">Select date</label>
             <input type="date" id="start" name="trip-start" th:field="*{date}"
                    th:value="${actuallydate}"
                    min="2018-01-01" max="2023-12-31">
         </div>
         <div class="form-group">
-            <label for="appt">Select time</label>
+            <label for="appt" th:text="#{new_visit_select_time}">Select time</label>
             <input type="time" id="appt" name="appt"
                    min="09:00" max="18:00" required>
         </div>
         <div class="form-group">
-            <label for="exampleFormControlSelect1">Select a doctor</label>
+            <label for="exampleFormControlSelect1" th:text="#{new_visit_select_doctor}">Select a doctor</label>
             <select class="form-control" id="exampleFormControlSelect1" th:field="*{doctor.id}" >
                 <option th:each="doctorr : ${doctors}" th:value="${doctorr.id}">
                     <span th:text="${doctorr.getName()}" ></span>
                     <span th:text="${doctorr.getSurname()}" ></span></option>
             </select>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary" th:text="#{new_visit_create}">Create</button>
 </form>
 </div>
 </body>

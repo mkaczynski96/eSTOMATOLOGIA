@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout (~{::body},'addspec')}">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div class="container-mydata container">
+
+    <h1 th:text="#{add_spec}"></h1>
+
+    <form action="#" th:action="@{'/myaccount/managespecializations/addspecialization'}"
+          style="width: 50%; margin-left: auto; margin-right: auto;" th:object="${specializations}" method="post">
+        <div class="form-row">
+            <div class="col">
+
+                <label for="addspec"><span th:text="#{spec_name}"></span></label>
+                <input type="text"
+                       class="form-control"
+                       id="addspec"
+                       th:field="*{name}"/>
+
+
+                <input type="submit" style="margin-top: 10px;" th:value="#{account_reception_add}"
+                       class="btn btn-primary"/>
+            </div>
+        </div>
+    </form>
+
+</div>
+</body>
+</html>

@@ -31,11 +31,18 @@
             <td><b><span th:text="#{person_address_additional}">Address:</span></b></td>
             <td><span th:text="${account.getAddress()}">Address</span></td>
         </tr>
+        <span sec:authorize="hasRole('PATIENT')">
+            <tr>
+            <td><b><span th:text="#{account_doctor_mypatients_chronic_diseases}+':'">Chronic</span></b></td>
+            <td><span th:text="${account.getChronicDiseases()}"></span></td>
+        </tr>
+             <tr>
+            <td><b><span th:text="#{account_doctor_mypatients_medicaments}+':'">Mtp</span></b></td>
+            <td><span th:text="${account.getMedicamentsTakenPermamently()}"></span></td>
+        </tr>
+        </span>
         </tbody>
     </table>
-    <span sec:authorize=" hasRole('ADMIN')">
-    <a class="btn btn-primary" th:href="@{'/mydata/editadmindata'}" role="button" th:text="#{account_reception_edit}">Edit</a>
-    </span>
 </div>
 
 </body>

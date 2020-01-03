@@ -15,4 +15,10 @@ public interface DoctorSpecializationRepository extends CrudRepository<DoctorSpe
 
     @Transactional
     void deleteAllByDoctorId(Long id);
+
+    @Transactional
+    void deleteByDoctorIdAndSpecializationId(Long id, Long specid);
+
+    @Transactional
+    void deleteAllBySpecializationId(Long id);
 }
