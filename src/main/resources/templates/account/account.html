@@ -14,7 +14,6 @@
 
     <div sec:authorize="hasRole('PATIENT')">
         <a class="btn" href="/myaccount/mydata" role="button" th:text="#{account_mydata}">My data</a>
-        <!--    umowiona/byla/w trakcie-->
         <a class="btn" href="/myaccount/historyofvisits" role="button" th:text="#{account_historyofvisits}">History
             of visits</a>
         <a class="btn" href="/myaccount/makevisit" role="button" th:text="#{account_makevisit}">Make visit
@@ -28,7 +27,6 @@
         <a class="btn" href="/myaccount/mydata" role="button" th:text="#{account_mydata}">My data</a>
         <a class="btn" href="/myaccount/mypatients" role="button" th:text="#{account_mypatients}">My
             patients</a>
-        <!--   (wystepujacy tylko raz) wystepujacy w tabeli WIZYTA powiazani z lekarzem-->
         <a class="btn" href="/myaccount/calendarofvisits" role="button"
            th:text="#{account_calendarofvisits}">Calendar of visits</a>
         <a class="btn" href="/myaccount/availablemedicaments" role="button"

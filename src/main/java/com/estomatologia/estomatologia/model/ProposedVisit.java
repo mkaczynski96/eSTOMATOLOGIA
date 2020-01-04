@@ -26,4 +26,7 @@ public class ProposedVisit {
 
     @Column(name = "date")
     private String date;
+
+    @Column(name = "hour")
+    private String hour;
 }

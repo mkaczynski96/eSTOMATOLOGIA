@@ -26,6 +26,10 @@ public class Visit {
 
     @Column(name = "date")
     private String date;
+
+    @Column(name = "hour")
+    private String hour;
+
     @Column(name = "diagnosis")
     private String diagnosis;
     @Column(name = "recommendations")

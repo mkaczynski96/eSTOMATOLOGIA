@@ -153,6 +153,7 @@ public class AccountReceptionistController {
                     visit.setPatient(proposedVisit.getPatient());
                     visit.setDoctor(proposedVisit.getDoctor());
                     visit.setDate(proposedVisit.getDate());
+                    visit.setHour(proposedVisit.getHour());
                     visit.setFinished(false);
                     visitRepository.save(visit);
                     proposedVisitRepository.deleteById(id);

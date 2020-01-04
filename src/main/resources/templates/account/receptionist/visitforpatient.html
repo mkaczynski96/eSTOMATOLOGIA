@@ -28,7 +28,7 @@
         </div>
         <div class="form-group">
             <label for="appt" th:text="#{new_visit_select_time}">Select time</label>
-            <input type="time" id="appt" name="appt"
+            <input type="time" id="appt" name="appt" th:field="*{hour}"
                    min="09:00" max="18:00" required>
         </div>
         <div class="form-group">

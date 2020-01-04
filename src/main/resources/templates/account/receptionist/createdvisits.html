@@ -24,7 +24,7 @@
             <tbody>
             <tr th:each="proposedVisit : ${proposedVisits}">
                 <td th:text="${proposedVisit.getDate()}"></td>
-                <td th:text="${proposedVisit.getDate()}"></td>
+                <td th:text="${proposedVisit.getHour()}"></td>
                 <td th:text="${proposedVisit.getPatient().getName()}"></td>
                 <td th:text="${proposedVisit.getPatient().getSurname()}"></td>
                 <td th:text="${proposedVisit.getPatient().getPesel()}"></td>

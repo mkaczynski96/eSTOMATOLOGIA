@@ -456,7 +456,7 @@ public class AccountAdministratorController {
                 doctorSpecialization1.setId(new DoctorSpecializationKey(d1.getId(), doctorSpecialization.getSpecialization().getId()));
 
                 doctorSpecializationRepository.save(doctorSpecialization1);
-                    return "success";
+                return "success";
             } else {
                 return "error";
             }
@@ -475,9 +475,9 @@ public class AccountAdministratorController {
             if (administratorRepository.findById(loggedUserId).isPresent()) {
                 if (doctorRepository.findById(id).isPresent()) {
                     Doctor p1 = doctorRepository.findById(id).orElse(null);
-                    model.addAttribute("doctor",p1);
+                    model.addAttribute("doctor", p1);
                     model.addAttribute("doctorspecializations", doctorSpecializationRepository.findAllByDoctorId(p1.getId()));
-                    model.addAttribute("specializations",specializationRepository.findAll());
+                    model.addAttribute("specializations", specializationRepository.findAll());
                     return "account/admin/deletespecialization";
                 }
                 return "error";
@@ -499,7 +499,7 @@ public class AccountAdministratorController {
             Long loggedUserId = loggedUser.getId();
             if (administratorRepository.findById(loggedUserId).isPresent()) {
 
-                doctorSpecializationRepository.deleteByDoctorIdAndSpecializationId(doctorid,specid);
+                doctorSpecializationRepository.deleteByDoctorIdAndSpecializationId(doctorid, specid);
 
                 return "success";
             } else {
@@ -881,11 +881,6 @@ public class AccountAdministratorController {
     }
 
 
-
-
-
-
-
     @RolesAllowed("ADMIN")
     @GetMapping("/myaccount/managespecializations/addspecialization")
     public String addSpec(Model model) {
@@ -895,8 +890,8 @@ public class AccountAdministratorController {
         } else {
             Long loggedUserId = loggedUser.getId();
             if (administratorRepository.findById(loggedUserId).isPresent()) {
-                    model.addAttribute("specializations", new Specialization());
-                    return "account/admin/addspec";
+                model.addAttribute("specializations", new Specialization());
+                return "account/admin/addspec";
             } else {
                 return "error";
             }
@@ -914,7 +909,7 @@ public class AccountAdministratorController {
         } else {
             Long loggedUserId = loggedUser.getId();
             if (administratorRepository.findById(loggedUserId).isPresent()) {
-               specializationRepository.save(specialization);
+                specializationRepository.save(specialization);
                 return "success";
             } else {
                 return "error";
@@ -961,7 +956,6 @@ public class AccountAdministratorController {
             }
         }
     }
-
 
 
 }

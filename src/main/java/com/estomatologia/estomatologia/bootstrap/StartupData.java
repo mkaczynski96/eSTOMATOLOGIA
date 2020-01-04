@@ -54,7 +54,7 @@ public class StartupData implements CommandLineRunner {
 
         //User doctor//
         User doctorUser = new User();
-        doctorUser.setUsername("doctor");
+        doctorUser.setUsername("j.abacki@gmail.com");
         doctorUser.setPassword(passwordEncoder.encode("password"));
         doctorUser.setEnabled(true);
         Doctor doctor = new Doctor();
@@ -71,26 +71,26 @@ public class StartupData implements CommandLineRunner {
 
         //Doctors authorities
         Authorities roleDoctor = new Authorities();
-        roleDoctor.setUsername("doctor");
+        roleDoctor.setUsername(doctorUser.getUsername());
         roleDoctor.setAuthority("ROLE_DOCTOR");
         authorityRepository.save(roleDoctor);
 
 
         //Specialization
-        Specialization ginecologist = new Specialization();
-        ginecologist.setName("Chirurg stomatolog");
+        Specialization surgery = new Specialization();
+        surgery.setName("Chirurg stomatolog");
         Specialization heartSurgeon = new Specialization();
         heartSurgeon.setName("Ortodonta");
 
         doctorRepository.save(doctor);
-        specializationRepository.save(ginecologist);
+        specializationRepository.save(surgery);
         specializationRepository.save(heartSurgeon);
 
         //Doctor-specialization
         DoctorSpecialization doctorSpecialization = new DoctorSpecialization();
         doctorSpecialization.setDoctor(doctor);
-        doctorSpecialization.setSpecialization(ginecologist);
-        doctorSpecialization.setId(new DoctorSpecializationKey(doctor.getId(), ginecologist.getId()));
+        doctorSpecialization.setSpecialization(surgery);
+        doctorSpecialization.setId(new DoctorSpecializationKey(doctor.getId(), surgery.getId()));
         doctorSpecialization.setLicense("4336");
         doctorSpecializationRepository.save(doctorSpecialization);
 
@@ -113,7 +113,7 @@ public class StartupData implements CommandLineRunner {
 
         //Administrator
         User admin = new User();
-        admin.setUsername("admin");
+        admin.setUsername("a.swalczyk@gmail.com");
         admin.setPassword(passwordEncoder.encode("password"));
         admin.setEnabled(true);
         Administrator administrator = new Administrator();
@@ -136,7 +136,7 @@ public class StartupData implements CommandLineRunner {
 
         //Patients
         User patient1User = new User();
-        patient1User.setUsername("patient1");
+        patient1User.setUsername("m.ewan@gmail.com");
         patient1User.setPassword(passwordEncoder.encode("password"));
         patient1User.setEnabled(true);
         Patient patient1 = new Patient();
@@ -151,7 +151,7 @@ public class StartupData implements CommandLineRunner {
         patient1User.setPatient(patient1);
 
         User patient2User = new User();
-        patient2User.setUsername("patient2");
+        patient2User.setUsername("k.mydliński@wp.pl");
         patient2User.setPassword(passwordEncoder.encode("password"));
         patient2User.setEnabled(true);
         Patient patient2 = new Patient();
@@ -185,14 +185,14 @@ public class StartupData implements CommandLineRunner {
 
         //Receptionist
         User receptionistUser = new User();
-        receptionistUser.setUsername("receptionist");
+        receptionistUser.setUsername("b.warecka@gmail.com");
         receptionistUser.setPassword(passwordEncoder.encode("password"));
         receptionistUser.setEnabled(true);
         Receptionist receptionist = new Receptionist();
         receptionist.setName("Barbara");
         receptionist.setSurname("Warecka");
         receptionist.setPesel("87021225775");
-        receptionist.setPhoneNumber("72412412");
+        receptionist.setPhoneNumber("724124126");
         receptionist.setAddress("al. Jerozolimskie 45/322, Warszawa");
         receptionist.setUserReceptionist(receptionistUser);
         receptionistUser.setReceptionist(receptionist);
@@ -221,9 +221,10 @@ public class StartupData implements CommandLineRunner {
         Visit visit1 = new Visit();
         visit1.setPatient(patient1);
         visit1.setDoctor(doctor);
-        visit1.setRecommendations("Mycie zebow 6 razy dziennie szczoteczka soniczną");
+        visit1.setRecommendations("Mycie zębów 6 razy dziennie szczoteczką soniczną");
         visit1.setDiagnosis("Kamień nazębny");
         visit1.setDate("2019-03-10");
+        visit1.setHour("15:45");
         visit1.setFinished(true);
 
         Prescription prescription1 = new Prescription();
@@ -238,7 +239,7 @@ public class StartupData implements CommandLineRunner {
 
         //Doctor2
         User doctorUser2 = new User();
-        doctorUser2.setUsername("doctor2");
+        doctorUser2.setUsername("p.iwanczyk@interia.pl");
         doctorUser2.setPassword(passwordEncoder.encode("password"));
         doctorUser2.setEnabled(true);
 
@@ -255,7 +256,7 @@ public class StartupData implements CommandLineRunner {
 
 
         Authorities roleAdmin2 = new Authorities();
-        roleAdmin2.setAuthority("ROLE_ADMIN");
+        roleAdmin2.setAuthority("ROLE_DOCTOR");
         roleAdmin2.setUsername(doctorUser2.getUsername());
         authorityRepository.save(roleAdmin2);
 
@@ -263,8 +264,8 @@ public class StartupData implements CommandLineRunner {
 
         DoctorSpecialization doctor2Specialization1 = new DoctorSpecialization();
         doctor2Specialization1.setDoctor(doctor2);
-        doctor2Specialization1.setSpecialization(ginecologist);
-        doctor2Specialization1.setId(new DoctorSpecializationKey(doctor2.getId(), ginecologist.getId()));
+        doctor2Specialization1.setSpecialization(surgery);
+        doctor2Specialization1.setId(new DoctorSpecializationKey(doctor2.getId(), surgery.getId()));
         doctor2Specialization1.setLicense("1337");
         doctorSpecializationRepository.save(doctor2Specialization1);
 

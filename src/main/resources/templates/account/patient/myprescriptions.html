@@ -23,7 +23,6 @@
             </tr>
             </thead>
             <tbody>
-<!--            TODO POZMIENIAC NAGLOWKI-->
             <tr th:each="prescription, iStats : ${recipes}">
                 <td th:scope="row" th:text="${iStats.index+1} + '.'">Each id</td>
                 <td th:text="${prescription.getClinicName()}">Clinic name</td>

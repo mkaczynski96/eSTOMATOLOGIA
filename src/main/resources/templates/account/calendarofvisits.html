@@ -27,6 +27,7 @@
             <th scope="col"><b><span th:text="#{patient_surname}">Patient surname</span></b></th>
             </span>
             <th scope="col"><b><span th:text="#{account_patient_historyofivists_date}">Date</span></b></th>
+            <th scope="col"><b><span th:text="#{hour}">Hour</span></b></th>
             <th scope="col"><b><span th:text="#{account_patient_historyofivists_diagnosis}">Diagnosis</span></b></th>
             <th scope="col"><b><span th:text="#{account_patient_historyofivists_recommendations}">Recommendations</span></b>
             </th>
@@ -56,6 +57,7 @@
                 <td th:text="${visit.getPatient().getSurname()}">Patient surname</td>
             </span>
             <td th:text="${visit.getDate()}">Date</td>
+            <td th:text="${visit.getHour()}">Hour</td>
             <td th:text="${visit.getDiagnosis()}">Diagnosis</td>
             <td th:text="${visit.getRecommendations()}">Recommendations</td>
             <span th:if="${visit.isFinished()==false}">
