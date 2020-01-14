@@ -1,12 +1,10 @@
 package com.estomatologia.estomatologia.controller.doctor;
 
 import com.estomatologia.estomatologia.model.Patient;
+import com.estomatologia.estomatologia.model.Prescription;
 import com.estomatologia.estomatologia.model.User;
 import com.estomatologia.estomatologia.model.Visit;
-import com.estomatologia.estomatologia.repository.DoctorRepository;
-import com.estomatologia.estomatologia.repository.MedicamentRepository;
-import com.estomatologia.estomatologia.repository.PatientRepository;
-import com.estomatologia.estomatologia.repository.VisitRepository;
+import com.estomatologia.estomatologia.repository.*;
 import com.estomatologia.estomatologia.service.AuthorizationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,14 +22,16 @@ public class AccountDoctorController {
     private final MedicamentRepository medicamentRepository;
     private final PatientRepository patientRepository;
     private final VisitRepository visitRepository;
+    private final PrescriptionRepository prescriptionRepository;
 
     private final AuthorizationService authorizationService;
 
-    public AccountDoctorController(DoctorRepository doctorRepository, MedicamentRepository medicamentRepository, PatientRepository patientRepository, VisitRepository visitRepository, AuthorizationService authorizationService) {
+    public AccountDoctorController(DoctorRepository doctorRepository, MedicamentRepository medicamentRepository, PatientRepository patientRepository, VisitRepository visitRepository, PrescriptionRepository prescriptionRepository, AuthorizationService authorizationService) {
         this.doctorRepository = doctorRepository;
         this.medicamentRepository = medicamentRepository;
         this.patientRepository = patientRepository;
         this.visitRepository = visitRepository;
+        this.prescriptionRepository = prescriptionRepository;
         this.authorizationService = authorizationService;
     }
 
@@ -640,6 +640,51 @@ public class AccountDoctorController {
     }
 
 
+    @RolesAllowed("DOCTOR")
+    @GetMapping("/myaccount/calendarofvisits/addprescription")
+    public String addPrescription(@RequestParam Long id, Model model) {
+        User loggedUser = authorizationService.getLoggedUser();
+        if (loggedUser == null) {
+            return "error";
+        } else {
+            Long loggedUserId = loggedUser.getId();
+            if (doctorRepository.findById(loggedUserId).isPresent()) {
+                    model.addAttribute("visit",id);
+                    model.addAttribute("prescription", new Prescription());
+                    return "account/doctor/addprescription";
+            } else {
+                return "error";
+            }
+        }
+    }
+
+
+    @RolesAllowed("DOCTOR")
+    @PostMapping("/myaccount/calendarofvisits/addprescription")
+    public String addPrescription(@ModelAttribute Prescription prescription, @RequestParam Long id) {
+        User loggedUser = authorizationService.getLoggedUser();
+
+        if (loggedUser == null) {
+            return "error";
+        } else {
+            Long loggedUserId = loggedUser.getId();
+            if (doctorRepository.findById(loggedUserId).isPresent()) {
+
+                Prescription p = new Prescription();
+                p.setClinicName(prescription.getClinicName());
+                p.setBranchOfNFZ(prescription.getBranchOfNFZ());
+                p.setMedicaments(prescription.getMedicaments());
+                p.setVisit(visitRepository.findById(id).orElse(null));
+
+
+                prescriptionRepository.save(p);
+                return "success";
+
+            } else {
+                return "error";
+            }
+        }
+    }
 
 
 }

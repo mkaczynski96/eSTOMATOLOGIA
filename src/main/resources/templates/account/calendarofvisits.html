@@ -33,9 +33,11 @@
             </th>
             <th scope="col"><b><span th:text="#{account_historyofivists_state}">State</span></b></th>
             <span sec:authorize="hasRole('DOCTOR')">
-                <th scope="col"><b><span th:text="#{diagnosisAction}">Diagnoza</span></b></th>
+                <th scope="col"><b><span th:text="#{diagnosisAction}">Diagnosis</span></b></th>
                 <th scope="col"><b><span
-                        th:text="#{recommendationsAction}">Rekomendacje</span></b></th>
+                        th:text="#{recommendationsAction}">Recommendations</span></b></th>
+                <th scope="col"><b><span
+                        th:text="#{prescription}">Prescription</span></b></th>
             </span>
             <th scope="col"><b><span th:text="#{account_historyofvisits_action}">Action</span></b></th>
         </tr>
@@ -128,13 +130,18 @@
                     <span th:text="#{account_reception_delete}">Delete</span>
                 </a>
             </td>
+             <td sec:authorize="hasRole('DOCTOR')">
+            <a th:href="@{'/myaccount/calendarofvisits/addprescription'(id=${visit.getId()})}">
+                <span th:text="#{account_reception_add}">Add</span>
+            </a>
+             </td>
                  <td sec:authorize="hasRole('ADMIN')">
                      <a th:href="@{'/myaccount/calendarofvisits/deletevisit'(id=${visit.getId()})}">
                 <span th:text="#{account_reception_delete}">Delete</span>
             </a></td>
                    <td sec:authorize="hasRole('RECEPTION') or hasRole('DOCTOR') or hasRole('PATIENT')">
                 <span th:text="'-'">-</span>
-            </a></td>
+                       </a></td>
             </span>
         </tr>
         </tbody>
