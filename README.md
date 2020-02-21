@@ -5,10 +5,10 @@ Implementation of software application supporting the functioning a dental clini
 
 
 Stack: 
->Spring
->Maven
->MySQL
->HTML
->CSS
->Bootstrap
+>Spring,
+>Maven,
+>MySQL,
+>HTML,
+>CSS,
+>Bootstrap,
 >Thymeleaf
