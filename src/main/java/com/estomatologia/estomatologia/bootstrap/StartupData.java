@@ -103,7 +103,7 @@ public class StartupData implements CommandLineRunner {
 
         //Medicaments
         Medicament anesthesia = new Medicament();
-        anesthesia.setName("Znieczulenie z adrenaliną");
+        anesthesia.setName("Znieczulenie z adrenalina");
         anesthesia.setNumber(3);
         Medicament apap = new Medicament();
         apap.setName("Apap Max");
