@@ -3,7 +3,6 @@ package com.estomatologia.estomatologia.controller.administrator;
 import com.estomatologia.estomatologia.model.*;
 import com.estomatologia.estomatologia.repository.*;
 import com.estomatologia.estomatologia.service.AuthenticationService;
-import com.estomatologia.estomatologia.service.AuthorizationService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,8 +16,6 @@ import javax.annotation.security.RolesAllowed;
 @Controller
 public class AccountAdministratorController {
 
-
-    private final AuthorizationService authorizationService;
     private final AuthenticationService authenticationService;
 
     private final AdministratorRepository administratorRepository;
@@ -32,14 +29,18 @@ public class AccountAdministratorController {
     private final PasswordEncoder passwordEncoder;
     private final AuthorityRepository authorityRepository;
 
-    public AccountAdministratorController(AuthorizationService authorizationService,
-                                          AuthenticationService authenticationService, AdministratorRepository administratorRepository, DoctorRepository doctorRepository, DoctorSpecializationRepository doctorSpecializationRepository, PatientRepository patientRepository, VisitRepository visitRepository, ReceptionistRepository receptionistRepository, UserRepository userRepository, SpecializationRepository specializationRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository) {
-        this.authorizationService = authorizationService;
+    public AccountAdministratorController(AuthenticationService authenticationService,
+                                          AdministratorRepository administratorRepository, DoctorRepository doctorRepository,
+                                          DoctorSpecializationRepository doctorSpecializationRepository,
+                                          PatientRepository patientRepository, VisitRepository visitRepository,
+                                          ReceptionistRepository receptionistRepository, UserRepository userRepository,
+                                          SpecializationRepository specializationRepository, PasswordEncoder passwordEncoder,
+                                          AuthorityRepository authorityRepository) {
         this.authenticationService = authenticationService;
         this.administratorRepository = administratorRepository;
         this.doctorRepository = doctorRepository;
-        this.patientRepository = patientRepository;
         this.doctorSpecializationRepository = doctorSpecializationRepository;
+        this.patientRepository = patientRepository;
         this.visitRepository = visitRepository;
         this.receptionistRepository = receptionistRepository;
         this.userRepository = userRepository;
@@ -47,6 +48,7 @@ public class AccountAdministratorController {
         this.passwordEncoder = passwordEncoder;
         this.authorityRepository = authorityRepository;
     }
+
 
     @RolesAllowed("ADMIN")
     @GetMapping("/myaccount/manageadmin")
@@ -109,6 +111,7 @@ public class AccountAdministratorController {
     @RolesAllowed("ADMIN")
     @GetMapping("/myaccount/manageadmin/edit")
     public String editAdmin(@RequestParam Long id, Model model) {
+
         if (authenticationService.validUser("admin")) {
             if (administratorRepository.findById(id).isPresent()) {
                 Administrator doctor = administratorRepository.findById(id).orElse(null);
