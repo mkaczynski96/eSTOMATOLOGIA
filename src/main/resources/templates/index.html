@@ -6,37 +6,34 @@
 </head>
 
 <body>
-<div class="row">
-    <div class="dentist-section1">
-        <h1>eStomatologia</h1>
-        <p th:text="#{indexMainDesc}" style="text-shadow: 1px 1px 2px black; color: #FFFFFF;"></p>
+
+<section id="sectionOne">
+    <h1>eSTOMATOLOGIA</h1>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt voluptas totam vero a nisi tenetur
+        possimus commodi, harum exercitationem itaque.</p>
+</section>
+<section id="sectionTwo">
+    <div id="sectionTwo_description">
+        <h1>About</h1>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id quod laborum earum fuga recusandae,
+            explicabo aspernatur incidunt similique dolores rerum ab minus enim sed quia eos labore vero
+            provident sapiente corporis ex quidem obcaecati? Odio tempore ratione animi ducimus soluta
+            incidunt autem officiis dolorem et nihil placeat nemo dolores quaerat, mollitia natus, nobis
+            quae aperiam nisi amet nulla. Necessitatibus rem dolore non earum ipsum ipsam quis repellendus
+            alias commodi officia! Incidunt, nulla perferendis, consequuntur error quibusdam aliquam rerum
+            corporis eaque optio explicabo voluptas pariatur animi adipisci placeat neque eligendi dolorem,
+            culpa ea. Consequatur molestiae iste sit et. Sequi, vel molestiae.</p>
     </div>
-    <div class="dentist-section2">
-        <div><span th:text="#{nice}"></span></div>
-        <div><span th:text="#{fast}"></span></div>
-        <div><span th:text="#{international}"></span></div>
-    </div>
-    <div class="dentist-section3">
-        <div class="dentist-section3-block">
-            <h1 th:text="#{indexBestTool}"></h1>
-            <p th:text="#{indexBestToolDesc}"></p>
+    <div id="sectionTwo_icons">
+        <div class="shorticon">
+            <img src="img/Icon map-dentist.png" th:src="@{/img/Icon map-dentist.png}"/>
+            <p>Lorem ipsum</p>
+        </div>
+        <div class="shorticon">
+            <img src="img/Icon map-doctor.png" th:src="@{/img/Icon map-doctor.png}" />
+            <p>Lorem ipsum</p>
         </div>
     </div>
-    <div class="dentist-section4">
-
-        <div class="dentist-section4-block">
-            <h1>eSTOMATOLOGIA</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus aliquam, nibh nec ultricies sagittis,
-                sapien lacus rhoncus eros, ullamcorper bibendum metus diam ac ex. Donec nisi risus, efficitur vitae
-                ipsum
-                in, auctor sodales arcu. Aliquam ultricies placerat justo non auctor. Donec sed arcu egestas, aliquet
-                nunc
-                in, varius leo. Suspendisse potenti. Mauris aliquet aliquam urna, laoreet efficitur velit varius sed.
-                Phasellus cursus urna rhoncus enim cursus, ut dignissim quam luctus.</p>
-        </div>
-
-
-    </div>
-</div>
+</section>
 </body>
 </html>

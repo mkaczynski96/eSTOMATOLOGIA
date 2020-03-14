@@ -30,8 +30,14 @@ header a:hover{
     color: chocolate;
 }
 
-header .header__img--icon{
-    padding: 5px;
+.header__img--icon{
+    margin: 5px;
+    transition-duration: 1s;
+}
+
+.header__img--icon:hover{
+    box-shadow: 1px 1px 10px #3B3B3B;
+    transition-duration: 1s;
 }
 
 
@@ -43,20 +49,18 @@ header .navbar{
 }
 
 .btn{
-    background-color: #047212;
-    color: #FFFFFF;
-    box-shadow: #000000 1px 1px 5px;
-    text-shadow: #000000 1px 1px 1px;
-    border: #000000 solid 1px;
-    transition-duration: 0.4s;
+    background: #3B3B3B;
+    border: 0;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 5px;
+    transition-duration: 0.5s;
 }
 
 .btn:hover{
-    background-color: #0EBA25;
+    background: rgb(80, 80, 80);
+    transition-duration: 0.5s;
     color: #FFFFFF;
-    text-shadow: #000000 1px 1px 1px;
-    box-shadow: #000000 1px 1px 8px;
-    transition-duration: 0.4s;
 }
 
 
@@ -239,4 +243,109 @@ input{
 
 
 
+}
+
+#sectionOne{
+    background: url("../img/img1.jpeg");
+    background-size: cover;
+    padding: 300px;
+    text-align: center;
+}
+
+#sectionTwo {
+    background: url("../img/img2.png");
+    background-size: cover;
+    padding: 250px;
+    color: #ffffff;
+}
+
+#sectionTwo_icons {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+#sectionTwo_icons > .shorticon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 350px;
+    width: 100%;
+    border: 1px solid #ffffff;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+
+
+
+
+/* Mobile */
+
+
+
+@media only screen and (max-width: 1000px){
+
+    #sectionOne{
+        padding: 150px;
+        text-align: center;
+    }
+
+    #sectionTwo {
+        padding: 80px;
+        color: #ffffff;
+    }
+
+    #sectionTwo_icons > .shorticon{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        border: 1px solid #ffffff;
+        margin: 10px;
+        border-radius: 10px;
+    }
+
+    #sectionTwo_icons > .shorticon > img{
+        height: 60px;
+        width: 50px;
+    }
+}
+
+@media only screen and (max-width: 850px){
+
+
+    #sectionOne{
+        padding: 150px;
+    }
+
+    #sectionTwo {
+        padding: 80px;
+    }
+}
+
+
+@media only screen and (max-width: 800px){
+
+    #header_left{
+        flex-direction: column;
+    }
+    #header_right{
+        padding: 15px;
+    }
+    #sectionOne{
+        padding: 60px;
+        text-align: center;
+    }
+
+    #sectionTwo_icons > .shorticon{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        border: 1px solid #ffffff;
+        margin: 10px;
+        border-radius: 10px;
+    }
 }
