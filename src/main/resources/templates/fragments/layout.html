@@ -24,9 +24,9 @@
                 </div>
                 <div class="d-flex justify-content-center align-items-center col-12 col-sm-12 col-xl-2">
                     <a href="?lang=pl"><img id="pl" src="../../static/img/pl.png"
-                                            th:src="@{/img/pl.png}" class="header__img--icon img-fluid" alt="pl"/></a>
+                                            th:src="@{/img/pl.png}" class="header__img--icon" alt="pl"/></a>
                     <a href="?lang=en"><img id="en" src="../../static/img/eng.png"
-                                            th:src="@{/img/eng.png}" class="header__img--icon img-fluid" alt="eng"/></a>
+                                            th:src="@{/img/eng.png}" class="header__img--icon" alt="eng"/></a>
                 </div>
                 <div class="navmenu col-12 col-sm-12 col-xl-3">
                     <nav class="navbar">
@@ -34,7 +34,7 @@
                         </div>
                     </nav>
                 </div>
-                <div class="d-flex justify-content-center align-items-center col-6 col-sm-6 col-xl-2">
+                <div class="d-flex justify-content-end align-items-center col-6 col-sm-6 col-xl-2">
                     <div sec:authorize="!isAuthenticated()">
                         <button type="button" onclick="location.href='/login';" class="btn" th:text="#{header.login}">
                             Login
@@ -46,7 +46,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="d-flex justify-content-center align-items-center col-6 col-sm-6 col-xl-2">
+                <div class="d-flex justify-content-start align-items-center col-6 col-sm-6 col-xl-2">
                     <div sec:authorize="!isAuthenticated()">
                         <button type="button" onclick="location.href='/register';" class="btn"
                                 th:text="#{header.register}">Register
