@@ -10,7 +10,7 @@ Application runs on standard 8080 port
 
 4 roles: patient, doctor, receptionist, admin
 
-Credentials for users (login - password - role):
+>Credentials for users (login - password - role):
 
 b.warecka@gmail.com - password - receptionist
 
