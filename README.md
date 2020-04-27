@@ -10,19 +10,19 @@ Application runs on standard 8080 port
 
 4 roles: patient, doctor, receptionist, admin
 
->Credentials for users (login - password - role):
+Credentials for users (login - password - role):
 
-b.warecka@gmail.com - password - receptionist
+[b.warecka@gmail.com - password - receptionist
 
-m.ewan@gmail.com - password - patient1
+[m.ewan@gmail.com - password - patient1
 
-k.mydliński@wp.pl - password - patient2
+[.mydliński@wp.pl - password - patient2
 
-j.abacki@gmail.com - password - doctor1
+[.abacki@gmail.com - password - doctor1
 
-p.iwanczyk@interia.pl - password - doctor2
+[.iwanczyk@interia.pl - password - doctor2
 
-a.swalczyk@gmail.com - password - admin
+[.swalczyk@gmail.com - password - admin
 
 
 Stack: 
