@@ -12,17 +12,17 @@ Application runs on standard 8080 port
 
 Credentials for users (login - password - role):
 
-[b.warecka@gmail.com - password - receptionist
+[b.warecka@gmail.com - password - receptionist]
 
-[m.ewan@gmail.com - password - patient1
+[m.ewan@gmail.com - password - patient1]
 
-[.mydliński@wp.pl - password - patient2
+[k.mydliński@wp.pl - password - patient2]
 
-[.abacki@gmail.com - password - doctor1
+[j.abacki@gmail.com - password - doctor1]
 
-[.iwanczyk@interia.pl - password - doctor2
+[p.iwanczyk@interia.pl - password - doctor2]
 
-[.swalczyk@gmail.com - password - admin
+[a.swalczyk@gmail.com - password - admin]
 
 
 Stack: 
