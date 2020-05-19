@@ -151,7 +151,7 @@ public class StartupData implements CommandLineRunner {
         patient1User.setPatient(patient1);
 
         User patient2User = new User();
-        patient2User.setUsername("k.mydliński@wp.pl");
+        patient2User.setUsername("k.mydlinski@wp.pl");
         patient2User.setPassword(passwordEncoder.encode("password"));
         patient2User.setEnabled(true);
         Patient patient2 = new Patient();
