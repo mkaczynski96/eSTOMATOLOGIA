@@ -16,7 +16,7 @@ Credentials for users (login - password - role):
 
 >m.ewan@gmail.com - password - patient1
 
->k.mydliński@wp.pl - password - patient2
+>k.mydlinski@wp.pl - password - patient2
 
 >j.abacki@gmail.com - password - doctor1
 
