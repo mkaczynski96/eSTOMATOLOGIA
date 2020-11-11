@@ -1,6 +1,7 @@
 # eSTOMATOLOGIA
 Application created to obtain Engineer's degree 
 
+//EDIT NOTE: That project was created while I was learning Spring, so after the time, I would have written it from scratch in another code design.
 Implementation of software application supporting the functioning a dental clinic
 
 Required to run: 
